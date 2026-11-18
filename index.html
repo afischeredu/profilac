@@ -242,6 +242,17 @@ const canvas = $("gl");
 const gl = canvas.getContext("webgl", { antialias: false, premultipliedAlpha: false });
 var ready = false; let imgAspect = 16 / 9, uni = {}, vidTex = null;
 const video = $("fallback");
+// Flüssigkeit: neue Videobilder nur hochladen, wenn das Video wirklich ein neues Bild hat; Bühne ruht, wenn sie verdeckt ist
+let vidFresh = true, stageOn = true;
+const DPR = () => Math.min(devicePixelRatio || 1, 1.5);
+if ("requestVideoFrameCallback" in HTMLVideoElement.prototype) {
+  const onVF = () => { vidFresh = true; video.requestVideoFrameCallback(onVF); };
+  video.requestVideoFrameCallback(onVF);
+} else setInterval(() => { vidFresh = true; }, 40);
+function setStage(on) {
+  if (on === stageOn) return; stageOn = on;
+  if (on) playVideo(); else video.pause();
+}
 function playVideo() { if (calm) return; const pr = video.play(); if (pr && pr.catch) pr.catch(() => {}); }
 playVideo();
 ["pointerdown", "touchstart", "scroll", "keydown"].forEach(ev => addEventListener(ev, () => { if (video.paused) playVideo(); }, { once: true, passive: true }));
@@ -287,13 +298,13 @@ async function initGL() {
   ready = true; video.style.opacity = "0"; resize();
 }
 function resize() {
-  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const dpr = DPR();
   canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
   if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
 }
 addEventListener("resize", resize);
 function draw(t) {
-  if (ready) {
+  if (ready && stageOn) {
     const vAsp = innerWidth / innerHeight;
     const cover = vAsp > imgAspect ? [1, imgAspect / vAsp] : [vAsp / imgAspect, 1];
     mouse.x += (mouse.tx - mouse.x) * 0.06; mouse.y += (mouse.ty - mouse.y) * 0.06;
@@ -309,13 +320,14 @@ function draw(t) {
     gl.uniform2f(uni.par, (mouse.x * 0.6 + drift[0]) * -1, (mouse.y * 0.35 + drift[1]) * -1);
     gl.uniform1f(uni.scale, s); gl.uniform1f(uni.amt, cam.depth / s); gl.uniform1f(uni.tiltY, cam.tiltY);
     // aktuelles Videobild als Textur (die Personen bewegen sich)
-    if (vidTex && video.readyState >= 2 && !video.paused) {
+    if (vidTex && vidFresh && video.readyState >= 2 && !video.paused) {
+      vidFresh = false;
       gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, vidTex);
       try { gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, video); } catch (e) {}
     }
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   }
-  else {
+  else if (!ready) {
     // ohne WebGL: dieselbe Kamerafahrt mit dem Foto als CSS-Transformation
     const im = $("fallback");
     im.style.transformOrigin = `${cam.cx * 100}% ${cam.cy * 100}%`;
@@ -347,7 +359,7 @@ function story() {
   const title = $("heroTitle"), cap = $("cap1"), white = $("whiteout"), shade = $("shade");
   // 1 Einstieg: Kamerafahrt über den Tisch auf das Blatt
   const cap2 = $("cap2"), seqCv = $("seq");
-  ScrollTrigger.create({ trigger: "#hero", start: "top top", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+  ScrollTrigger.create({ trigger: "#hero", start: "top top", end: "bottom bottom", scrub: 0.45, onUpdate: (st) => {
     const p = st.progress;
     // a) leichte Fahrt in die bewegte Szene hinein
     const e = ease(clamp01(p / 0.42));
@@ -359,6 +371,7 @@ function story() {
     shade.style.opacity = 1 - clamp01(p / 0.35);
     // b) Überblendung in Clip 2: die Kamera fährt auf das Blatt, Bild für Bild mit dem Scrollen
     seqCv.style.opacity = clamp01((p - 0.36) / 0.1);
+    setStage(p < 0.47);
     $("seq6").style.opacity = 0;
     seqShow(clamp01((p - 0.38) / 0.5));
     cap2.style.opacity = clamp01((p - 0.62) / 0.08) * (1 - clamp01((p - 0.82) / 0.06));
@@ -368,7 +381,7 @@ function story() {
   } });
   // 2 Das Blatt hebt sich vom Tisch und die Balken wachsen
   const sheet = $("sheet");
-  ScrollTrigger.create({ trigger: "#profile", start: "top top", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+  ScrollTrigger.create({ trigger: "#profile", start: "top top", end: "bottom bottom", scrub: 0.45, onUpdate: (st) => {
     const p = st.progress;
     const lift = ease(clamp01(p / 0.35));
     sheet.style.transform = `translateY(${mix(40, 0, lift)}vh) rotateX(${mix(68, 0, lift)}deg) scale(${mix(0.78, 1, lift)})`;
@@ -377,7 +390,7 @@ function story() {
   } });
   // 3 Dreischritt: waagerechte Fahrt durch drei Kapitel
   const track = $("track"), pics = [...document.querySelectorAll(".media .pic")], dots = [...$("prog").children];
-  ScrollTrigger.create({ trigger: "#steps", start: "top top", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+  ScrollTrigger.create({ trigger: "#steps", start: "top top", end: "bottom bottom", scrub: 0.45, onUpdate: (st) => {
     const p = st.progress;
     // jedes Kapitel bleibt stehen, solange sein Clip läuft; dazwischen wird gewechselt
     const seg = (a, b) => ease(clamp01((p - a) / (b - a)));
@@ -390,7 +403,7 @@ function story() {
     dots.forEach((d, k) => d.classList.toggle("on", Math.round(x) === k));
   } });
   // weiße Fläche verschwindet erst wieder, wenn der Abschluss kommt
-  ScrollTrigger.create({ trigger: "#finale", start: "top bottom", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+  ScrollTrigger.create({ trigger: "#finale", start: "top bottom", end: "bottom bottom", scrub: 0.45, onUpdate: (st) => {
     const p = st.progress;
     // 4 Abschluss: Clip 6 fährt vom Tisch zurück auf die lachende Gruppe, Bild für Bild mit dem Scrollen
     $("seq").style.opacity = 0;
@@ -418,7 +431,7 @@ function mseqLoad(m) {
   // HD (große Bildschirme): je 8 Bilder untereinander in einem Streifen
   m.per = (m.hd && innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100) ? 8 : 1;
   const files = Math.ceil(m.n / m.per);
-  for (let i = 0; i < files; i++) { const im = new Image(); im.decoding = "async"; im.src = m.per > 1 ? `${m.hd}/s${String(i).padStart(2, "0")}.jpg` : `${m.dir}/${m.pre}${String(i).padStart(3, "0")}.jpg`; im.onload = () => { if (i === 0 || i === Math.floor(m.want / m.per)) mseqDraw(m, m.want, true); }; m.imgs.push(im); }
+  for (let i = 0; i < files; i++) { const im = new Image(); im.decoding = "async"; im.src = m.per > 1 ? `${m.hd}/s${String(i).padStart(2, "0")}.jpg` : `${m.dir}/${m.pre}${String(i).padStart(3, "0")}.jpg`; im.onload = () => { const go = () => { if (i === 0 || i === Math.floor(m.want / m.per)) mseqDraw(m, m.want, true); }; im.decode ? im.decode().then(go, go) : go(); }; m.imgs.push(im); }
 }
 function mseqDraw(m, i, force) {
   if (i === m.cur && !force) return;
@@ -426,7 +439,7 @@ function mseqDraw(m, i, force) {
   let k = i; while (k > 0 && !ok(k)) k--;
   if (!ok(k)) return;
   const im = m.imgs[Math.floor(k / per)], iw = im.naturalWidth, ih = im.naturalHeight / per, sy = (k % per) * ih;
-  const r = m.cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+  const r = m.cv.getBoundingClientRect(), dpr = DPR();
   const W = Math.max(1, Math.round(r.width * dpr)), H = Math.max(1, Math.round(r.height * dpr));
   if (m.cv.width !== W || m.cv.height !== H) { m.cv.width = W; m.cv.height = H; }
   const sc = Math.max(W / iw, H / ih), w = iw * sc, h = ih * sc;
@@ -445,14 +458,14 @@ const SEQ_N = 76, seqImgs = [], seqCanvas = $("seq"), sctx = seqCanvas.getContex
 let seqCur = -1, seqWant = 0, seqLoaded = false;
 function seqLoad() {
   if (seqLoaded) return; seqLoaded = true;
-  for (let i = 0; i < SEQ_N; i++) { const im = new Image(); im.decoding = "async"; im.src = `seq/f${String(i).padStart(3, "0")}.jpg`; im.onload = () => { if (i === seqWant) seqDraw(i, true); }; seqImgs.push(im); }
+  for (let i = 0; i < SEQ_N; i++) { const im = new Image(); im.decoding = "async"; im.src = `seq/f${String(i).padStart(3, "0")}.jpg`; im.onload = () => { const go = () => { if (i === seqWant) seqDraw(i, true); }; im.decode ? im.decode().then(go, go) : go(); }; seqImgs.push(im); }
 }
 function seqDraw(i, force) {
   if (i === seqCur && !force) return;
   // nächstes bereits geladenes Bild nehmen
   let k = i; while (k > 0 && !(seqImgs[k] && seqImgs[k].complete && seqImgs[k].naturalWidth)) k--;
   const im = seqImgs[k]; if (!im || !im.naturalWidth) return;
-  const dpr = Math.min(devicePixelRatio || 1, 2), W = Math.round(innerWidth * dpr), H = Math.round(innerHeight * dpr);
+  const dpr = DPR(), W = Math.round(innerWidth * dpr), H = Math.round(innerHeight * dpr);
   if (seqCanvas.width !== W || seqCanvas.height !== H) { seqCanvas.width = W; seqCanvas.height = H; }
   const s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
   sctx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h);

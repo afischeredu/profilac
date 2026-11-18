@@ -493,7 +493,7 @@ body[data-role="s"] .fact:nth-child(3) { padding-left: 0; }
 .bgimg { position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background: linear-gradient(rgb(var(--bg-rgb) / var(--veil)), rgb(var(--bg-rgb) / var(--veil))), url("bg.webp") center / cover no-repeat; --veil: .84; }
 body:not([data-role]) .bgimg { --veil: .25; }
-.chooser-head, .chooser > .note { background: rgb(var(--bg-rgb) / .9); border-radius: 24px; padding: clamp(18px, 4vw, 32px); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.chooser-head, .chooser > .note { background: rgb(var(--bg-rgb) / .93); border-radius: 24px; padding: clamp(18px, 4vw, 32px); }
 .chooser > .note { align-self: flex-start; padding-block: 10px; border-radius: 12px; }
 .mrole { background: rgb(var(--bg-rgb) / .94); }
 /* Bildungsministerium: Osterei */
@@ -2690,7 +2690,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
 .cine .bubbles { padding: 0; }
 .cine .bubble { text-shadow: none; will-change: transform; }
 .cine .claim { border-radius: 12px; text-shadow: none; }
-.cine .facts { background: rgb(var(--bg-rgb) / .9); color: var(--ink); border-radius: 20px; padding: 16px 18px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.cine .facts { background: rgb(var(--bg-rgb) / .94); color: var(--ink); border-radius: 20px; padding: 16px 18px; }
 .cine .stand { align-self: flex-start; background: rgb(var(--bg-rgb) / .9); color: var(--soft); border-radius: 10px; padding: 6px 10px; text-shadow: none; }
 .cine .hero-solo .stand { margin-top: 8px; }
 .cine .hero-solo.easy b { color: #ffffff; }
@@ -2711,7 +2711,8 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
 .tri .tv { display: block; width: calc(100% + 40px); margin: -18px -20px 6px; aspect-ratio: 16 / 9; object-fit: cover; background: #14162b; }
 
 /* Bewegung nur, wo erwünscht */
-.r3d { transform-origin: 50% 100%; backface-visibility: hidden; }
+.r3d { transform-origin: 50% 100%; }
+.r3d.moving { will-change: transform, opacity; }
 .tilt { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
 .tilt.tilting { transition: transform .12s ease-out; }
 @media (prefers-reduced-motion: reduce) {
@@ -2726,7 +2727,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   const RM = matchMedia("(prefers-reduced-motion: reduce)");
   const CLIP = { "": "start", s: "schueler", e: "eltern", l: "lehrkraft", x: "start", en: "start", uk: "start", m: "start" };
   const stage = document.getElementById("vstage"), cam = stage.querySelector(".cam"), vid = stage.querySelector("video");
-  let cur = "start", items = [], mx = 0, my = 0, tmx = 0, tmy = 0, dirty = true;
+  let cur = "start", items = [], mx = 0, my = 0, tmx = 0, tmy = 0, dirty = true, sy = scrollY, heroes = [], bubbles = [], vidOn = true;
   const clamp01 = (t) => Math.max(0, Math.min(1, t));
   const ease = (t) => t * t * (3 - 2 * t);
   const role = () => document.body.dataset.role || "";
@@ -2767,6 +2768,9 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   function collect() {
     items.forEach((it) => { it.el.style.transform = ""; it.el.style.opacity = ""; it.el.classList.remove("r3d"); });
     items = [];
+    const vis = (e) => e.getClientRects().length;
+    heroes = [...document.querySelectorAll(".site main > section.cine")].filter(vis).flatMap((sec) => [...sec.querySelectorAll(":scope > .hero, :scope > .hero-solo")]);
+    bubbles = heroes.flatMap((h) => [...h.querySelectorAll(".bubble")]);
     if (RM.matches) return;
     document.querySelectorAll(".site main > section:not(.cine)").forEach((sec) => {
       if (!sec.getClientRects().length) return;
@@ -2787,22 +2791,24 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
 
   function frame() {
     mx += (tmx - mx) * 0.06; my += (tmy - my) * 0.06;
-    const moving = Math.abs(tmx - mx) + Math.abs(tmy - my) > 0.001;
+    // weiche Nachführung der Scrollposition: Bewegung gleitet statt zu springen
+    const ty = scrollY; sy += (ty - sy) * 0.16; if (Math.abs(ty - sy) < 0.5) sy = ty;
+    const moving = Math.abs(tmx - mx) + Math.abs(tmy - my) > 0.001 || sy !== ty;
     if (dirty || moving) {
       dirty = false;
-      const vh = innerHeight, y = scrollY, r = role();
+      const vh = innerHeight, y = sy, r = role();
       const e = ease(clamp01(y / (vh * 1.1)));
       // Kamera: Push-in, leichtes Kippen, Maus-Parallaxe
       if (!RM.matches) cam.style.transform = `translate3d(${-mx * 14}px, ${-my * 10 - e * 40}px, 0) scale(${1.02 + e * 0.3}) rotateX(${e * 7 + my * 1.6}deg) rotateY(${mx * 2.2}deg)`;
       const veil = !r ? 0.1 + e * 0.55 : r === "m" ? 0.9 : Math.min(0.9, 0.02 + e * 0.95);
       stage.style.setProperty("--veil", veil.toFixed(3));
+      const wantVid = veil < 0.86 && !RM.matches;
+      if (wantVid !== vidOn) { vidOn = wantVid; if (wantVid) play(vid); else vid.pause(); }
       // Einstieg: Text liegt vor dem Video und zieht schneller weg
       if (!RM.matches) {
-        document.querySelectorAll(".site main > section.cine").forEach((sec) => {
-          if (!sec.getClientRects().length) return;
-          sec.querySelectorAll(":scope > .hero, :scope > .hero-solo").forEach((h) => { const wide = innerWidth > 820; h.style.transform = `translate3d(${mx * 10}px, ${-y * (wide ? 0.22 : 0.05) + my * 6}px, 0)`; h.style.opacity = wide ? (1 - 0.85 * ease(clamp01((y - vh * 0.12) / (vh * 0.6)))).toFixed(3) : ""; });
-          sec.querySelectorAll(".bubble").forEach((b, i) => { const z = 1 + i * 0.6; b.style.transform = `translate3d(${mx * 14 * z}px, ${my * 9 * z - y * 0.08 * z}px, 0) rotate(${(i % 2 ? 1 : -1) * (1.5 - e * 1.5)}deg)`; });
-        });
+        const wide = innerWidth > 820;
+        heroes.forEach((h) => { h.style.transform = `translate3d(${mx * 10}px, ${-y * (wide ? 0.22 : 0.05) + my * 6}px, 0)`; h.style.opacity = wide ? (1 - 0.85 * ease(clamp01((y - vh * 0.12) / (vh * 0.6)))).toFixed(3) : ""; });
+        bubbles.forEach((b, i) => { const z = 1 + i * 0.6; b.style.transform = `translate3d(${mx * 14 * z}px, ${my * 9 * z - y * 0.08 * z}px, 0) rotate(${(i % 2 ? 1 : -1) * (1.5 - e * 1.5)}deg)`; });
       }
       for (const it of items) {
         const top = it.top - y;
@@ -2810,6 +2816,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
         const p = clamp01((start - top) / span);
         if (Math.abs(p - it.p) < 0.002) continue;
         it.p = p;
+        if (p >= 1 || p <= 0) it.el.classList.remove("moving"); else it.el.classList.add("moving");
         if (p >= 1) { if (!it.el.classList.contains("tilting")) it.el.style.transform = ""; it.el.style.opacity = ""; continue; }
         const q = ease(p);
         it.el.style.transform = `perspective(1100px) translate3d(0, ${(1 - q) * 70}px, ${(1 - q) * -180}px) rotateX(${(1 - q) * 22}deg)`;
