@@ -2702,6 +2702,11 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   .gutter { max-width: max(1080px, 75vw); }
   body[data-role="x"] .site { font-size: 1.1875rem; }
 }
+.chooser h1 { hyphens: manual; -webkit-hyphens: manual; overflow-wrap: normal; }
+@media (min-width: 1100px) {
+  .chooser-head { max-width: none; width: fit-content; }
+  .chooser h1 { font-size: clamp(4rem, 6.2vw, 7.4rem); }
+}
 /* Dreischritt mit den Clips der Startseite */
 .tri .tv { display: block; width: calc(100% + 40px); margin: -18px -20px 6px; aspect-ratio: 16 / 9; object-fit: cover; background: #14162b; }
 
