@@ -149,7 +149,7 @@ main { position: relative; z-index: 1; }
     <source src="loop.mp4" type="video/mp4">
   </video>
   <canvas id="gl"></canvas>
-  <canvas id="seq"></canvas>
+  <canvas id="seq" class="mseq" data-dir="seq" data-n="76"></canvas>
   <canvas id="seq6" class="mseq" data-dir="finale" data-hd="finale-hd" data-pre="e" data-n="96"></canvas>
   <div class="shade" id="shade"></div>
   <div class="whiteout" id="whiteout"></div>
@@ -428,10 +428,10 @@ document.querySelectorAll(".media[data-video]").forEach(m => {
 const MSEQ = [...document.querySelectorAll("canvas.mseq")].map(cv => ({ cv, ctx: cv.getContext("2d"), dir: cv.dataset.dir, hd: cv.dataset.hd, pre: cv.dataset.pre, n: +cv.dataset.n, imgs: [], cur: -1, want: 0, loaded: false }));
 function mseqLoad(m) {
   if (m.loaded) return; m.loaded = true;
-  // HD (große Bildschirme): je 8 Bilder untereinander in einem Streifen
-  m.per = (m.hd && innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100) ? 8 : 1;
+  // je 8 Bilder untereinander in einem Streifen; große Bildschirme laden die HD-Streifen
+  m.per = 8; const big = m.hd && innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100;
   const files = Math.ceil(m.n / m.per);
-  for (let i = 0; i < files; i++) { const im = new Image(); im.decoding = "async"; im.src = m.per > 1 ? `${m.hd}/s${String(i).padStart(2, "0")}.jpg` : `${m.dir}/${m.pre}${String(i).padStart(3, "0")}.jpg`; im.onload = () => { const go = () => { if (i === 0 || i === Math.floor(m.want / m.per)) mseqDraw(m, m.want, true); }; im.decode ? im.decode().then(go, go) : go(); }; m.imgs.push(im); }
+  for (let i = 0; i < files; i++) { const im = new Image(); im.decoding = "async"; im.src = `${big ? m.hd : m.dir}/s${String(i).padStart(2, "0")}.jpg`; im.onload = () => { const go = () => { if (i === 0 || i === Math.floor(m.want / m.per)) mseqDraw(m, m.want, true); }; im.decode ? im.decode().then(go, go) : go(); }; m.imgs.push(im); }
 }
 function mseqDraw(m, i, force) {
   if (i === m.cur && !force) return;
@@ -454,28 +454,9 @@ if (calm) MSEQ.forEach(m => { m.want = Math.round(m.n * 0.6); mseqLoad(m); });
 setTimeout(() => MSEQ.forEach(mseqLoad), 1500);
 
 /* ---------- Clip 2 als Bildfolge (läuft synchron zum Scrollen) ---------- */
-const SEQ_N = 76, seqImgs = [], seqCanvas = $("seq"), sctx = seqCanvas.getContext("2d");
-let seqCur = -1, seqWant = 0, seqLoaded = false;
-function seqLoad() {
-  if (seqLoaded) return; seqLoaded = true;
-  for (let i = 0; i < SEQ_N; i++) { const im = new Image(); im.decoding = "async"; im.src = `seq/f${String(i).padStart(3, "0")}.jpg`; im.onload = () => { const go = () => { if (i === seqWant) seqDraw(i, true); }; im.decode ? im.decode().then(go, go) : go(); }; seqImgs.push(im); }
-}
-function seqDraw(i, force) {
-  if (i === seqCur && !force) return;
-  // nächstes bereits geladenes Bild nehmen
-  let k = i; while (k > 0 && !(seqImgs[k] && seqImgs[k].complete && seqImgs[k].naturalWidth)) k--;
-  const im = seqImgs[k]; if (!im || !im.naturalWidth) return;
-  const dpr = DPR(), W = Math.round(innerWidth * dpr), H = Math.round(innerHeight * dpr);
-  if (seqCanvas.width !== W || seqCanvas.height !== H) { seqCanvas.width = W; seqCanvas.height = H; }
-  const s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
-  sctx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h);
-  seqCur = i;
-}
-function seqShow(t) { seqWant = Math.round(t * (SEQ_N - 1)); seqDraw(seqWant); }
-addEventListener("resize", () => seqDraw(seqWant, true));
+function seqShow(t) { mseqShow("seq", t); }
 // Bildfolge laden, sobald die Seite steht (nicht im ersten Moment)
-setTimeout(seqLoad, 600);
-addEventListener("scroll", seqLoad, { once: true, passive: true });
+setTimeout(() => mseqLoad(MSEQ.find(q => q.dir === "seq")), 600);
 
 initGL(); resize(); requestAnimationFrame(draw); story();
 </script>

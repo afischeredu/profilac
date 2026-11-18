@@ -2727,7 +2727,10 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   const RM = matchMedia("(prefers-reduced-motion: reduce)");
   const CLIP = { "": "start", s: "schueler", e: "eltern", l: "lehrkraft", x: "start", en: "start", uk: "start", m: "start" };
   const stage = document.getElementById("vstage"), cam = stage.querySelector(".cam"), vid = stage.querySelector("video");
-  let cur = "start", items = [], mx = 0, my = 0, tmx = 0, tmy = 0, dirty = true, sy = scrollY, heroes = [], bubbles = [], vidOn = true;
+  // große Bildschirme: hochskalierte Fassungen der Hintergrundvideos
+  const HD = innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100;
+  const HD_CLIPS = ["start"];
+  let cur = HD ? "" : "start", items = [], mx = 0, my = 0, tmx = 0, tmy = 0, dirty = true, sy = scrollY, heroes = [], bubbles = [], vidOn = true;
   const clamp01 = (t) => Math.max(0, Math.min(1, t));
   const ease = (t) => t * t * (3 - 2 * t);
   const role = () => document.body.dataset.role || "";
@@ -2736,8 +2739,9 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
     const k = CLIP[role()] || "start";
     if (k === cur) return;
     cur = k;
+    const f = HD && HD_CLIPS.includes(k) ? `${k}-hd` : k;
     vid.poster = `media/${k}.jpg`;
-    vid.innerHTML = `<source src="media/${k}.webm" type="video/webm"><source src="media/${k}.mp4" type="video/mp4">`;
+    vid.innerHTML = `<source src="media/${f}.webm" type="video/webm"><source src="media/${f}.mp4" type="video/mp4">`;
     vid.load();
     play(vid);
   }
