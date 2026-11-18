@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Profil AC erleben</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Rubik:wght@400;500;700&family=Space+Mono:wght@700&display=swap">
+<style>
+/* Layout: one fixed 3D photo stage (WebGL depth parallax) behind pinned scroll chapters: Tisch → Profil → Dreischritt → zurück zur Gruppe */
+:root {
+  --bg: #f8f4ec;
+  --paper: #ffffff;
+  --ink: #14162b;
+  --soft: #55586e;
+  --line: #e4dacb;
+  --magenta: #e2007a;
+  --cyan: #00b1e6;
+  --cyan-deep: #0079a8;
+  --on-brand: #ffffff;
+  --font-display: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Rubik", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #14162b; --paper: #1d2040; --ink: #f8f4ec; --soft: #b7b5c4; --line: #2e3258; --magenta: #ff3d9e; --cyan: #2cc4f2; --cyan-deep: #7fd9f7; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #14162b; --paper: #1d2040; --ink: #f8f4ec; --soft: #b7b5c4; --line: #2e3258; --magenta: #ff3d9e; --cyan: #2cc4f2; --cyan-deep: #7fd9f7; color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { overflow-x: clip; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--font-body); }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 0.92; text-wrap: balance; letter-spacing: -0.05em; text-transform: uppercase; font-weight: 900; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--magenta); outline-offset: 3px; }
+.gutter { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.kicker { font: 700 0.78rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--magenta); display: inline-flex; gap: 10px; align-items: center; }
+.kicker::before { content: "»"; font: 900 1.3rem/0.6 var(--font-display); }
+
+/* Bühne: festes 3D-Foto */
+.stage { position: fixed; inset: 0; z-index: 0; background: #e9e7e2; }
+.stage canvas, .stage video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
+.stage .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,22,43,.0) 40%, rgba(20,22,43,.55) 100%); pointer-events: none; }
+.stage .whiteout { position: absolute; inset: 0; background: var(--paper); opacity: 0; pointer-events: none; }
+
+main { position: relative; z-index: 1; }
+
+/* 1 Einstieg */
+.hero { height: 420vh; position: relative; }
+.stage #seq, .stage #seq6 { opacity: 0; }
+#cap2 { color: #14162b; text-shadow: 0 0 24px rgba(255,255,255,.9), 0 0 6px rgba(255,255,255,.8); }
+.hero-inner { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-block: 0 max(48px, env(safe-area-inset-bottom, 0px)); pointer-events: none; }
+.hero-title { color: #ffffff; display: flex; flex-direction: column; gap: 14px; max-width: 980px; text-shadow: 0 4px 30px rgba(20,22,43,.35); }
+.hero-title h1 { font-size: clamp(2.6rem, 8vw, 6.4rem); }
+.hero-title h1 span { color: var(--cyan); display: block; }
+.hero-title h1 b { color: #ff4fa8; font-weight: 900; }
+.claim { font: 800 clamp(0.8rem, 2.2vw, 1.05rem)/1.3 var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; }
+.claim span { white-space: nowrap; }
+.scrollhint { margin-top: 22px; font: 700 0.75rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: .1em; display: inline-flex; align-items: center; gap: 10px; }
+.scrollhint i { width: 2px; height: 34px; background: currentColor; display: inline-block; transform-origin: top; animation: hint 1.8s ease-in-out infinite; }
+@keyframes hint { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.caption { position: absolute; left: 0; right: 0; top: 18vh; text-align: center; color: #ffffff; opacity: 0; pointer-events: none; text-shadow: 0 4px 24px rgba(20,22,43,.5); }
+.caption p { font: 900 clamp(1.6rem, 5vw, 3.4rem)/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.04em; }
+
+/* 2 Kompetenzprofil */
+.profile { height: 260vh; position: relative; background: transparent; }
+.profile-inner { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; perspective: 1400px; }
+.sheet { width: min(760px, 100%); background: var(--paper); color: var(--ink); border-radius: 14px; padding: clamp(18px, 4vw, 36px); box-shadow: 0 30px 80px -30px rgba(20,22,43,.45); transform-origin: 50% 70%; display: flex; flex-direction: column; gap: 14px; will-change: transform; }
+.sheet-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.sheet h2 { font-size: clamp(1.4rem, 4vw, 2.2rem); color: var(--magenta); }
+.badge { font: 700 0.7rem/1 var(--font-mono); text-transform: uppercase; padding: 6px 9px; border-radius: 6px; background: var(--bg); color: var(--soft); }
+.prow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 6px 14px; align-items: center; padding-block: 6px; border-top: 1px solid var(--line); }
+.prow b { font-weight: 500; font-size: 0.95rem; }
+.bars { display: grid; gap: 3px; }
+.bar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; height: 14px; }
+.bar i { background: var(--bg); border-radius: 2px; }
+.bar.b i.on { background: var(--cyan); }
+.bar.s i.on { background: var(--magenta); }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--soft); }
+.legend span::before { content: ""; display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+.legend .b::before { background: var(--cyan); }
+.legend .s::before { background: var(--magenta); }
+.sheet-note { font-size: 0.9rem; color: var(--soft); }
+
+/* 3 Dreischritt */
+.steps { height: 480vh; position: relative; background: var(--bg); }
+.steps-inner { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+.track { display: flex; height: 100%; width: 300vw; will-change: transform; }
+.panel { width: 100vw; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: clamp(20px, 5vw, 64px); }
+.panel .txt { display: flex; flex-direction: column; gap: 18px; }
+.panel .num { font: 900 clamp(5rem, 16vw, 12rem)/0.8 var(--font-display); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 3px var(--magenta); }
+.panel h2 { font-size: clamp(2.6rem, 8vw, 6rem); }
+.panel:nth-child(2) h2 { color: var(--magenta); }
+.panel:nth-child(3) h2 { color: var(--cyan-deep); }
+.panel p { max-width: 42ch; font-size: 1.1rem; color: var(--soft); }
+.media { position: relative; height: min(68vh, 640px); border-radius: 22px; overflow: hidden; background: #e9e7e2; }
+.media .pic { position: absolute; inset: -12%; background-image: url("hero.jpg"); background-repeat: no-repeat; will-change: transform; }
+.media video, .media canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.media .tag { position: absolute; left: 16px; bottom: 16px; font: 700 0.72rem/1 var(--font-mono); text-transform: uppercase; padding: 7px 10px; border-radius: 6px; background: rgba(20,22,43,.75); color: #fff; }
+.progress { position: absolute; left: 50%; bottom: max(24px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; gap: 8px; }
+.progress i { width: 34px; height: 5px; border-radius: 3px; background: var(--line); }
+.progress i.on { background: var(--magenta); }
+
+/* 4 Abschluss */
+.finale { height: 220vh; position: relative; }
+.finale-inner { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-block: 0 max(48px, env(safe-area-inset-bottom, 0px)); }
+.finale-box { color: #fff; display: flex; flex-direction: column; gap: 18px; opacity: 0; transform: translateY(30px); text-shadow: 0 4px 30px rgba(20,22,43,.4); }
+.finale-box h2 { font-size: clamp(2.4rem, 8vw, 6rem); }
+.finale-box h2 span { color: var(--cyan); }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.cta { text-decoration: none; padding: 16px 22px; border-radius: 999px; font: 900 1rem/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.01em; text-shadow: none; display: inline-flex; gap: 10px; align-items: center; }
+.cta::after { content: "»"; font-size: 1.4em; line-height: .6; }
+.cta.s { background: var(--magenta); color: #fff; }
+.cta.e { background: var(--cyan); color: #fff; }
+.cta.l { background: #fff; color: #14162b; }
+.foot { position: relative; z-index: 1; background: var(--bg); padding-block: 28px; font-size: 0.85rem; color: var(--soft); }
+
+/* Mobil und reduzierte Bewegung */
+@media (max-width: 820px) {
+  .panel { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 18px; }
+  .media { height: 38vh; order: -1; }
+  .panel .num { font-size: 4.5rem; }
+  .panel h2 { font-size: clamp(1.9rem, 9vw, 2.6rem); overflow-wrap: break-word; }
+  .panel p { font-size: 1rem; }
+  .prow { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero, .profile, .steps, .finale { height: auto; }
+  .hero-inner, .finale-inner { position: relative; height: 100vh; }
+  .profile-inner { position: relative; height: auto; padding-block: 12vh; }
+  .steps-inner { position: relative; height: auto; overflow: visible; }
+  .track { width: auto; flex-direction: column; }
+  .panel { width: auto; height: auto; padding-block: 10vh; }
+  .finale-box { opacity: 1; transform: none; }
+  .scrollhint i { animation: none; }
+  .progress { display: none; }
+}
+</style>
+
+<div class="stage" id="stage" aria-hidden="true">
+  <video id="fallback" muted loop playsinline preload="auto" poster="poster.jpg">
+    <source src="loop-hd.webm" type="video/webm" media="(min-width: 900px)">
+    <source src="loop-hd.mp4" type="video/mp4" media="(min-width: 900px)">
+    <source src="loop.webm" type="video/webm">
+    <source src="loop.mp4" type="video/mp4">
+  </video>
+  <canvas id="gl"></canvas>
+  <canvas id="seq"></canvas>
+  <canvas id="seq6" class="mseq" data-dir="finale" data-hd="finale-hd" data-pre="e" data-n="96"></canvas>
+  <div class="shade" id="shade"></div>
+  <div class="whiteout" id="whiteout"></div>
+</div>
+
+<main>
+  <!-- 1 Einstieg -->
+  <section class="hero gutter" id="hero" aria-label="Einstieg">
+    <div class="hero-inner">
+      <div class="caption" id="cap1"><p>Alles beginnt am Tisch.</p></div>
+      <div class="caption" id="cap2"><p>Hier entsteht dein Profil.</p></div>
+      <div class="hero-title" id="heroTitle">
+        <span class="kicker" style="color:#fff">Kompetenzanalyse Rheinland-Pfalz</span>
+        <h1><b>Profil AC</b><span>Next Level</span></h1>
+        <p class="claim"><span>Stärken erkennen ·</span> <span>Interessen erkunden ·</span> <span>Perspektiven schaffen</span></p>
+        <span class="scrollhint"><i></i>Scrollen und eintauchen</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 Kompetenzprofil -->
+  <section class="profile gutter" id="profile" aria-labelledby="ph">
+    <div class="profile-inner">
+      <article class="sheet" id="sheet">
+        <div class="sheet-head">
+          <h2 id="ph">Dein Kompetenzprofil</h2>
+          <span class="badge">Beispiel · fiktive Werte</span>
+        </div>
+        <p class="sheet-note">Aus Aufgaben, Tests und deiner Selbsteinschätzung wird ein Profil. Ganz ohne Noten.</p>
+        <div id="rows"></div>
+        <div class="legend"><span class="b">Beobachtung</span><span class="s">Selbsteinschätzung</span><span>Skala 1–5 · 3 = Erwartung der Klassenstufe</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3 Dreischritt -->
+  <section class="steps" id="steps" aria-label="Der Dreischritt">
+    <div class="steps-inner">
+      <div class="track" id="track">
+        <div class="panel gutter">
+          <div class="txt"><span class="num">01</span><span class="kicker">Diagnostik</span><h2>Zeig, was du kannst</h2><p>Einzel- und Gruppenaufgaben, zum Beispiel eine Murmelbahn bauen. Geschulte Lehrkräfte beobachten, Tests am PC ergänzen das Bild.</p></div>
+          <div class="media" data-video=""><canvas class="mseq" data-dir="murmel" data-pre="m" data-n="96" aria-label="Hände bauen eine Murmelbahn aus Pappe und legen eine Murmel auf"></canvas><span class="tag">Gruppenaufgabe</span></div>
+        </div>
+        <div class="panel gutter">
+          <div class="txt"><span class="num">02</span><span class="kicker">Reflexion</span><h2>Versteh, was es bedeutet</h2><p>Im Rückmeldegespräch schaut ihr gemeinsam auf dein Profil. Wo siehst du dich anders als die Beobachter? Was passt zu dir?</p></div>
+          <div class="media" data-video=""><canvas class="mseq" data-dir="gespraech" data-pre="g" data-n="96" aria-label="Lehrerin und Schülerin lesen gemeinsam ein Blatt und lächeln sich an"></canvas><span class="tag">Rückmeldegespräch</span></div>
+        </div>
+        <div class="panel gutter">
+          <div class="txt"><span class="num">03</span><span class="kicker">Förderung</span><h2>Mach den nächsten Schritt</h2><p>Neue Fördermodule helfen dir, an deinen Entwicklungsfeldern zu arbeiten. Und dann: Praktikum, Ausbildung, Traumjob.</p></div>
+          <div class="media" data-video=""><canvas class="mseq" data-dir="praktikum" data-pre="p" data-n="96" aria-label="Eine Praktikantin arbeitet in einer Werkstatt, ihr Ausbilder unterstützt sie"></canvas><span class="tag">Praktikum</span></div>
+        </div>
+      </div>
+      <div class="progress" id="prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <!-- 4 Abschluss -->
+  <section class="finale gutter" id="finale" aria-labelledby="fh">
+    <div class="finale-inner">
+      <div class="finale-box" id="finaleBox">
+        <span class="kicker" style="color:#fff">Bereit?</span>
+        <h2 id="fh">Starte mit <span>Profil AC</span></h2>
+        <div class="ctas">
+          <a class="cta s" href="info/#schueler">Ich bin Schüler*in</a>
+          <a class="cta e" href="info/#eltern">Ich bin Elternteil</a>
+          <a class="cta l" href="info/#lehrkraefte">Ich bin Lehrkraft</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="foot gutter">Keine offizielle Seite des Landes. Profil AC ist ein Verfahren der Kompetenzanalyse an Schulen in Rheinland-Pfalz.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const mix = (a, b, t) => a + (b - a) * t;
+
+/* ---------- Kamera-Zustand der 3D-Bühne ---------- */
+const cam = { scale: 1, cx: 0.5, cy: 0.5, depth: 0.035, tiltY: 0 };
+const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+addEventListener("pointermove", (e) => { mouse.tx = (e.clientX / innerWidth - 0.5) * 2; mouse.ty = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
+
+/* ---------- WebGL: Foto mit Tiefenkarte ---------- */
+const canvas = $("gl");
+const gl = canvas.getContext("webgl", { antialias: false, premultipliedAlpha: false });
+var ready = false; let imgAspect = 16 / 9, uni = {}, vidTex = null;
+const video = $("fallback");
+function playVideo() { if (calm) return; const pr = video.play(); if (pr && pr.catch) pr.catch(() => {}); }
+playVideo();
+["pointerdown", "touchstart", "scroll", "keydown"].forEach(ev => addEventListener(ev, () => { if (video.paused) playVideo(); }, { once: true, passive: true }));
+function loadImg(src) { return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; }); }
+function makeTex(img, unit) {
+  const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  return t;
+}
+async function initGL() {
+  if (!gl) return;
+  const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p * 0.5 + 0.5; v.y = 1.0 - v.y; gl_Position = vec4(p, 0.0, 1.0); }`;
+  const fs = `precision mediump float; varying vec2 v;
+    uniform sampler2D img, dep; uniform vec2 cover, center, par; uniform float scale, amt, tiltY;
+    void main(){
+      vec2 uv = (v - 0.5) * cover / scale + center;
+      // zweistufige Parallaxe: nahe Bereiche (hell in der Tiefenkarte) verschieben sich stärker
+      float d = texture2D(dep, uv).r;
+      vec2 off = par * (d - 0.45) * amt + vec2(0.0, tiltY * (d - 0.45));
+      d = texture2D(dep, uv + off * 0.5).r;
+      off = par * (d - 0.45) * amt + vec2(0.0, tiltY * (d - 0.45));
+      vec2 q = clamp(uv + off, 0.001, 0.999);
+      vec3 c = texture2D(img, q).rgb;
+      float vig = smoothstep(1.15, 0.35, length((v - 0.5) * vec2(1.2, 1.0)));
+      gl_FragColor = vec4(c * mix(0.88, 1.0, vig), 1.0);
+    }`;
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+  const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+  gl.useProgram(pr);
+  const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  try {
+    const [im, dp] = await Promise.all([loadImg("poster.jpg"), loadImg("depth-video.jpg")]);
+    imgAspect = im.width / im.height;
+    vidTex = makeTex(im, 0); makeTex(dp, 1);
+  } catch (e) { return; }
+  for (const n of ["img", "dep", "cover", "center", "par", "scale", "amt", "tiltY"]) uni[n] = gl.getUniformLocation(pr, n);
+  gl.uniform1i(uni.img, 0); gl.uniform1i(uni.dep, 1);
+  ready = true; video.style.opacity = "0"; resize();
+}
+function resize() {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
+  if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
+}
+addEventListener("resize", resize);
+function draw(t) {
+  if (ready) {
+    const vAsp = innerWidth / innerHeight;
+    const cover = vAsp > imgAspect ? [1, imgAspect / vAsp] : [vAsp / imgAspect, 1];
+    mouse.x += (mouse.tx - mouse.x) * 0.06; mouse.y += (mouse.ty - mouse.y) * 0.06;
+    // ruhige Eigenbewegung, damit die Szene lebendig wirkt
+    const drift = calm ? [0, 0] : [Math.sin(t / 2300) * 0.55, Math.cos(t / 3100) * 0.35];
+    const breathe = calm ? 0 : Math.sin(t / 2600) * 0.008;
+    const s = cam.scale * (1 + breathe);
+    // Bildmitte so begrenzen, dass nie über den Rand hinaus gezeigt wird
+    const hx = cover[0] / s / 2, hy = cover[1] / s / 2;
+    const cx = Math.min(1 - hx, Math.max(hx, cam.cx)), cy = Math.min(1 - hy, Math.max(hy, cam.cy));
+    gl.uniform2f(uni.cover, cover[0], cover[1]);
+    gl.uniform2f(uni.center, cx, cy);
+    gl.uniform2f(uni.par, (mouse.x * 0.6 + drift[0]) * -1, (mouse.y * 0.35 + drift[1]) * -1);
+    gl.uniform1f(uni.scale, s); gl.uniform1f(uni.amt, cam.depth / s); gl.uniform1f(uni.tiltY, cam.tiltY);
+    // aktuelles Videobild als Textur (die Personen bewegen sich)
+    if (vidTex && video.readyState >= 2 && !video.paused) {
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, vidTex);
+      try { gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, video); } catch (e) {}
+    }
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  else {
+    // ohne WebGL: dieselbe Kamerafahrt mit dem Foto als CSS-Transformation
+    const im = $("fallback");
+    im.style.transformOrigin = `${cam.cx * 100}% ${cam.cy * 100}%`;
+    im.style.transform = `scale(${cam.scale})`;
+  }
+  requestAnimationFrame(draw);
+}
+
+/* ---------- Kompetenzprofil-Beispiel ---------- */
+const PROFILE = [["Teamfähigkeit", 3, 4], ["Kommunikationsfähigkeit", 3, 4], ["Planungsfähigkeit", 4, 4], ["Problemlösefähigkeit", 4, 3], ["Durchhaltevermögen", 4, 5], ["Selbstständigkeit", 3, 4]];
+$("rows").innerHTML = PROFILE.map(([n]) => `<div class="prow"><b>${n}</b><div class="bars"><div class="bar b">${"<i></i>".repeat(5)}</div><div class="bar s">${"<i></i>".repeat(5)}</div></div></div>`).join("");
+const barEls = [...document.querySelectorAll(".prow")];
+function setBars(p) {
+  barEls.forEach((row, r) => {
+    const [, bv, sv] = PROFILE[r];
+    const local = clamp01(p * 1.6 - r * 0.12);
+    [[".bar.b", bv], [".bar.s", sv]].forEach(([sel, val]) => {
+      const n = Math.round(local * val);
+      row.querySelectorAll(sel + " i").forEach((c, k) => c.classList.toggle("on", k < n));
+    });
+  });
+}
+
+/* ---------- Scroll-Choreografie ---------- */
+const PAPER = { x: 0.40, y: 0.89 }, TABLE = { x: 0.46, y: 0.74 };
+function story() {
+  if (calm || !window.gsap || !window.ScrollTrigger) { setBars(1); return; }
+  gsap.registerPlugin(ScrollTrigger);
+  const title = $("heroTitle"), cap = $("cap1"), white = $("whiteout"), shade = $("shade");
+  // 1 Einstieg: Kamerafahrt über den Tisch auf das Blatt
+  const cap2 = $("cap2"), seqCv = $("seq");
+  ScrollTrigger.create({ trigger: "#hero", start: "top top", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+    const p = st.progress;
+    // a) leichte Fahrt in die bewegte Szene hinein
+    const e = ease(clamp01(p / 0.42));
+    cam.scale = mix(1.0, 1.7, e); cam.cx = mix(0.5, TABLE.x, e); cam.cy = mix(0.5, TABLE.y, e);
+    cam.depth = mix(0.035, 0.06, e); cam.tiltY = mix(0, -0.03, e);
+    title.style.opacity = 1 - clamp01(p / 0.16); title.style.transform = `translateY(${-p * 160}px)`;
+    cap.style.opacity = clamp01((p - 0.14) / 0.08) * (1 - clamp01((p - 0.32) / 0.08));
+    cap.style.transform = `translateY(${(0.25 - p) * 90}px)`;
+    shade.style.opacity = 1 - clamp01(p / 0.35);
+    // b) Überblendung in Clip 2: die Kamera fährt auf das Blatt, Bild für Bild mit dem Scrollen
+    seqCv.style.opacity = clamp01((p - 0.36) / 0.1);
+    $("seq6").style.opacity = 0;
+    seqShow(clamp01((p - 0.38) / 0.5));
+    cap2.style.opacity = clamp01((p - 0.62) / 0.08) * (1 - clamp01((p - 0.82) / 0.06));
+    cap2.style.transform = `translateY(${(0.72 - p) * 90}px)`;
+    // c) das Blatt wird zur weißen Fläche des Profils
+    white.style.opacity = clamp01((p - 0.88) / 0.1);
+  } });
+  // 2 Das Blatt hebt sich vom Tisch und die Balken wachsen
+  const sheet = $("sheet");
+  ScrollTrigger.create({ trigger: "#profile", start: "top bottom", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+    const p = st.progress;
+    const lift = ease(clamp01((p - 0.18) / 0.32));
+    sheet.style.transform = `translateY(${mix(40, 0, lift)}vh) rotateX(${mix(68, 0, lift)}deg) scale(${mix(0.78, 1, lift)})`;
+    sheet.style.opacity = clamp01((p - 0.12) / 0.12);
+    setBars(clamp01((p - 0.5) / 0.42));
+  } });
+  // 3 Dreischritt: waagerechte Fahrt durch drei Kapitel
+  const track = $("track"), pics = [...document.querySelectorAll(".media .pic")], dots = [...$("prog").children];
+  ScrollTrigger.create({ trigger: "#steps", start: "top top", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+    const p = st.progress;
+    // jedes Kapitel bleibt stehen, solange sein Clip läuft; dazwischen wird gewechselt
+    const seg = (a, b) => ease(clamp01((p - a) / (b - a)));
+    const x = seg(0.3, 0.42) + seg(0.66, 0.78);
+    mseqShow("murmel", clamp01(p / 0.3));
+    mseqShow("gespraech", clamp01((p - 0.42) / 0.24));
+    mseqShow("praktikum", clamp01((p - 0.78) / 0.2));
+    track.style.transform = `translateX(${-x * 100}vw)`;
+    pics.forEach((pic) => { const k = [...track.children].indexOf(pic.closest(".panel")); const rel = x - k; pic.style.transform = `translateX(${rel * -9}%) scale(${1.05 + Math.abs(rel) * 0.08})`; });
+    dots.forEach((d, k) => d.classList.toggle("on", Math.round(x) === k));
+  } });
+  // weiße Fläche verschwindet erst wieder, wenn der Abschluss kommt
+  ScrollTrigger.create({ trigger: "#finale", start: "top bottom", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+    const p = st.progress;
+    // 4 Abschluss: Clip 6 fährt vom Tisch zurück auf die lachende Gruppe, Bild für Bild mit dem Scrollen
+    $("seq").style.opacity = 0;
+    $("seq6").style.opacity = p > 0 ? 1 : 0;
+    mseqShow("finale", clamp01((p - 0.04) / 0.66));
+    cam.scale = 1.06; cam.cx = 0.5; cam.cy = 0.48; cam.depth = 0.04; cam.tiltY = 0;
+    white.style.opacity = 1 - clamp01((p - 0.02) / 0.18);
+    shade.style.opacity = clamp01((p - 0.5) / 0.3);
+    const box = $("finaleBox"); const b = clamp01((p - 0.65) / 0.25);
+    box.style.opacity = b; box.style.transform = `translateY(${(1 - b) * 30}px)`;
+  } });
+}
+
+/* Videos (später): .media[data-video="clip.mp4"] bekommt ein stummes, schleifendes Video statt des Fotoausschnitts */
+document.querySelectorAll(".media[data-video]").forEach(m => {
+  const src = m.dataset.video; if (!src) return;
+  const v = document.createElement("video"); v.src = src; v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = !calm; v.setAttribute("aria-hidden", "true");
+  m.querySelector(".pic").remove(); m.prepend(v);
+});
+
+/* ---------- Kapitel-Clips als Bildfolgen (laufen mit dem Scrollen) ---------- */
+const MSEQ = [...document.querySelectorAll("canvas.mseq")].map(cv => ({ cv, ctx: cv.getContext("2d"), dir: cv.dataset.dir, hd: cv.dataset.hd, pre: cv.dataset.pre, n: +cv.dataset.n, imgs: [], cur: -1, want: 0, loaded: false }));
+function mseqLoad(m) {
+  if (m.loaded) return; m.loaded = true;
+  // HD (große Bildschirme): je 8 Bilder untereinander in einem Streifen
+  m.per = (m.hd && innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100) ? 8 : 1;
+  const files = Math.ceil(m.n / m.per);
+  for (let i = 0; i < files; i++) { const im = new Image(); im.decoding = "async"; im.src = m.per > 1 ? `${m.hd}/s${String(i).padStart(2, "0")}.jpg` : `${m.dir}/${m.pre}${String(i).padStart(3, "0")}.jpg`; im.onload = () => { if (i === 0 || i === Math.floor(m.want / m.per)) mseqDraw(m, m.want, true); }; m.imgs.push(im); }
+}
+function mseqDraw(m, i, force) {
+  if (i === m.cur && !force) return;
+  const per = m.per || 1, ok = (f) => { const im = m.imgs[Math.floor(f / per)]; return im && im.complete && im.naturalWidth; };
+  let k = i; while (k > 0 && !ok(k)) k--;
+  if (!ok(k)) return;
+  const im = m.imgs[Math.floor(k / per)], iw = im.naturalWidth, ih = im.naturalHeight / per, sy = (k % per) * ih;
+  const r = m.cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+  const W = Math.max(1, Math.round(r.width * dpr)), H = Math.max(1, Math.round(r.height * dpr));
+  if (m.cv.width !== W || m.cv.height !== H) { m.cv.width = W; m.cv.height = H; }
+  const sc = Math.max(W / iw, H / ih), w = iw * sc, h = ih * sc;
+  m.ctx.drawImage(im, 0, sy, iw, ih, (W - w) / 2, (H - h) / 2, w, h);
+  m.cur = i;
+}
+function mseqShow(key, t) { const m = MSEQ.find(q => q.dir === key); if (!m) return; mseqLoad(m); m.want = Math.round(t * (m.n - 1)); mseqDraw(m, m.want); }
+addEventListener("resize", () => MSEQ.forEach(m => mseqDraw(m, m.want, true)));
+// ohne Scroll-Animation (reduzierte Bewegung): ein ruhiges Standbild aus der Mitte des Clips zeigen
+if (calm) MSEQ.forEach(m => { m.want = Math.round(m.n * 0.6); mseqLoad(m); });
+// früh vorladen, damit das Kapitel sofort bereit ist
+setTimeout(() => MSEQ.forEach(mseqLoad), 1500);
+
+/* ---------- Clip 2 als Bildfolge (läuft synchron zum Scrollen) ---------- */
+const SEQ_N = 76, seqImgs = [], seqCanvas = $("seq"), sctx = seqCanvas.getContext("2d");
+let seqCur = -1, seqWant = 0, seqLoaded = false;
+function seqLoad() {
+  if (seqLoaded) return; seqLoaded = true;
+  for (let i = 0; i < SEQ_N; i++) { const im = new Image(); im.decoding = "async"; im.src = `seq/f${String(i).padStart(3, "0")}.jpg`; im.onload = () => { if (i === seqWant) seqDraw(i, true); }; seqImgs.push(im); }
+}
+function seqDraw(i, force) {
+  if (i === seqCur && !force) return;
+  // nächstes bereits geladenes Bild nehmen
+  let k = i; while (k > 0 && !(seqImgs[k] && seqImgs[k].complete && seqImgs[k].naturalWidth)) k--;
+  const im = seqImgs[k]; if (!im || !im.naturalWidth) return;
+  const dpr = Math.min(devicePixelRatio || 1, 2), W = Math.round(innerWidth * dpr), H = Math.round(innerHeight * dpr);
+  if (seqCanvas.width !== W || seqCanvas.height !== H) { seqCanvas.width = W; seqCanvas.height = H; }
+  const s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
+  sctx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h);
+  seqCur = i;
+}
+function seqShow(t) { seqWant = Math.round(t * (SEQ_N - 1)); seqDraw(seqWant); }
+addEventListener("resize", () => seqDraw(seqWant, true));
+// Bildfolge laden, sobald die Seite steht (nicht im ersten Moment)
+setTimeout(seqLoad, 600);
+addEventListener("scroll", seqLoad, { once: true, passive: true });
+
+initGL(); resize(); requestAnimationFrame(draw); story();
+</script>
