@@ -2661,7 +2661,9 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
       play(v);
     } else v.pause();
   }), { rootMargin: "100px" });
-  triVids.forEach((v) => io.observe(v));
+  // früh vorladen, damit die Clips beim Erscheinen sofort laufen statt kurz zu stocken
+  const pre = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; const v = e.target; pre.unobserve(v); if (!v.dataset.on) { v.dataset.on = 1; v.preload = "auto"; v.innerHTML = `<source src="media/${v.dataset.k}.webm" type="video/webm"><source src="media/${v.dataset.k}.mp4" type="video/mp4">`; v.load(); } }), { rootMargin: "1200px 0px" });
+  triVids.forEach((v) => { io.observe(v); pre.observe(v); });
 
   // Elemente, die sich beim Hereinscrollen in 3D aufrichten
   function collect() {
@@ -2852,7 +2854,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   const num = document.getElementById("sm-num"), fill = document.getElementById("sm-fill");
   const RM = matchMedia("(prefers-reduced-motion: reduce)");
   let cur = -1, near = false;
-  const load = (v) => { if (v.dataset.on) return; v.dataset.on = 1; const k = v.dataset.clip; v.innerHTML = `<source src="media/${k}.webm" type="video/webm"><source src="media/${k}.mp4" type="video/mp4">`; v.load(); };
+  const load = (v) => { if (v.dataset.on) return; v.dataset.on = 1; v.preload = "auto"; const k = v.dataset.clip; v.innerHTML = `<source src="media/${k}.webm" type="video/webm"><source src="media/${k}.mp4" type="video/mp4">`; v.load(); };
   const play = (v) => { if (RM.matches || !near) { v.pause(); return; } const p = v.play(); if (p) p.catch(() => {}); };
   function show(i) {
     if (i === cur) return; cur = i;
@@ -2869,7 +2871,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
     steps.forEach((s, j) => { const r = s.getBoundingClientRect(); const d = innerWidth > 820 ? Math.abs((r.top + Math.min(r.height, innerHeight * 0.5) / 2) - mid) : (r.top <= mid && r.bottom > mid ? 0 : Math.abs(r.top - mid)); if (d < bd) { bd = d; best = j; } });
     show(best); };
   addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(pick); }, { passive: true });
-  new IntersectionObserver((es) => { near = es[0].isIntersecting; if (near) { vids.slice(0, 2).forEach(load); if (cur >= 0) play(vids[cur]); else pick(); } else vids.forEach((v) => v.pause()); }, { rootMargin: "300px" }).observe(story);
+  new IntersectionObserver((es) => { near = es[0].isIntersecting; if (near) { vids.forEach(load); if (cur >= 0) play(vids[cur]); else pick(); } else vids.forEach((v) => v.pause()); }, { rootMargin: "1000px 0px" }).observe(story);
   document.addEventListener("rolechange", () => { cur = -1; requestAnimationFrame(pick); });
   document.addEventListener("chapterchange", () => { cur = -1; requestAnimationFrame(pick); });
   show(0);
