@@ -692,7 +692,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
 </style>
 
 <div class="bgimg" aria-hidden="true"></div>
-<div class="vstage" id="vstage" aria-hidden="true"><div class="cam"><video muted loop playsinline autoplay preload="auto" poster="media/start.jpg"><source src="media/start.webm" type="video/webm"><source src="media/start.mp4" type="video/mp4"></video></div><div class="shade"></div><div class="veil"></div></div>
+<div class="vstage" id="vstage" aria-hidden="true"><div class="cam"><video muted loop playsinline autoplay preload="auto" poster="media/start.jpg"><source src="media/start.webm" type="video/webm"><source src="media/start.mp4" type="video/mp4"></video></div><div class="shade"></div><div class="veil"></div><div class="bgw" id="bgw"><video muted loop playsinline preload="none" poster="media/raum.jpg"></video><div class="bgveil"></div></div></div>
 <div class="lupe" id="lupe">
   <div class="lupe-panel" id="lupe-panel" role="group" aria-label="Schriftgröße" hidden>
     <button type="button" id="lupe-minus" aria-label="Schrift kleiner">A−</button>
@@ -724,7 +724,6 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     <a class="mrole" href="#english" data-pick="en" lang="en"><b>English</b><span>Information in English</span></a>
     <a class="mrole" href="#ukrainska" data-pick="uk" lang="uk"><b>Українська</b><span>Інформація українською</span></a>
   </div>
-  <a class="mrole minis" href="#ministerium" data-pick="m"><span><b>Bildungsministerium</b></span></a>
   <p class="note">Keine offizielle Seite des Landes. Zusammengestellt aus Unterlagen zu Profil AC, Stand 28.10.2026.</p>
 </div>
 
@@ -732,8 +731,11 @@ body[data-role="l"] main > section { order: var(--l, 50); }
 <nav class="nav gutter" aria-label="Abschnitte">
   <div class="nav-in">
     <a class="logo" href="#top">Profil AC</a>
+    <div class="chap-tabs" id="chap-tabs" role="tablist" aria-label="Kapitel"></div>
     <a href="#dreischritt" class="nl">» Next Level</a>
     <a href="#ablauf">Ablauf</a>
+    <a href="#rundgang" data-r="s">Rundgang</a>
+    <a href="#zeitleiste" data-r="e">Zeitleiste</a>
     <a href="#aufgaben">Aufgaben</a>
     <a href="#kompetenzen">Kompetenzen</a>
     <a href="#ergebnis">Ergebnis</a>
@@ -754,6 +756,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     <a href="#x-skills" data-r="x">Das kannst du</a>
     <a href="#x-woerter" data-r="x">Wörter</a>
     <a href="#x-fragen" data-r="x">Fragen</a>
+    <a href="#spiele" data-r="x">Spiele</a>
     <a class="cta" href="#quiz" data-r="x en uk">Quiz</a>
     <a href="#en-steps" data-r="en" lang="en">How it works</a>
     <a href="#en-skills" data-r="en" lang="en">Skills</a>
@@ -801,8 +804,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     <div class="hero-solo" data-r="l">
       <span class="kicker">Für Lehrkräfte und Schulleitungen</span>
       <h1>Profil AC <span class="c">Next Level</span></h1>
-      <p class="lead">Profil AC ist jetzt ein digitales Gesamtverfahren aus Diagnostik, Reflexion und Förderung überfachlicher Kompetenzen, als Startschuss in die Berufliche Orientierung. Seit dem Schuljahr 2026/2027 läuft es auf einer neuen Verfahrensplattform.</p>
-      <p>Hier finden Sie, was sich ändert, was bleibt, und was Sie für die Umsetzung an Ihrer Schule brauchen.</p>
+      <p class="lead">Digitales Gesamtverfahren aus Diagnostik, Reflexion und Förderung, seit 2026/2027 auf einer neuen Plattform. Hier: was neu ist und was Sie für die Umsetzung brauchen.</p>
       <div class="row"><a class="btn" href="#dreischritt">Was ist neu?</a><a class="btn alt" href="#schule">Umsetzung</a></div>
     </div>
     <div class="facts">
@@ -837,11 +839,11 @@ body[data-role="l"] main > section { order: var(--l, 50); }
       </div>
       <div class="features">
         <div class="feature" data-r="s e"><span class="who you" data-r="s">Für dich</span><span class="who you" data-r="e">Für Ihr Kind</span><h3>Zukunftswege</h3><p data-r="s">Story-Spiel am PC: Gibt es Jungs- und Mädchenberufe? Nein.</p><p data-r="e">Ein digitales Modul für Klasse 5 bis 8 zur gendersensiblen Berufsorientierung: Ihr Kind setzt sich mit Rollenbildern und Klischees auseinander.</p></div>
-        <div class="feature"><span class="who you" data-r="s">Für dich</span><span class="who you" data-r="e">Auch für Sie</span><span class="who" data-r="l">Im Schüler-Login</span><h3>Digitale Netzwerkkarte</h3><p data-r="s">Zeig, wer dich bei der Berufswahl unterstützt.</p><p data-r="e">Ihr Kind kann darstellen, wer es bei der Berufswahl unterstützt. So werden auch Eltern indirekt eingebunden. Das Angebot ist freiwillig.</p><p data-r="l">Zeigt persönliche Bezugspersonen im BO-Prozess, macht Ressourcen oder fehlende Unterstützung sichtbar. Optional; entwickelt mit Prof. Dr. Thorsten Bührmann (MSH Hamburg).</p></div>
-        <div class="feature"><span class="who you" data-r="s">Für dich</span><span class="who you" data-r="e">Für Ihr Kind</span><span class="who" data-r="l">Für Sek I</span><h3>Neues Video</h3><p data-r="s">Jugendliche erzählen: „Profil AC stärkt mir den Rücken.“</p><p data-r="e">Jugendliche und Lehrkräfte berichten von ihren Erfahrungen. Das Video soll Lust auf Profil AC machen.</p><p data-r="l">Erfahrungsberichte von Schüler*innen und Lehrkräften, ohne Lehrfilm-Charakter. Abrufbar auf der Plattform unter „Vorlagen“.</p></div>
-        <div class="feature" data-r="l"><span class="who">Reflexion</span><h3>Zukunftswege</h3><p>Digitales Reflexionsmodul „Vielfalt entdecken, Stärken nutzen“ für Klasse 5 bis 8, frühzeitig im BO-Prozess. Thema: gendersensible Berufliche Orientierung, Rollen, Stereotype und Klischees.</p></div>
-        <div class="feature" data-r="l"><span class="who">Förderung</span><h3>Fördermodule</h3><p>Anpassbar für verschiedene Zielgruppen und Sozialformen. Einsatz z. B. in Klassenleiterstunden, Vertretungsstunden, Ganztag oder durch externe Partner ohne Plattformzugang.</p></div>
-        <div class="feature" data-r="l"><span class="who">Plattform</span><h3>Neue Menüpunkte</h3><p>Digitale Reflexion, Förderplanung (wie bei 2P), Dokumentation und FAQ. Ergebnisse gesammelt je Schüler*in mit automatischem Profilvergleich.</p></div>
+        <div class="feature"><span class="who you" data-r="s">Für dich</span><span class="who you" data-r="e">Auch für Sie</span><span class="who" data-r="l">Im Schüler-Login</span><h3>Digitale Netzwerkkarte</h3><p data-r="s">Zeig, wer dich bei der Berufswahl unterstützt.</p><p data-r="e">Ihr Kind kann darstellen, wer es bei der Berufswahl unterstützt. So werden auch Eltern indirekt eingebunden. Das Angebot ist freiwillig.</p><p data-r="l">Zeigt, wer Schüler*innen bei der Berufswahl unterstützt.</p></div>
+        <div class="feature"><span class="who you" data-r="s">Für dich</span><span class="who you" data-r="e">Für Ihr Kind</span><span class="who" data-r="l">Für Sek I</span><h3>Neues Video</h3><p data-r="s">Jugendliche erzählen: „Profil AC stärkt mir den Rücken.“</p><p data-r="e">Jugendliche und Lehrkräfte berichten von ihren Erfahrungen. Das Video soll Lust auf Profil AC machen.</p><p data-r="l">Erfahrungsberichte von Schüler*innen und Lehrkräften, auf der Plattform unter „Vorlagen“.</p></div>
+        <div class="feature" data-r="l"><span class="who">Reflexion</span><h3>Zukunftswege</h3><p>Digitales Modul für Klasse 5 bis 8 zu Rollenbildern und Klischees in der Berufswahl.</p></div>
+        <div class="feature" data-r="l"><span class="who">Förderung</span><h3>Fördermodule</h3><p>Anpassbar an Zielgruppe und Sozialform, auch ohne Plattformzugang einsetzbar.</p></div>
+        <div class="feature" data-r="l"><span class="who">Plattform</span><h3>Neue Menüpunkte</h3><p>Reflexion, Förderplanung, Dokumentation und FAQ, mit automatischem Profilvergleich.</p></div>
       </div>
     </div>
     <details class="fold" data-r="l"><summary>Was bleibt, was ist neu? Im Vergleich</summary>
@@ -896,7 +898,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
         </li>
         <li class="st" data-clip="schueler">
           <div class="st-in">
-          <span class="st-n" aria-hidden="true">02</span>
+          <span class="st-n" aria-hidden="true">02</span><span class="st-tag d">Diagnostik</span>
           <h3><span data-r="s">Durch&shy;führung</span><span data-r="e l">Durch&shy;führung</span></h3>
           <p data-r="s">Bauen, planen, knobeln: allein oder im Team. Dazu Tests am PC und deine Selbsteinschätzung.</p><p data-r="e">Ihr Kind löst Beobachtungsaufgaben allein und im Team. Dazu kommen Tests am PC, Simulationsspiele und eine Selbsteinschätzung.</p><p data-r="l">Beobachtungsaufgaben mit Beurteilung und Beobachterkonferenz, Selbsteinschätzung, Simulationsspiele, Tests und Fragebogen.</p>
           </div>
@@ -910,14 +912,14 @@ body[data-role="l"] main > section { order: var(--l, 50); }
         </li>
         <li class="st" data-clip="eltern">
           <div class="st-in">
-          <span class="st-n" aria-hidden="true">04</span>
+          <span class="st-n" aria-hidden="true">04</span><span class="st-tag r">Reflexion</span>
           <h3><span data-r="s">Gespräch</span><span data-r="e l">Reflexion</span></h3>
           <p data-r="s">Im Rückmeldegespräch schaut ihr gemeinsam auf dein Profil: Was passt zu dir?</p><p data-r="e">Im Rückmeldegespräch werden die Ergebnisse gemeinsam besprochen und eingeordnet.</p><p data-r="l">Ergebnisse reflektieren, Rückmeldegespräch, digitale und analoge Module der Reflexion.</p>
           </div>
         </li>
         <li class="st" data-clip="praktikum">
           <div class="st-in">
-          <span class="st-n" aria-hidden="true">05</span>
+          <span class="st-n" aria-hidden="true">05</span><span class="st-tag f">Förderung</span>
           <h3><span data-r="s">Mein Plan</span><span data-r="e l">Entwicklungs&shy;plan</span></h3>
           <p data-r="s">Du planst deine nächsten Schritte und übst gezielt, zum Beispiel im Praktikum.</p><p data-r="e">Daraus entsteht ein Entwicklungsplan mit Förderplanung und passenden Fördermodulen.</p><p data-r="l">Förderplanung und Fördermodule für Einzelarbeit, Tandem oder Gruppe.</p>
           </div>
@@ -925,7 +927,34 @@ body[data-role="l"] main > section { order: var(--l, 50); }
       </ol>
     </div>
     <p class="loop"><b>Verzahnung:</b> <span data-r="s">Deine Ergebnisse helfen dir später auch beim Praxistag und bei Praktika.</span><span data-r="e l">Die Ergebnisse fließen weiter in DiBoP, BOP, Praxistag und andere Angebote der Beruflichen Orientierung.</span></p>
+    <details class="fold tl-fold" data-r="e">
+      <summary>Ihr Fahrplan: Termine eintragen und in den Kalender übernehmen</summary>
+      <p class="soft">Was wann passiert, was Ihr Kind macht und was Sie tun können. Die genauen Termine legt die Schule fest.</p>
+      <ol class="tl" id="tl"></ol>
+    </details>
   </section>
+
+  <!-- SCHÜLER: SPIELE-BEREICH -->
+  <section id="spiele" data-r="s x" style="--s:1">
+    <div class="sec-head">
+      <span class="kicker">Mitmachen</span>
+      <h2>Such dir <span class="c">ein Spiel aus</span></h2>
+      <p class="soft">Vier Spiele rund um Profil AC. Tipp auf eine Karte, um loszulegen.</p>
+    </div>
+    <div class="hub" id="hub"></div>
+  </section>
+
+  <!-- SCHÜLER: RUNDGANG MIT AVATAR -->
+  <section id="rundgang" data-r="s x" style="--s:2">
+    <span class="tab-label r">Mitmachen</span>
+    <div class="sec-head">
+      <span class="kicker">Dein Profil-AC-Tag</span>
+      <h2>Mach den <span class="c">Rundgang</span></h2>
+      <p class="soft">Such dir eine Figur aus und begleite sie durch den Tag. Du entscheidest an jeder Station mit.</p>
+    </div>
+    <div class="tour" id="tour"></div>
+  </section>
+
 
   <!-- AUFGABEN / DIAGNOSTIK -->
   <section id="aufgaben" style="--s:2;--e:2;--l:5">
@@ -944,7 +973,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     <div class="methods" data-r="e l">
       <div class="card"><span class="tag">45 Min. je Aufgabe</span><h3>Einzelaufgaben</h3><p class="soft" data-r="e">Ihr Kind löst eine Aufgabe allein. Geschulte Lehrkräfte beobachten nach festen Kriterien.</p><p class="soft" data-r="l">Beobachtungsaufgaben für eine Person, systematische Beobachtung und Beurteilung. Sek I: 13 Module, Sek II: 5 Module.</p></div>
       <div class="card"><span class="tag">45 Min. je Aufgabe</span><h3>Gruppenaufgaben</h3><p class="soft" data-r="e">Ihr Kind löst eine Aufgabe im Team. Geschulte Lehrkräfte beobachten nach festen Kriterien.</p><p class="soft" data-r="l">Beobachtungsaufgaben im Team, mit Beobachterkonferenz. Sek I: 27 Module, Sek II: 4 Module.</p><div class="examples"><span>z. B. Murmelbahn bauen</span></div></div>
-      <div class="card"><span class="tag">45 Min. je Teil</span><h3>Simulationsspiele</h3><p class="soft" data-r="s e">Am Computer in einem Planspiel: Was würdest du in dieser Situation tun? Meist in der Oberstufe.</p><p class="soft" data-r="l">Kompetenzen werden über Tests und Situationen mit Handlungsoption in simulierten Situationen innerhalb eines Planspiels erfasst. Meist Sek II oder ergänzend.</p></div>
+      <div class="card"><span class="tag">45 Min. je Teil</span><h3>Simulationsspiele</h3><p class="soft" data-r="s e">Am Computer in einem Planspiel: Was würdest du in dieser Situation tun? Meist in der Oberstufe.</p><p class="soft" data-r="l">Erfassung über Tests und Handlungsoptionen in einem Planspiel. Meist Sek II oder ergänzend.</p></div>
       <div class="card"><span class="tag">am PC</span><h3>Tests und Fragebogen</h3><p class="soft">Kognitiver Test, IT-Test, Test zu berufsfeldbezogenen Kompetenzen und ein Fragebogen zu Berufs- und Studieninteressen.</p></div>
     </div>
     <details class="fold" data-r="l"><summary>Aufgabentypen nach Sekundarstufe</summary>
@@ -982,6 +1011,12 @@ body[data-role="l"] main > section { order: var(--l, 50); }
       <p class="soft" data-r="s">Dreh das Profil und tippe auf eine Fähigkeit.</p>
       <p class="soft" data-r="e l">Erfasst werden überfachliche Kompetenzen, also Fähigkeiten, die in Ausbildung und Studium unabhängig vom Fach zählen. Klicken Sie auf eine Kompetenz, um mehr zu erfahren.</p>
     </div>
+    <div class="seg" role="tablist" aria-label="Ansicht wählen" data-r="s">
+      <button type="button" role="tab" aria-selected="true" data-kp="0">Alle Fähigkeiten</button>
+      <button type="button" role="tab" aria-selected="false" data-kp="1">Mein Selbstcheck</button>
+      <button type="button" role="tab" aria-selected="false" data-kp="2">Was mir Spaß macht</button>
+    </div>
+    <div class="kpanel" data-kp="0">
     <div class="k3d" id="k3d">
       <div class="k3d-stage">
         <div class="k3d-sheet" id="k3d-sheet">
@@ -991,6 +1026,26 @@ body[data-role="l"] main > section { order: var(--l, 50); }
         </div>
       </div>
       <div class="k3d-detail" id="k3d-detail" aria-live="polite"></div>
+    </div>
+    </div>
+    <div class="kpanel" data-kp="1" data-r="s" hidden>
+      <p class="soft">Wie gut kannst du das? Schieb die Regler.</p>
+    <div class="two">
+      <div class="card" id="sc-form"></div>
+      <div class="card">
+        <h3>Deine Top 3</h3>
+        <ol class="top3" id="sc-top"></ol>
+        <p class="note">Nur zum Ausprobieren. Nichts wird gesendet.</p>
+      </div>
+    </div>
+    </div>
+    <div class="kpanel" data-kp="2" data-r="s" hidden>
+      <p class="soft">Tippe an, was du gern machst.</p>
+    <div class="card">
+      <div class="chipset" id="int-chips" role="group" aria-label="Tätigkeiten auswählen"></div>
+      <div class="int-result" id="int-result"></div>
+      <p class="note">Nur ein Spiel. Den echten Test machst du bei Profil AC.</p>
+    </div>
     </div>
     <p class="note">Welche Module eingesetzt werden, entscheidet die Schule. Die Übungsideen sind Anregungen, keine offiziellen Fördermodule.</p>
   </section>
@@ -1006,7 +1061,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
         <h3>Das Kompetenzprofil</h3>
         <p class="soft" data-r="s">Dein Blick und der Blick der Beobachter, nebeneinander.</p>
         <p class="soft" data-r="e">Es stellt die Selbsteinschätzung Ihres Kindes und die Einschätzung der Beobachter nebeneinander. Das hilft, die eigene Wahrnehmung zu reflektieren.</p>
-        <p class="soft" data-r="l">Überblick über die Ausprägungen der überfachlichen Kompetenzen; Selbst- und Fremdeinschätzung nebeneinander. Basis für Rückmeldegespräch und Entwicklungsbegleitung, Ablage im BO-Portfolio.</p>
+        <p class="soft" data-r="l">Selbst- und Fremdeinschätzung der überfachlichen Kompetenzen nebeneinander. Basis für Rückmeldegespräch und Entwicklungsbegleitung, Ablage im BO-Portfolio.</p>
         <div class="mini-profile" aria-label="Beispielhafte Darstellung, keine echten Werte">
           <span>Teamfähigkeit</span><span class="bar"><i class="s" style="left:58%"></i><i class="f" style="left:76%"></i></span>
           <span>Planungsfähigkeit</span><span class="bar"><i class="f" style="left:40%"></i><i class="s" style="left:66%"></i></span>
@@ -1121,25 +1176,9 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     </div>
   </section>
 
-  <!-- SCHÜLER: SELBSTCHECK -->
-  <section id="selbstcheck" data-r="s" style="--s:5">
-    <span class="tab-label r">Mitmachen</span>
-    <div class="sec-head">
-      <h2>Dein <span class="c">Selbstcheck</span></h2>
-      <p class="soft">Wie gut kannst du das? Schieb die Regler.</p>
-    </div>
-    <div class="two">
-      <div class="card" id="sc-form"></div>
-      <div class="card">
-        <h3>Deine Top 3</h3>
-        <ol class="top3" id="sc-top"></ol>
-        <p class="note">Nur zum Ausprobieren. Nichts wird gesendet.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- SCHÜLER: SUCHSEL -->
-  <section id="suchsel" data-r="s" style="--s:7">
+  <section id="suchsel" data-r="s x" style="--s:7">
     <span class="tab-label r">Mini-Spiel</span>
     <div class="sec-head">
       <h2>Profil-AC-<span class="c">Suchsel</span></h2>
@@ -1162,19 +1201,6 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     </div>
   </section>
 
-  <!-- SCHÜLER: INTERESSEN -->
-  <section id="interessen" data-r="s" style="--s:7">
-    <div class="sec-head">
-      <span class="kicker">Mini-Spiel</span>
-      <h2>Was <span class="c">macht dir Spaß?</span></h2>
-      <p class="soft">Tippe an, was du gern machst.</p>
-    </div>
-    <div class="card">
-      <div class="chipset" id="int-chips" role="group" aria-label="Tätigkeiten auswählen"></div>
-      <div class="int-result" id="int-result"></div>
-      <p class="note">Nur ein Spiel. Den echten Test machst du bei Profil AC.</p>
-    </div>
-  </section>
 
   <!-- ELTERN: GESPRÄCHSSTARTER -->
   <section id="gespraech" data-r="e" style="--e:7">
@@ -1207,14 +1233,14 @@ body[data-role="l"] main > section { order: var(--l, 50); }
   </section>
 
   <!-- MYTHOS ODER FAKT (Schüler + Eltern) -->
-  <section id="mythos" data-r="s e" style="--s:2;--e:6">
+  <section id="mythos" data-r="s e x" style="--s:2;--e:6">
     <span class="tab-label r">Mitmachen</span>
     <div class="sec-head">
       <h2>Mythos <span class="c">oder Fakt?</span></h2>
-      <p class="soft" data-r="s">Was stimmt? Tipp schnell!</p>
+      <p class="soft" data-r="s x">Wisch nach links für Mythos, nach rechts für Fakt.</p>
       <p class="soft" data-r="e">Was stimmt über Profil AC? Testen Sie Ihr Bauchgefühl.</p>
     </div>
-    <div class="card mf" id="mf-s" data-set="s" data-r="s" aria-live="polite"></div>
+    <div class="swipe" id="swipe" data-r="s x"></div>
     <div class="card mf" id="mf-e" data-set="e" data-r="e" aria-live="polite"></div>
   </section>
 
@@ -1262,7 +1288,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
       <h2>Unterstützung <span class="c">für Sie</span></h2>
     </div>
     <div class="two">
-      <div class="card"><h3>Fortbildungen</h3><p class="soft">Für Lehrkräfte und Schulleitungen, für die das Verfahren neu ist, gibt es auch im Schuljahr 2026/2027 regelmäßig Schulungen zu Profil AC und Profil AC GYM, zu finden unter Fortbildung online oder auf der Seite der Servicestelle Berufsorientierung.</p><p class="stand">Stand: <time datetime="2026-10-28">28.10.2026</time>. Aktuelle Termine immer unter Fortbildung online.</p><p><a href="https://bildung.rlp.de/berufsorientierung">bildung.rlp.de/berufsorientierung</a></p></div>
+      <div class="card"><h3>Fortbildungen</h3><p class="soft">Regelmäßige Schulungen zu Profil AC und Profil AC GYM für alle, für die das Verfahren neu ist: unter Fortbildung online oder bei der Servicestelle Berufsorientierung.</p><p class="stand">Stand: <time datetime="2026-10-28">28.10.2026</time>. Aktuelle Termine immer unter Fortbildung online.</p><p><a href="https://bildung.rlp.de/berufsorientierung">bildung.rlp.de/berufsorientierung</a></p></div>
       <div class="card"><h3>Support</h3>
         <p>Inhaltliche Fragen: PL, <span id="mail">sebo@pl.rlp.de</span><button class="copy" data-copy="mail" type="button">Kopieren</button></p>
         <p>Technische Fragen: MTO, <span id="mail2">kompetenzanalyse@mto.de</span><button class="copy" data-copy="mail2" type="button">Kopieren</button></p>
@@ -1278,7 +1304,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
         <h2>KI als <span class="c">Begleiter</span></h2>
         <p data-r="s">Bald vielleicht: ein KI-Chatbot, der dein Profil erklärt und bei der Bewerbung hilft.</p>
         <p data-r="e">Geplant ist ein Chatbot, der Jugendliche von der Erklärung ihres Kompetenzprofils bis zur fertigen Bewerbung begleitet.</p>
-        <p data-r="l">Ziel ist ein KI-Begleiter, der Schüler*innen von der Analyse und Erklärung ihres Kompetenzprofils bis zur fertigen Bewerbung unterstützt. Erprobt wird ein Chatbot auf Basis von fobizz.</p>
+        <p data-r="l">Geplant: ein KI-Begleiter von der Erklärung des Kompetenzprofils bis zur Bewerbung. Erprobt wird ein Chatbot auf Basis von fobizz.</p>
         <p class="note">Das ist ein Ausblick. Ob und wann der Chatbot an Schulen eingesetzt wird, steht noch nicht fest.</p>
       </div>
       <div class="chat" aria-label="Beispiel, wie ein Gespräch aussehen könnte">
@@ -1585,39 +1611,6 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     <div class="callout"><b>Є запитання?</b><p>Зверніться до школи, зазвичай до вчителя, відповідального за профорієнтацію. Офіційна інформація доступна лише німецькою мовою.</p></div>
   </section>
 
-  <!-- ===================== BILDUNGSMINISTERIUM: ÜBERRASCHUNGSEI ===================== -->
-  <section id="m-egg" data-r="m">
-    <div class="egg-stage">
-      <span class="kicker">Für das Bildungsministerium</span>
-      <h2>Eine kleine <span class="c">Überraschung</span></h2>
-      <button class="egg" id="egg" type="button" aria-expanded="false" aria-controls="egg-msg" aria-label="Osterei öffnen">
-        <svg viewBox="0 0 200 270" aria-hidden="true">
-          <defs>
-            <path id="egg-shape" d="M100 8 C158 8 192 118 192 172 C192 228 152 262 100 262 C48 262 8 228 8 172 C8 118 42 8 100 8 Z"/>
-            <clipPath id="egg-top"><polygon points="-20,-40 220,-40 220,146 200,134 180,152 160,134 140,152 120,134 100,152 80,134 60,152 40,134 20,152 0,134 -20,146"/></clipPath>
-            <clipPath id="egg-bot"><polygon points="-20,146 0,134 20,152 40,134 60,152 80,134 100,152 120,134 140,152 160,134 180,152 200,134 220,146 220,300 -20,300"/></clipPath>
-            <clipPath id="egg-in"><use href="#egg-shape"/></clipPath>
-            <g id="egg-paint">
-              <use href="#egg-shape" style="fill: var(--cyan)"/>
-              <g clip-path="url(#egg-in)">
-                <path style="fill: var(--magenta)" d="M0 70 Q25 56 50 70 T100 70 T150 70 T200 70 V96 Q175 110 150 96 T100 96 T50 96 T0 96 Z"/>
-                <path fill="#ffd23f" d="M0 196 L20 182 L40 196 L60 182 L80 196 L100 182 L120 196 L140 182 L160 196 L180 182 L200 196 V214 L180 228 L160 214 L140 228 L120 214 L100 228 L80 214 L60 228 L40 214 L20 228 L0 214 Z"/>
-                <g fill="#ffffff"><circle cx="40" cy="132" r="7"/><circle cx="80" cy="120" r="5"/><circle cx="125" cy="126" r="7"/><circle cx="165" cy="134" r="5"/><circle cx="60" cy="160" r="5"/><circle cx="100" cy="166" r="7"/><circle cx="145" cy="162" r="5"/><circle cx="100" cy="36" r="6"/><circle cx="70" cy="44" r="4"/><circle cx="130" cy="44" r="4"/></g>
-              </g>
-            </g>
-          </defs>
-          <g class="egg-bot" clip-path="url(#egg-bot)"><use href="#egg-paint"/></g>
-          <g class="egg-top" clip-path="url(#egg-top)"><use href="#egg-paint"/></g>
-        </svg>
-      </button>
-      <p class="egg-hint" id="egg-hint">Tippen Sie auf das Ei.</p>
-      <div class="egg-msg" id="egg-msg" hidden>
-        <p class="egg-hello">Hallo Frau <span style="white-space:nowrap">Schönauer-Gragg</span>,</p>
-        <p>… hier könnte eine Einleitung bzw. einleitende Worte von Ihnen stehen.</p>
-        <button class="btn alt" id="egg-close" type="button">Ei wieder schließen</button>
-      </div>
-    </div>
-  </section>
 
   <!-- QUIZ -->
   <section id="quiz" data-r="s e l x en uk" style="--s:8;--e:11;--l:12">
@@ -1649,58 +1642,29 @@ body[data-role="l"] main > section { order: var(--l, 50); }
   </section>
 
   <!-- RÜCKMELDUNG (alle Ansichten) -->
-  <section id="feedback" data-r="s e l x en uk" style="--s:98;--e:98;--l:98">
-    <div class="card fb">
-      <div class="sec-head">
-        <span class="kicker" data-r="s e l x">Deine Meinung</span><span class="kicker" data-r="en">Your opinion</span><span class="kicker" data-r="uk">Ваша думка</span>
-        <h2 data-r="s x">War die Seite <span class="c">hilfreich?</span></h2>
-        <h2 data-r="e l">War die Seite <span class="c">hilfreich?</span></h2>
-        <h2 data-r="en">Was this page <span class="c">helpful?</span></h2>
-        <h2 data-r="uk">Чи була сторінка <span class="c">корисною?</span></h2>
-      </div>
-      <form id="fb-form" novalidate>
-        <div class="fb-choices" role="radiogroup" aria-label="Hilfreich?">
-          <button type="button" id="fb-yes" data-v="ja" aria-pressed="false"><span data-r="s e l x">Ja</span><span data-r="en">Yes</span><span data-r="uk">Так</span></button>
-          <button type="button" id="fb-part" data-v="teilweise" aria-pressed="false"><span data-r="s e l x">Teilweise</span><span data-r="en">Partly</span><span data-r="uk">Частково</span></button>
-          <button type="button" id="fb-no" data-v="nein" aria-pressed="false"><span data-r="s e l x">Nein</span><span data-r="en">No</span><span data-r="uk">Ні</span></button>
-        </div>
-        <label for="fb-text"><span data-r="s x">Was fehlt dir? Was können wir besser machen?</span><span data-r="e l">Was fehlt Ihnen? Was können wir besser machen?</span><span data-r="en">What is missing? What could be better?</span><span data-r="uk">Чого бракує? Що можна покращити?</span></label>
-        <textarea id="fb-text" maxlength="600" rows="3"></textarea>
-        <div class="row">
-          <button class="btn" type="submit" id="fb-send" disabled><span data-r="s e l x">Absenden</span><span data-r="en">Send</span><span data-r="uk">Надіслати</span></button>
-          <span class="note" id="fb-msg" aria-live="polite"></span>
-        </div>
-      </form>
-      <p class="note" id="fb-off" hidden><span data-r="s x">Zum Absenden musst du bei claude.ai angemeldet sein. Du kannst deine Meinung auch deiner Lehrkraft sagen.</span><span data-r="e l">Zum Absenden ist eine Anmeldung bei claude.ai nötig. Ihre Rückmeldung nimmt auch die Schule gern entgegen.</span><span data-r="en">Sending feedback requires signing in to claude.ai. You can also give feedback to the school.</span><span data-r="uk">Щоб надіслати відгук, потрібно увійти в claude.ai. Відгук також можна передати школі.</span></p>
-      <div class="fb-admin" id="fb-admin" hidden>
-        <h3>Auswertung <small>(nur für Sie als Bearbeiter*in sichtbar)</small></h3>
-        <div id="fb-stats"></div>
-        <ol class="fb-list" id="fb-list"></ol>
-      </div>
-    </div>
-  </section>
+  <section id="chap-next" class="chap-next" data-r="s e l" style="--s:90;--e:90;--l:90" aria-label="Nächstes Kapitel"></section>
 
-  <!-- QUELLEN -->
-  <section id="quellen" data-r="s e l" style="--s:99;--e:99;--l:99">
+
+
+  <!-- KONTAKT UND FRAGEN -->
+  <section id="kontakt" data-r="s e l" style="--s:99;--e:99;--l:99">
     <div class="sec-head">
-      <span class="kicker">Weiterlesen</span>
-      <h2>Quellen <span class="c">und Kontakt</span></h2>
+      <span class="kicker">Noch Fragen?</span>
+      <h2>Kontakt <span class="c">und Fragen</span></h2>
     </div>
     <div class="sources">
-      <div class="card">
-        <ul>
-          <li>Präsentation „Kompetenzanalyse Profil AC Rheinland-Pfalz“ für Lehrkräfte (CJD, MTO, Land RLP)</li>
-          <li>Fortbildung „Profil AC und Profil AC GYM Next Level“, 20.08.2026</li>
-          <li>Präsentation „Profil AC Next Level Rheinland-Pfalz“, Ministerium für Bildung RLP und PL, 26.08.2026</li>
-          <li><a href="https://bildung.rlp.de/berufsorientierung">Servicestelle Berufsorientierung auf dem Bildungsserver</a></li>
-          <li><a href="https://kompetenzfeststellung.bildung-rp.de/potenzialanalyse-profil-ac/profil-ac-gym.html">Bildungsserver RLP: Kompetenzfeststellung</a></li>
-        </ul>
-      </div>
       <div class="card">
         <h3>Fragen?</h3>
         <p data-r="s">Frag deine Lehrkraft oder die Koordination für Berufliche Orientierung an deiner Schule.</p>
         <p data-r="e">Ihre erste Anlaufstelle ist die Schule Ihres Kindes, meist die Koordination für Berufliche Orientierung.</p>
         <p data-r="l">Inhaltlich: sebo@pl.rlp.de · Technisch: kompetenzanalyse@mto.de</p>
+      </div>
+      <div class="card">
+        <h3>Mehr Infos</h3>
+        <ul>
+          <li><a href="https://bildung.rlp.de/berufsorientierung">Servicestelle Berufsorientierung auf dem Bildungsserver</a></li>
+          <li><a href="https://kompetenzfeststellung.bildung-rp.de/potenzialanalyse-profil-ac/profil-ac-gym.html">Bildungsserver RLP: Kompetenzfeststellung</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -1711,7 +1675,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
 
 <script>
 /* Rollen-Auswahl: #schueler, #eltern, #lehrkraefte */
-const ROLE_HASH = { schueler: "s", eltern: "e", lehrkraefte: "l", einfach: "x", english: "en", ukrainska: "uk", ministerium: "m" };
+const ROLE_HASH = { schueler: "s", eltern: "e", lehrkraefte: "l", einfach: "x", english: "en", ukrainska: "uk" };
 const SWITCH_LABEL = { en: "Change view", uk: "Змінити вигляд", m: "Zurück zur Auswahl" };
 let ROLE = null;
 function setRole(r, scroll) {
@@ -1958,23 +1922,6 @@ window.addEventListener("hashchange", fromHash);
   document.getElementById("lf-reset").addEventListener("click", () => { lfState.picked = []; lfSave(); drawLf(); lfMsg.textContent = "Leitfaden geleert."; });
   drawLf();
 
-  /* Bildungsministerium: Osterei öffnen */
-  const egg = document.getElementById("egg"), eggMsg = document.getElementById("egg-msg"), eggHint = document.getElementById("egg-hint");
-  const setEgg = (open) => {
-    egg.classList.toggle("open", open);
-    egg.setAttribute("aria-expanded", String(open));
-    egg.setAttribute("aria-label", open ? "Osterei ist geöffnet" : "Osterei öffnen");
-    eggMsg.hidden = !open; eggHint.hidden = open;
-  };
-  egg.addEventListener("click", () => {
-    if (egg.classList.contains("open")) return;
-    setEgg(true);
-    window.sfx?.("win");
-    const r = egg.getBoundingClientRect();
-    if (typeof confetti === "function") confetti(r.left + r.width / 2, r.top + r.height * 0.45, 140);
-  });
-  document.getElementById("egg-close").addEventListener("click", () => { setEgg(false); egg.focus({ preventScroll: true }); });
-  document.addEventListener("rolechange", () => setEgg(false));
 
   /* Schüler: Suchsel */
   const WS_WORDS = ["KOMPETENZ", "PROFIL", "TEAM", "PLANEN", "BERUF", "PRAKTIKUM", "REFLEXION", "MURMELBAHN", "INTERESSEN", "NEXTLEVEL"];
@@ -2565,78 +2512,6 @@ window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude
 })();
 </script>
 <script>
-/* Rückmeldung: gespeichert im gemeinsamen Datenspeicher der Seite (eine Rückmeldung pro Person) */
-(() => {
-  const form = document.getElementById("fb-form"), msg = document.getElementById("fb-msg"), send = document.getElementById("fb-send");
-  const text = document.getElementById("fb-text"), off = document.getElementById("fb-off");
-  const MSG = {
-    de: { sent: "Danke! Deine Rückmeldung ist angekommen.", sentSie: "Danke! Ihre Rückmeldung ist angekommen.", fail: "Das hat nicht geklappt. Bitte später noch einmal versuchen.", pick: "Bitte zuerst Ja, Teilweise oder Nein wählen." },
-    en: { sent: "Thank you! Your feedback has been received.", fail: "That did not work. Please try again later.", pick: "Please choose Yes, Partly or No first." },
-    uk: { sent: "Дякуємо! Ваш відгук отримано.", fail: "Не вдалося. Спробуйте пізніше.", pick: "Спочатку виберіть «Так», «Частково» або «Ні»." }
-  };
-  const lang = () => { const r = document.body.dataset.role; return r === "en" || r === "uk" ? r : "de"; };
-  const m = (k) => { const l = lang(), r = document.body.dataset.role; if (k === "sent" && l === "de" && (r === "e" || r === "l")) return MSG.de.sentSie; return MSG[l][k]; };
-  let choice = null, db = null, uid = null, busy = false;
-
-  form.querySelector(".fb-choices").addEventListener("click", (e) => {
-    const b = e.target.closest("button"); if (!b) return;
-    choice = b.dataset.v;
-    form.querySelectorAll(".fb-choices button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-    msg.textContent = "";
-  });
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!db || !uid || busy) return;
-    if (!choice) { msg.textContent = m("pick"); return; }
-    busy = true; send.disabled = true;
-    try {
-      await db.collection("feedback").doc(uid).set({
-        helpful: choice,
-        missing: text.value.trim().slice(0, 600),
-        role: document.body.dataset.role || "",
-        at: new Date().toISOString()
-      });
-      msg.textContent = m("sent");
-    } catch (err) {
-      msg.textContent = m("fail");
-    } finally { busy = false; send.disabled = false; }
-  });
-
-  (async () => {
-    const [dbNs, user] = await Promise.all([window.claude?.use?.("db"), window.claude?.use?.("user")]);
-    uid = user ? await user.id() : null;
-    if (!dbNs || !uid) { form.hidden = true; off.hidden = false; return; }
-    db = dbNs; send.disabled = false;
-    // eigene frühere Rückmeldung vorausfüllen
-    try {
-      const mine = await db.collection("feedback").doc(uid).get();
-      if (mine.exists) {
-        const d = mine.data();
-        choice = d.helpful || null;
-        form.querySelectorAll(".fb-choices button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.v === choice)));
-        if (typeof d.missing === "string") text.value = d.missing;
-      }
-    } catch (err) {}
-    // Auswertung nur für Bearbeiter*innen
-    if (!(await user.canEdit())) return;
-    const box = document.getElementById("fb-admin"); box.hidden = false;
-    const ROLE = { s: "Schüler*innen", e: "Eltern", l: "Lehrkräfte", x: "Einfache Sprache", en: "English", uk: "Українська", m: "Ministerium" };
-    const esc3 = (t) => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-    db.collection("feedback").orderBy("at", "desc").limit(300).onSnapshot((snap) => {
-      const rows = snap.docs.map(d => d.data());
-      const n = { ja: 0, teilweise: 0, nein: 0 };
-      rows.forEach(r => { if (r.helpful in n) n[r.helpful]++; });
-      document.getElementById("fb-stats").innerHTML = rows.length
-        ? `<div class="fb-bars">${[["ja", "Ja"], ["teilweise", "Teilweise"], ["nein", "Nein"]].map(([k, l]) => `<div class="fb-bar"><span>${l}</span><span class="track"><i style="width:${(n[k] / rows.length * 100).toFixed(0)}%"></i></span><output>${n[k]}</output></div>`).join("")}</div><p class="note">${rows.length} Rückmeldung${rows.length === 1 ? "" : "en"} insgesamt</p>`
-        : `<p class="note">Noch keine Rückmeldungen.</p>`;
-      document.getElementById("fb-list").innerHTML = rows.filter(r => r.missing).slice(0, 50).map(r =>
-        `<li><small>${esc3(ROLE[r.role] || "–")} · ${esc3({ ja: "Ja", teilweise: "Teilweise", nein: "Nein" }[r.helpful] || "")} · ${esc3(String(r.at || "").slice(0, 10))}</small>${esc3(r.missing)}</li>`).join("");
-    }, () => {});
-  })();
-})();
-</script>
-<script>
 /* Lupe: Schriftgröße in Stufen, im Browser gemerkt */
 (() => {
   const STEPS = [1, 1.15, 1.3, 1.5, 1.75];
@@ -2736,7 +2611,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   const stage = document.getElementById("vstage"), cam = stage.querySelector(".cam"), vid = stage.querySelector("video");
   // große Bildschirme: hochskalierte Fassungen der Hintergrundvideos
   const HD = innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100;
-  const HD_CLIPS = ["start"];
+  const HD_CLIPS = ["start", "schueler", "eltern", "lehrkraft"];
   let cur = HD ? "" : "start", items = [], mx = 0, my = 0, tmx = 0, tmy = 0, dirty = true, sy = scrollY, heroes = [], bubbles = [], vidOn = true;
   const clamp01 = (t) => Math.max(0, Math.min(1, t));
   const ease = (t) => t * t * (3 - 2 * t);
@@ -2753,6 +2628,19 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
     play(vid);
   }
   function play(v) { if (RM.matches) { v.pause(); return; } const p = v.play(); if (p) p.catch(() => {}); }
+
+  // Klassenraum im Hintergrund: erst nach dem Einstieg, nie während des Ablaufs
+  const bgw = document.getElementById("bgw"), bgv = bgw.querySelector("video");
+  const ABL = ["ablauf", "x-ablauf", "en-steps", "uk-steps"].map((id) => document.getElementById(id)).filter(Boolean);
+  let bgOn = false, bgLoaded = false;
+  function bgTick(y, vh, r) {
+    let on = !!r && r !== "m" && y > vh * 0.9;
+    if (on) for (const a of ABL) { if (!a.getClientRects().length) continue; const b = a.getBoundingClientRect(); if (b.top < vh * 0.75 && b.bottom > vh * 0.25) { on = false; break; } }
+    if (on && !bgLoaded) { bgLoaded = true; const f = HD ? "raum-hd" : "raum"; bgv.innerHTML = `<source src="media/${f}.webm" type="video/webm"><source src="media/${f}.mp4" type="video/mp4">`; bgv.load(); }
+    if (on !== bgOn) { bgOn = on; bgw.classList.toggle("on", on); if (on) play(bgv); else setTimeout(() => { if (!bgOn) bgv.pause(); }, 700); }
+    // leichte Tiefe: der Raum gleitet beim Scrollen langsam mit
+    if (on && !RM.matches) bgv.style.transform = `scale(1.08) translate3d(${-mx * 8}px, ${((y / vh) % 6) * -4 + my * -5}px, 0)`;
+  }
 
   // Dreischritt: kleine Clips in Diagnostik / Reflexion / Förderung
   const TRI = { d: "schueler", r: "eltern", f: "praktikum" };
@@ -2811,8 +2699,9 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
       const e = ease(clamp01(y / (vh * 1.1)));
       // Kamera: Push-in, leichtes Kippen, Maus-Parallaxe
       if (!RM.matches) cam.style.transform = `translate3d(${-mx * 14}px, ${-my * 10 - e * 40}px, 0) scale(${1.02 + e * 0.3}) rotateX(${e * 7 + my * 1.6}deg) rotateY(${mx * 2.2}deg)`;
-      const veil = !r ? 0.1 + e * 0.55 : r === "m" ? 0.9 : Math.min(0.9, 0.02 + e * 0.95);
+      const veil = !r ? 0.1 + e * 0.55 : Math.min(1, 0.02 + e * 1.15);
       stage.style.setProperty("--veil", veil.toFixed(3));
+      bgTick(y, vh, r);
       const wantVid = veil < 0.86 && !RM.matches;
       if (wantVid !== vidOn) { vidOn = wantVid; if (wantVid) play(vid); else vid.pause(); }
       // Einstieg: Text liegt vor dem Video und zieht schneller weg
@@ -2830,7 +2719,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
         if (p >= 1 || p <= 0) it.el.classList.remove("moving"); else it.el.classList.add("moving");
         if (p >= 1) { if (!it.el.classList.contains("tilting")) it.el.style.transform = ""; it.el.style.opacity = ""; continue; }
         const q = ease(p);
-        it.el.style.transform = `perspective(1100px) translate3d(0, ${(1 - q) * 70}px, ${(1 - q) * -180}px) rotateX(${(1 - q) * 22}deg)`;
+        it.el.style.transform = `translate3d(0, ${(1 - q) * 28}px, 0)`;
         it.el.style.opacity = (0.08 + q * 0.92).toFixed(3);
       }
     }
@@ -2838,7 +2727,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   }
 
   // Karten kippen unter dem Finger/der Maus leicht in 3D
-  const TILT = ".chooser .role, .chooser .mrole, .tri > div, .links > div, .fact, .count";
+  const TILT = ".chooser .role, .chooser .mrole";
   if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
     document.addEventListener("pointermove", (ev) => {
       tmx = ev.clientX / innerWidth * 2 - 1; tmy = ev.clientY / innerHeight * 2 - 1;
@@ -2860,12 +2749,12 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   addEventListener("resize", later);
   new ResizeObserver(later).observe(document.body);
   document.addEventListener("rolechange", () => { setClip(); requestAnimationFrame(collect); });
+  document.addEventListener("chapterchange", () => requestAnimationFrame(collect));
   RM.addEventListener("change", () => { collect(); if (RM.matches) vid.pause(); else play(vid); });
   setClip(); collect(); play(vid);
   requestAnimationFrame(frame);
 })();
 </script>
-<style>/* GitHub-Fassung: Umfrage braucht claude.ai */ #feedback { display: none !important; }</style>
 <style>
 /* 1 Ablauf als Scroll-Geschichte: Video bleibt stehen, Schritte ziehen vorbei */
 .story { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 56px); align-items: start; }
@@ -2927,7 +2816,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
 .kd dl { margin: 0; display: flex; flex-direction: column; gap: 18px; }
 .kd dt { font: 700 0.75rem/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .04em; color: var(--cyan); margin-bottom: 6px; }
 .kd dd { margin: 0; font-size: 1.02rem; line-height: 1.5; color: #e9e7f2; }
-.kd-empty { border: 2px dashed var(--line); border-radius: 22px; padding: 28px; color: var(--soft); display: flex; flex-direction: column; gap: 10px; }
+.kd-empty { background: rgb(var(--bg-rgb) / .92); border: 2px dashed var(--line); border-radius: 22px; padding: 28px; color: var(--soft); display: flex; flex-direction: column; gap: 10px; }
 .kd-empty b { font: 900 1.4rem/1 var(--font-display); text-transform: uppercase; color: var(--ink); }
 @media (max-width: 820px) {
   .k3d { grid-template-columns: minmax(0, 1fr); }
@@ -2982,6 +2871,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(pick); }, { passive: true });
   new IntersectionObserver((es) => { near = es[0].isIntersecting; if (near) { vids.slice(0, 2).forEach(load); if (cur >= 0) play(vids[cur]); else pick(); } else vids.forEach((v) => v.pause()); }, { rootMargin: "300px" }).observe(story);
   document.addEventListener("rolechange", () => { cur = -1; requestAnimationFrame(pick); });
+  document.addEventListener("chapterchange", () => { cur = -1; requestAnimationFrame(pick); });
   show(0);
 })();
 
@@ -3085,7 +2975,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
     const r = document.body.dataset.role;
     if (!r || r === "m") { bar.hidden = true; return; }
     key = "pac-read-" + r; read = new Set(store.get(key));
-    list = [...document.querySelectorAll(".site main > section[id]")].filter((s) => s.getClientRects().length && !/^(feedback|quellen)$/.test(s.id) && !s.classList.contains("cine"))
+    list = [...document.querySelectorAll(".site main > section[id]")].filter((s) => s.getClientRects().length && !/^(feedback|quellen|kontakt)$/.test(s.id) && !s.classList.contains("cine"))
       .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
     segs.innerHTML = list.map((s, i) => `<button type="button" data-i="${i}" data-t="${title(s).replace(/"/g, "&quot;")}"><i></i></button>`).join("");
     bar.hidden = false; curIdx = -1; paint();
@@ -3111,6 +3001,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   }
   function maybeToast() {
     if (toastShown) return;
+    if (window.PAC_CH && window.PAC_CH.i < window.PAC_CH.n - 1) return;
     const quiz = list.find((s) => s.id === "quiz"), rest = list.filter((s) => s.id !== "quiz");
     if (!rest.length || !rest.every((s) => read.has(s.id))) return;
     toastShown = true; const L = T[lang()];
@@ -3129,6 +3020,472 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); }, { passive: true });
   setInterval(tick, 1500);
   document.addEventListener("rolechange", () => { toastShown = false; requestAnimationFrame(() => { build(); tick(); }); });
+  document.addEventListener("chapterchange", () => requestAnimationFrame(() => { build(); tick(); }));
   build(); tick();
 })();
 </script>
+<style>
+/* 4 Rundgang mit Avatar (Schüler*innen) */
+.tour { position: relative; perspective: 1400px; }
+.tour-pick { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.tour-pick button { border: 0; padding: 0; background: var(--card); border-radius: 22px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; text-align: left; box-shadow: 0 24px 40px -28px rgba(20,22,43,.6); transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease; color: var(--ink); }
+.tour-pick button:hover, .tour-pick button:focus-visible { transform: translateY(-6px) rotateX(6deg); box-shadow: 0 34px 50px -26px rgba(20,22,43,.6); }
+.tour-pick img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.tour-pick b { font: 900 1.5rem/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.03em; padding: 14px 16px 4px; }
+.tour-pick span { font-size: 0.95rem; color: var(--soft); padding: 0 16px 16px; }
+.tour-scene { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); background: var(--card); border-radius: 26px; overflow: hidden; box-shadow: 0 40px 70px -40px rgba(20,22,43,.6); transform-origin: 50% 50%; animation: tourIn .7s cubic-bezier(.2,.8,.2,1); }
+@keyframes tourIn { from { opacity: 0; transform: rotateY(-28deg) translateX(40px) scale(.96); } to { opacity: 1; transform: none; } }
+.tour-img { position: relative; min-height: 360px; background: #14162b center / cover no-repeat; }
+.tour-img .who { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: flex-end; gap: 10px; }
+.tour-img .who img { width: 74px; height: 74px; border-radius: 50%; border: 4px solid #ffffff; object-fit: cover; box-shadow: 0 10px 24px -8px rgba(0,0,0,.6); animation: bob 2.6s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-5px); } }
+.tour-img .say { background: #ffffff; color: #14162b; border-radius: 16px 16px 16px 4px; padding: 10px 14px; font-weight: 500; max-width: 240px; box-shadow: 0 10px 24px -10px rgba(0,0,0,.5); margin-bottom: 40px; }
+.tour-img .stn { position: absolute; left: 18px; top: 18px; font: 700 0.75rem/1 var(--font-mono); text-transform: uppercase; background: rgba(20,22,43,.8); color: #ffffff; padding: 7px 10px; border-radius: 8px; }
+.tour-body { padding: clamp(20px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; }
+.tour-body h3 { font: 900 clamp(1.6rem, 2.8vw, 2.4rem)/.98 var(--font-display); text-transform: uppercase; letter-spacing: -0.04em; color: var(--magenta); hyphens: manual; }
+.tour-body > p { font-size: 1.08rem; }
+.tour-opts { display: flex; flex-direction: column; gap: 10px; }
+.tour-opts button { text-align: left; border: 2px solid var(--line); background: var(--bg); border-radius: 14px; padding: 13px 16px; font: 500 1rem/1.35 var(--font-body); color: var(--ink); cursor: pointer; transition: transform .2s ease, border-color .2s ease; }
+.tour-opts button:hover:not(:disabled) { transform: translateX(4px); border-color: var(--magenta); }
+.tour-opts button.chosen { border-color: var(--magenta); background: var(--magenta); color: #ffffff; }
+.tour-opts button:disabled:not(.chosen) { opacity: .45; cursor: default; }
+.tour-fb { background: var(--tint); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.tour-path { display: flex; gap: 6px; align-items: center; margin-top: 4px; }
+.tour-path i { width: 26px; height: 6px; border-radius: 3px; background: var(--line); }
+.tour-path i.done { background: var(--magenta); }
+.tour-path i.cur { background: var(--cyan); width: 40px; }
+.badge3d { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: center; background: var(--ink); color: var(--bg); border-radius: 26px; padding: clamp(22px, 4vw, 44px); animation: tourIn .7s cubic-bezier(.2,.8,.2,1); }
+.coin { width: clamp(150px, 20vw, 220px); aspect-ratio: 1; perspective: 800px; }
+.coin-in { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; animation: spin 1.6s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes spin { from { transform: rotateY(-540deg) scale(.6); } to { transform: rotateY(0) scale(1); } }
+.coin-in > * { position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden; }
+.coin-f { background: radial-gradient(circle at 30% 25%, #ffffff55, transparent 45%), conic-gradient(from 0deg, var(--magenta), var(--cyan), var(--magenta)); padding: 10px; }
+.coin-f img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid #ffffff; display: block; }
+.coin-b { transform: rotateY(180deg); background: var(--magenta); }
+.badge3d small { font: 700 0.78rem/1 var(--font-mono); text-transform: uppercase; color: var(--cyan); }
+.badge3d h3 { font: 900 clamp(2rem, 4.5vw, 3.6rem)/.92 var(--font-display); text-transform: uppercase; letter-spacing: -0.045em; color: #ffffff; margin: 8px 0 12px; hyphens: manual; }
+.badge3d p { color: #e9e7f2; max-width: 46ch; }
+.badge3d .note { color: #b7b5c4; margin-top: 10px; }
+.badge3d .row { margin-top: 16px; }
+.badge3d .btn.alt { color: #ffffff; box-shadow: inset 0 0 0 2px #ffffff; }
+@media (max-width: 820px) {
+  .tour-pick { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tour-scene { grid-template-columns: minmax(0, 1fr); }
+  .tour-img { min-height: 230px; }
+  .tour-img .say { max-width: 200px; font-size: 0.92rem; margin-bottom: 30px; }
+  .tour-img .who img { width: 58px; height: 58px; }
+  .badge3d { grid-template-columns: minmax(0, 1fr); }
+  .badge3d .coin { justify-self: start; }
+  .badge3d h3 { font-size: clamp(1.4rem, 6.6vw, 2.4rem); }
+}
+
+/* 6 Mythos oder Fakt zum Wischen (Schüler*innen) */
+.swipe { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.sw-deck { position: relative; width: min(100%, 440px); height: 320px; perspective: 1200px; }
+.sw-card { position: absolute; inset: 0; background: var(--card); border-radius: 26px; box-shadow: 0 30px 60px -34px rgba(20,22,43,.6); padding: 28px 26px; display: flex; flex-direction: column; justify-content: center; gap: 12px; touch-action: pan-y; user-select: none; transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .45s ease; border: 3px solid var(--line); }
+.sw-card .stmt { font: 900 clamp(1.4rem, 3.6vw, 2rem)/1.12 var(--font-display); letter-spacing: -0.02em; }
+.sw-card .cnt { font: 700 0.78rem/1 var(--font-mono); color: var(--soft); text-transform: uppercase; }
+.sw-card.top { cursor: grab; z-index: 3; }
+.sw-card.top.drag { transition: none; cursor: grabbing; }
+.sw-card.n1 { transform: translateY(14px) scale(.95) translateZ(-40px); z-index: 2; }
+.sw-card.n2 { transform: translateY(28px) scale(.9) translateZ(-80px); z-index: 1; opacity: .7; }
+.sw-card .stamp { position: absolute; top: 22px; font: 900 1.3rem/1 var(--font-display); text-transform: uppercase; padding: 6px 12px; border-radius: 10px; border: 3px solid; opacity: 0; transition: opacity .15s; }
+.sw-card .stamp.m { right: 22px; color: var(--magenta); transform: rotate(10deg); }
+.sw-card .stamp.f { left: 22px; color: var(--cyan-deep); transform: rotate(-10deg); }
+.sw-btns { display: flex; gap: 12px; width: min(100%, 440px); }
+.sw-btns button { flex: 1; cursor: pointer; border-radius: 16px; padding: 16px; font: 900 1.1rem/1 var(--font-display); text-transform: uppercase; border: 3px solid var(--magenta); background: var(--card); color: var(--magenta); }
+.sw-btns button.f { border-color: var(--cyan); color: var(--cyan-deep); }
+.sw-btns button:disabled { opacity: .4; cursor: default; }
+.sw-fb { width: min(100%, 440px); min-height: 72px; border-radius: 16px; padding: 12px 16px; background: var(--tint); }
+.sw-fb.ok { background: var(--ok-soft); }
+.sw-fb.no { background: var(--magenta-soft); }
+.sw-fb b { display: block; }
+.sw-end { width: min(100%, 440px); text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; background: var(--card); border-radius: 26px; padding: 30px; box-shadow: 0 30px 60px -34px rgba(20,22,43,.6); }
+.sw-end b { font: 900 2.4rem/1 var(--font-display); color: var(--magenta); }
+@media (prefers-reduced-motion: reduce) { .sw-card { transition: none; } }
+
+/* 8 Zeitleiste für Eltern */
+.tl { list-style: none; margin: 0; padding: 0 0 0 34px; position: relative; display: flex; flex-direction: column; gap: 22px; }
+.tl::before { content: ""; position: absolute; left: 12px; top: 8px; bottom: 8px; width: 4px; border-radius: 2px; background: linear-gradient(var(--cyan), var(--magenta)); }
+.tl > li { position: relative; }
+.tl > li::before { content: ""; position: absolute; left: -31px; top: 22px; width: 18px; height: 18px; border-radius: 50%; background: var(--card); border: 4px solid var(--cyan); transition: transform .3s ease, background .3s ease; }
+.tl > li.has::before { background: var(--magenta); border-color: var(--magenta); transform: scale(1.15); }
+.tl-card { background: var(--card); border: 1.5px solid var(--line); border-radius: 22px; padding: clamp(18px, 2.6vw, 28px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 14px 22px; }
+.tl-card header { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.tl-card header small { font: 700 0.78rem/1 var(--font-mono); text-transform: uppercase; color: var(--magenta); }
+.tl-card header h3 { font: 900 clamp(1.4rem, 2.4vw, 2rem)/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.035em; margin-top: 6px; }
+.tl-when { font: 700 0.85rem/1.2 var(--font-mono); background: var(--magenta); color: #ffffff; padding: 7px 10px; border-radius: 8px; }
+.tl-col h4 { margin: 0 0 6px; font: 800 0.8rem/1.2 var(--font-mono); text-transform: uppercase; color: var(--cyan-deep); }
+.tl-col ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+.tl-col.you { background: var(--tint); border-radius: 14px; padding: 12px 14px; }
+.tl-col.you h4 { color: var(--magenta); }
+.tl-cal { grid-column: 1 / -1; border-top: 1.5px dashed var(--line); padding-top: 14px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; }
+.tl-cal label { display: flex; flex-direction: column; gap: 4px; font: 700 0.75rem/1 var(--font-mono); text-transform: uppercase; color: var(--soft); }
+.tl-cal input { font: 500 1rem/1.2 var(--font-body); padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); min-width: 0; }
+.tl-cal input[type="text"] { width: min(100%, 280px); }
+.tl-cal .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.tl-cal .acts a, .tl-cal .acts button { font: 700 0.85rem/1 var(--font-body); padding: 11px 14px; border-radius: 999px; border: 2px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; cursor: pointer; }
+.tl-cal .acts a.g { background: var(--ink); color: var(--bg); }
+.tl-cal .acts [aria-disabled="true"] { opacity: .4; pointer-events: none; }
+.tl-note { font-size: 0.85rem; color: var(--soft); grid-column: 1 / -1; }
+@media (max-width: 820px) { .tl-card { grid-template-columns: minmax(0, 1fr); } }
+</style>
+<script>
+/* 4 Rundgang mit Avatar */
+(() => {
+  const box = document.getElementById("tour"); if (!box) return;
+  const AV = [["Lea", "media/av1.jpg", "Redet gern und hat immer eine Idee."], ["Mia", "media/av2.jpg", "Probiert alles aus."], ["Jonas", "media/av3.jpg", "Plant gern voraus."], ["Sara", "media/av4.jpg", "Hat ein Auge für die anderen."]];
+  const ST = [
+    ["start", "Station 1 · Ankommen", "Los geht's", "Am Morgen erklärt die Lehrkraft, wie der Tag abläuft. Was machst du?", "Bin gespannt, was heute kommt!",
+      [["Ich frage nach, was genau passiert.", "talk", "Nachfragen ist stark: So weißt du, worauf es ankommt."], ["Ich schaue mir den Ablauf genau an.", "plan", "Gut vorbereitet startet es sich leichter."], ["Ich quatsche mit den anderen, um locker zu werden.", "team", "Ein gutes Gefühl in der Gruppe hilft allen."]]],
+    ["schueler", "Station 2 · Gruppenaufgabe", "Die Murmelbahn", "Eure Gruppe soll aus Pappe eine Murmelbahn bauen. Wie legst du los?", "Okay, wir bauen eine Bahn!",
+      [["Ich schlage einen Plan vor: Wer baut was?", "plan", "Ein Plan bringt Ordnung ins Team."], ["Ich baue einfach mal eine Rampe zum Testen.", "tuef", "Ausprobieren bringt schnell Erkenntnisse."], ["Ich frage, welche Ideen die anderen haben.", "team", "So kommen alle Ideen auf den Tisch."]]],
+    ["schueler", "Station 3 · Knifflig", "Die Murmel fliegt raus", "In der Kurve fliegt die Murmel aus der Bahn. Was tust du?", "Oh nein, die Kurve!",
+      [["Ich teste verschiedene Winkel, bis es klappt.", "tuef", "Dranbleiben und testen: echte Tüftlerarbeit."], ["Ich erkläre den anderen meine Idee für die Kurve.", "talk", "Eine Idee gut erklären hilft der ganzen Gruppe."], ["Wir überlegen zusammen, woran es liegt.", "team", "Gemeinsam findet man oft die beste Lösung."]]],
+    ["start", "Station 4 · Vorstellen", "Eure Bahn", "Eure Gruppe stellt die Bahn den Beobachtern vor. Welche Rolle übernimmst du?", "Jetzt zeigen wir, was wir gebaut haben.",
+      [["Ich präsentiere unsere Bahn.", "talk", "Vor anderen sprechen braucht Mut. Respekt!"], ["Ich zeige, wie die Bahn funktioniert.", "tuef", "Wer die Technik erklärt, weiß, wie sie läuft."], ["Ich achte darauf, dass alle drankommen.", "team", "So wird es ein Erfolg für die ganze Gruppe."]]],
+    ["eltern", "Station 5 · Gespräch", "Dein Profil", "Ein paar Wochen später schaut ihr im Gespräch auf dein Profil. Was interessiert dich am meisten?", "Mal sehen, was im Profil steht.",
+      [["Wo meine Stärken liegen.", "talk", "Deine Stärken zu kennen hilft dir bei jeder Bewerbung."], ["Wie ich als Nächstes weitermache.", "plan", "Mit einem Plan geht es Schritt für Schritt voran."], ["Welches Praktikum ich ausprobieren kann.", "tuef", "Ausprobieren ist der beste Weg, Berufe kennenzulernen."]]]
+  ];
+  const BADGE = {
+    team: ["Teamplayer*in", "Du denkst an die anderen und bringst die Gruppe zusammen. Das gehört zur Teamfähigkeit."],
+    plan: ["Planer*in", "Du behältst den Überblick und gehst Schritt für Schritt vor. Das gehört zur Planungsfähigkeit."],
+    tuef: ["Tüftler*in", "Du probierst aus und gibst nicht auf, bis es klappt. Das gehört zur Problemlösefähigkeit."],
+    talk: ["Kommunikations&shy;talent", "Du fragst nach, erklärst und sprichst vor anderen. Das gehört zur Kommunikationsfähigkeit."]
+  };
+  let av = null, k = 0, tally = {}, chosen = null;
+  const pick = () => {
+    box.innerHTML = `<div class="tour-pick">${AV.map((a, i) => `<button type="button" data-av="${i}"><img src="${a[1]}" alt="" loading="lazy"><b>${a[0]}</b><span>${a[2]}</span></button>`).join("")}</div>
+      <p class="note" style="margin-top:12px">Die Figuren sind ausgedacht. Wähl einfach, wer dir gefällt.</p>`;
+  };
+  const path = () => `<div class="tour-path" aria-label="Station ${k + 1} von ${ST.length}">${ST.map((_, i) => `<i class="${i < k ? "done" : i === k ? "cur" : ""}"></i>`).join("")}</div>`;
+  const scene = () => {
+    const [img, stn, h, q, say, opts] = ST[k], a = AV[av];
+    box.innerHTML = `<div class="tour-scene"><div class="tour-img" style="background-image:url('media/${img}.jpg')"><span class="stn">${stn}</span><div class="who"><img src="${a[1]}" alt="${a[0]}"><span class="say">${chosen === null ? say : "Gute Wahl!"}</span></div></div>
+      <div class="tour-body">${path()}<h3>${h}</h3><p>${q}</p><div class="tour-opts">${opts.map((o, i) => `<button type="button" data-o="${i}"${chosen !== null ? " disabled" : ""}${chosen === i ? ' class="chosen"' : ""}>${o[0]}</button>`).join("")}</div>
+      ${chosen !== null ? `<div class="tour-fb" aria-live="polite"><span>${opts[chosen][2]}</span><button class="btn" type="button" data-next>${k === ST.length - 1 ? "Zum Ergebnis" : "Weiter"}</button></div>` : ""}</div></div>`;
+  };
+  const badge = () => {
+    const best = ["team", "plan", "tuef", "talk"].reduce((b, x) => (tally[x] || 0) > (tally[b] || 0) ? x : b, "team");
+    const [title, text] = BADGE[best], a = AV[av];
+    box.innerHTML = `<div class="badge3d"><div class="coin"><div class="coin-in"><div class="coin-f"><img src="${a[1]}" alt=""></div><div class="coin-b"></div></div></div>
+      <div><small>Dein Stärken-Badge</small><h3>${title}</h3><p>${text} Bei Profil AC zeigst du in vielen Aufgaben, was du kannst.</p>
+      <p class="note">Nur zum Spaß: Das ist kein Ergebnis von Profil AC. Dein echtes Profil entsteht aus Beobachtungen, Tests und deiner Selbsteinschätzung.</p>
+      <div class="row"><button class="btn" type="button" data-again>Noch mal</button><a class="btn alt" href="#kompetenzen">Alle Fähigkeiten ansehen</a></div></div></div>`;
+    window.sfx?.("win");
+  };
+  box.addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.av) { av = +b.dataset.av; k = 0; tally = {}; chosen = null; scene(); box.querySelector(".tour-opts button")?.focus({ preventScroll: true }); }
+    else if (b.dataset.o && chosen === null) { chosen = +b.dataset.o; const t = ST[k][5][chosen][1]; tally[t] = (tally[t] || 0) + 1; scene(); box.querySelector("[data-next]")?.focus({ preventScroll: true }); }
+    else if (b.hasAttribute("data-next")) { chosen = null; k++; if (k >= ST.length) badge(); else scene(); box.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" }); box.querySelector(".tour-opts button, [data-again]")?.focus({ preventScroll: true }); }
+    else if (b.hasAttribute("data-again")) { av = null; pick(); }
+  });
+  pick();
+})();
+
+/* 6 Mythos oder Fakt zum Wischen */
+(() => {
+  const box = document.getElementById("swipe"); if (!box) return;
+  const SET = [
+    ["Für Profil AC musst du lernen.", false, "Du musst nichts lernen."],
+    ["Bei Profil AC gibt es Noten.", false, "Keine Noten. Es geht um deine Stärken."],
+    ["Du kannst durchfallen.", false, "Alle bekommen ein Profil. Durchfallen gibt es nicht."],
+    ["Bei Profil AC baut jede Gruppe eine Murmelbahn.", false, "Die Murmelbahn ist nur ein Beispiel. Es gibt viele verschiedene Einzel- und Gruppenaufgaben."],
+    ["Du schätzt dich auch selbst ein.", true, "Dein Blick zählt mit."],
+    ["Manche Berufe sind nur für Jungs.", false, "Jeder Beruf steht allen offen. Darum geht es bei Zukunftswege."],
+    ["Deine Ergebnisse siehst du in deinem Login.", true, "Sobald sie freigegeben sind."]
+  ];
+  const RM = matchMedia("(prefers-reduced-motion: reduce)");
+  let k = 0, right = 0, busy = false;
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  function draw(fb) {
+    if (k >= SET.length) {
+      box.innerHTML = `<div class="sw-end"><span class="cnt">Fertig</span><b>${right} / ${SET.length}</b><p>${right === SET.length ? "Perfekt! Du kennst dich aus." : "Gar nicht schlecht. Jetzt weißt du mehr."}</p><button class="btn" type="button" data-again>Noch mal</button></div>`;
+      return;
+    }
+    const cards = SET.slice(k, k + 3).map((c, i) => `<div class="sw-card ${["top", "n1", "n2"][i]}"${i ? ' aria-hidden="true"' : ""}><span class="cnt">${k + i + 1} / ${SET.length}</span><p class="stmt">${esc(c[0])}</p><span class="stamp m">Mythos</span><span class="stamp f">Fakt</span></div>`).reverse().join("");
+    box.innerHTML = `<div class="sw-deck" role="group" aria-label="Aussage ${k + 1} von ${SET.length}: Mythos oder Fakt? Pfeiltaste links für Mythos, rechts für Fakt.">${cards}</div>
+      <div class="sw-btns"><button type="button" class="m" data-v="0">« Mythos</button><button type="button" class="f" data-v="1">Fakt »</button></div>
+      <div class="sw-fb${fb ? " " + fb.cls : ""}" aria-live="polite">${fb ? fb.html : `<span class="soft">${right} richtig bisher. Wisch die Karte oder tipp unten.</span>`}</div>`;
+    bindDrag();
+  }
+  function decide(isFact) {
+    if (busy || k >= SET.length) return; busy = true;
+    const [, truth, why] = SET[k], ok = isFact === truth; if (ok) right++;
+    window.sfx?.(ok ? "ok" : "no");
+    const top = box.querySelector(".sw-card.top");
+    const fb = { cls: ok ? "ok" : "no", html: `<b>${ok ? "Richtig!" : "Leider falsch."}</b>${truth ? "Fakt" : "Mythos"}: ${esc(why)}` };
+    if (top && !RM.matches) { top.style.transform = `translateX(${isFact ? 140 : -140}%) rotate(${isFact ? 24 : -24}deg)`; top.style.opacity = "0"; }
+    setTimeout(() => { k++; busy = false; draw(fb); box.querySelector(".sw-btns button")?.focus({ preventScroll: true }); }, RM.matches ? 0 : 380);
+  }
+  function bindDrag() {
+    const c = box.querySelector(".sw-card.top"); if (!c) return;
+    const sm = c.querySelector(".stamp.m"), sf = c.querySelector(".stamp.f");
+    let x0 = null, dx = 0;
+    c.addEventListener("pointerdown", (e) => { x0 = e.clientX; dx = 0; c.classList.add("drag"); c.setPointerCapture(e.pointerId); });
+    c.addEventListener("pointermove", (e) => { if (x0 === null) return; dx = e.clientX - x0; c.style.transform = `translateX(${dx}px) rotate(${dx / 18}deg)`; sf.style.opacity = Math.max(0, Math.min(1, dx / 90)); sm.style.opacity = Math.max(0, Math.min(1, -dx / 90)); });
+    const up = () => { if (x0 === null) return; x0 = null; c.classList.remove("drag"); if (Math.abs(dx) > 90) decide(dx > 0); else { c.style.transform = ""; sf.style.opacity = sm.style.opacity = 0; } };
+    c.addEventListener("pointerup", up); c.addEventListener("pointercancel", up);
+  }
+  box.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; if (b.dataset.v) decide(b.dataset.v === "1"); else if (b.hasAttribute("data-again")) { k = 0; right = 0; draw(); } });
+  box.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") { e.preventDefault(); decide(false); } else if (e.key === "ArrowRight") { e.preventDefault(); decide(true); } });
+  draw();
+})();
+
+/* 8 Zeitleiste für Eltern, Termine in den eigenen Kalender */
+(() => {
+  const ol = document.getElementById("tl"); if (!ol) return;
+  const PH = [
+    ["Phase 1", "Vorher", "Einige Wochen vor Profil AC", "Profil AC: Infos der Schule",
+      ["Die Schule informiert über Termin und Ablauf, zum Beispiel per Elternbrief oder am Elternabend."],
+      ["Erfährt in der Schule, was auf es zukommt."],
+      ["Termin notieren und bei Fragen die Schule ansprechen.", "Ihrem Kind sagen: Keine Noten, kein Lernen nötig."]],
+    ["Phase 2", "Profil AC", "Die Tage der Kompetenzanalyse", "Profil AC: Kompetenzanalyse",
+      ["Beobachtungsaufgaben allein und im Team, Tests am PC und eine Selbsteinschätzung."],
+      ["Löst Aufgaben, wird von geschulten Lehrkräften beobachtet und schätzt sich selbst ein."],
+      ["Ausgeschlafen und mit Frühstück in den Tag schicken.", "Abends fragen: Was hat dir Spaß gemacht?"]],
+    ["Phase 3", "Ergebnis", "Einige Wochen danach", "Profil AC: Rückmeldegespräch",
+      ["Das Kompetenzprofil entsteht. Im Rückmeldegespräch wird es besprochen."],
+      ["Spricht über sein Profil und überlegt, was zu ihm passt."],
+      ["Das Profil gemeinsam anschauen und zuerst die Stärken würdigen.", "Fragen: Hat dich etwas überrascht?"]],
+    ["Phase 4", "Weiter geht's", "Im weiteren Schuljahr", "Profil AC: Förderung und Praktikum",
+      ["Fördermodule, Praxistag, Praktika und weitere Angebote der Beruflichen Orientierung."],
+      ["Übt gezielt und probiert Berufe aus."],
+      ["Bei der Praktikumssuche helfen und eigene Kontakte nutzen.", "Interesse zeigen und nachfragen."]]
+  ];
+  const KEY = "pac-timeline";
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } };
+  const save = (v) => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} };
+  const st = load();
+  const inClaude = !!(window.claude && window.claude.use);
+  const pad = (n) => String(n).padStart(2, "0");
+  const fmtDate = (d) => d ? d.split("-").reverse().join(".") : "";
+  const ul = (a) => `<ul>${a.map((x) => `<li>${x}</li>`).join("")}</ul>`;
+  ol.innerHTML = PH.map((p, i) => `<li data-i="${i}"><div class="tl-card">
+    <header><div><small>${p[0]} · ${p[2]}</small><h3>${p[1]}</h3></div><span class="tl-when" id="tlw-${i}" hidden></span></header>
+    <div class="tl-col"><h4>Was passiert</h4>${ul(p[4])}</div>
+    <div class="tl-col"><h4>Ihr Kind</h4>${ul(p[5])}</div>
+    <div class="tl-col you"><h4>Das können Sie tun</h4>${ul(p[6])}</div>
+    <div class="tl-cal">
+      <label>Datum<input type="date" id="tld-${i}"></label>
+      <label>Uhrzeit<input type="time" id="tlt-${i}"></label>
+      <label>Notiz<input type="text" id="tln-${i}" maxlength="120" placeholder="z. B. Raum, Ansprechperson"></label>
+      <div class="acts"><a class="g" id="tlg-${i}" target="_blank" rel="noopener" aria-disabled="true">Google Kalender</a><a id="tlo-${i}" target="_blank" rel="noopener" aria-disabled="true">Outlook</a>${inClaude ? "" : `<button type="button" id="tli-${i}" aria-disabled="true">.ics-Datei</button>`}</div>
+    </div></div></li>`).join("") + `<li class="tl-end"><p class="tl-note">Ihre Termine bleiben nur in diesem Browser gespeichert. Der Kalender-Eintrag öffnet sich erst, wenn Sie auf einen der Knöpfe tippen.</p></li>`;
+  function ev(i) {
+    const d = st[i] || {}, p = PH[i];
+    if (!d.date) return null;
+    const [Y, M, D] = d.date.split("-").map(Number);
+    let s, e, allDay = !d.time;
+    if (allDay) { const n = new Date(Y, M - 1, D + 1); s = `${Y}${pad(M)}${pad(D)}`; e = `${n.getFullYear()}${pad(n.getMonth() + 1)}${pad(n.getDate())}`; }
+    else { const [h, m] = d.time.split(":").map(Number); const n = new Date(Y, M - 1, D, h + 1, m); s = `${Y}${pad(M)}${pad(D)}T${pad(h)}${pad(m)}00`; e = `${n.getFullYear()}${pad(n.getMonth() + 1)}${pad(n.getDate())}T${pad(n.getHours())}${pad(n.getMinutes())}00`; }
+    return { title: p[3], note: d.note || "", s, e, allDay, Y, M, D, time: d.time };
+  }
+  function refresh(i) {
+    const li = ol.querySelector(`li[data-i="${i}"]`), x = ev(i), d = st[i] || {};
+    const w = document.getElementById("tlw-" + i);
+    li.classList.toggle("has", !!x); w.hidden = !x; if (x) w.textContent = `Ihr Termin: ${fmtDate(d.date)}${d.time ? ", " + d.time + " Uhr" : ""}`;
+    const g = document.getElementById("tlg-" + i), o = document.getElementById("tlo-" + i), c = document.getElementById("tli-" + i);
+    [g, o, c].forEach((el) => el && el.setAttribute("aria-disabled", String(!x)));
+    if (!x) { g.removeAttribute("href"); o.removeAttribute("href"); return; }
+    const det = encodeURIComponent(x.note);
+    g.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(x.title)}&dates=${x.s}/${x.e}&details=${det}${x.allDay ? "" : "&ctz=Europe/Berlin"}`;
+    const iso = (v) => v.length === 8 ? `${v.slice(0, 4)}-${v.slice(4, 6)}-${v.slice(6, 8)}` : `${v.slice(0, 4)}-${v.slice(4, 6)}-${v.slice(6, 8)}T${v.slice(9, 11)}:${v.slice(11, 13)}:00`;
+    o.href = `https://outlook.live.com/calendar/0/action/compose?subject=${encodeURIComponent(x.title)}&startdt=${iso(x.s)}&enddt=${iso(x.e)}${x.allDay ? "&allday=true" : ""}&body=${det}`;
+  }
+  ol.addEventListener("input", (e) => {
+    const m = e.target.id.match(/^tl([dtn])-(\d)$/); if (!m) return;
+    const i = +m[2]; st[i] = st[i] || {};
+    st[i][{ d: "date", t: "time", n: "note" }[m[1]]] = e.target.value; save(st); refresh(i);
+  });
+  ol.addEventListener("click", (e) => {
+    const b = e.target.closest("button[id^='tli-']"); if (!b) return;
+    const x = ev(+b.id.slice(4)); if (!x) return;
+    const esc = (t) => t.replace(/[\\,;]/g, (c) => "\\" + c).replace(/\n/g, "\\n");
+    const dt = x.allDay ? `DTSTART;VALUE=DATE:${x.s}\r\nDTEND;VALUE=DATE:${x.e}` : `DTSTART;TZID=Europe/Berlin:${x.s}\r\nDTEND;TZID=Europe/Berlin:${x.e}`;
+    const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Profil AC Info//DE\r\nBEGIN:VEVENT\r\nUID:${Date.now()}@profil-ac-info\r\nDTSTAMP:${new Date().toISOString().replace(/[-:]/g, "").slice(0, 15)}Z\r\n${dt}\r\nSUMMARY:${esc(x.title)}\r\nDESCRIPTION:${esc(x.note)}\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n`;
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" })); a.download = "profil-ac-termin.ics"; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+  PH.forEach((_, i) => { const d = st[i] || {}; document.getElementById("tld-" + i).value = d.date || ""; document.getElementById("tlt-" + i).value = d.time || ""; document.getElementById("tln-" + i).value = d.note || ""; refresh(i); });
+})();
+</script>
+<style>
+/* A Kapitel statt langer Liste */
+.chap-tabs { display: none; gap: 4px; flex: none; }
+body[data-role="s"] .chap-tabs, body[data-role="e"] .chap-tabs, body[data-role="l"] .chap-tabs { display: flex; }
+body[data-role="s"] .nav-in > a:not(.logo), body[data-role="e"] .nav-in > a:not(.logo), body[data-role="l"] .nav-in > a:not(.logo) { display: none !important; }
+.chap-tabs button { border: 0; cursor: pointer; border-radius: 999px; padding: 10px 14px; font: 700 0.9rem/1 var(--font-body); background: transparent; color: var(--ink); display: inline-flex; gap: 8px; align-items: center; white-space: nowrap; }
+.chap-tabs button i { font: 900 0.8rem/1 var(--font-display); font-style: normal; width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--tint); color: var(--ink); }
+.chap-tabs button[aria-selected="true"] { background: var(--magenta); color: #ffffff; }
+.chap-tabs button[aria-selected="true"] i { background: #ffffff; color: var(--magenta); }
+.chap-tabs button:hover:not([aria-selected="true"]) { background: var(--tint); }
+body[data-role="s"] .switch, body[data-role="e"] .switch, body[data-role="l"] .switch { margin-left: auto; }
+.site main > section[data-off] { display: none !important; }
+.chap-next { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; background: var(--ink); color: var(--bg); border-radius: 26px; padding: clamp(22px, 4vw, 40px); }
+.chap-next small { font: 700 0.78rem/1 var(--font-mono); text-transform: uppercase; color: var(--cyan); }
+.chap-next h2 { color: #ffffff; font-size: clamp(1.8rem, 4vw, 3rem); }
+.chap-next p { color: #d9d7e6; }
+@media (max-width: 640px) {
+  .chap-tabs button { padding: 9px 10px; font-size: 0.82rem; }
+  .chap-tabs button span { display: none; }
+  .chap-tabs button[aria-selected="true"] span { display: inline; }
+}
+/* B Dreischritt-Begriffe in der Geschichte, Fahrplan zum Aufklappen, Ansichten im Kompetenzprofil */
+.st-tag { align-self: flex-start; font: 800 0.72rem/1 var(--font-display); text-transform: uppercase; letter-spacing: .04em; padding: 6px 10px; border-radius: 999px; background: var(--card); color: var(--magenta); box-shadow: inset 0 0 0 2px var(--magenta); }
+.st-tag.r { background: var(--magenta); color: #ffffff; box-shadow: none; }
+.st-tag.f { background: var(--cyan); color: #ffffff; box-shadow: none; }
+.tl-fold { margin-top: 18px; }
+.tl-fold > summary { font: 800 1.05rem/1.3 var(--font-display); }
+.tl-fold[open] > .tl { margin-top: 16px; }
+.tl-fold > p { margin-top: 8px; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 6px; background: var(--card); border: 1.5px solid var(--line); border-radius: 999px; padding: 5px; align-self: flex-start; }
+.seg button { border: 0; cursor: pointer; border-radius: 999px; padding: 10px 16px; font: 700 0.95rem/1 var(--font-body); background: transparent; color: var(--ink); }
+.seg button[aria-selected="true"] { background: var(--magenta); color: #ffffff; }
+.kpanel[hidden] { display: none !important; }
+.kpanel { display: flex; flex-direction: column; gap: 16px; }
+/* C Spiele-Bereich */
+.hub { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.hub button { position: relative; border: 0; cursor: pointer; text-align: left; border-radius: 22px; padding: 20px 18px 18px; min-height: 170px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; color: #ffffff; background: var(--hc); box-shadow: 0 20px 36px -26px rgba(20,22,43,.7); transition: transform .25s ease; overflow: hidden; }
+.hub button:hover { transform: translateY(-4px); }
+.hub button::before { content: attr(data-n); position: absolute; right: 12px; top: 2px; font: 900 4.4rem/1 var(--font-display); color: rgba(255,255,255,.22); letter-spacing: -0.05em; }
+.hub b { font: 900 clamp(1.05rem, 4.6vw, 1.35rem)/1.05 var(--font-display); text-transform: uppercase; letter-spacing: -0.03em; overflow-wrap: break-word; hyphens: manual; }
+.hub span { font-size: 0.92rem; opacity: .92; }
+.hub button[aria-pressed="true"] { outline: 4px solid var(--ink); outline-offset: 3px; }
+.hub .done { position: absolute; left: 14px; top: 14px; font: 700 0.72rem/1 var(--font-mono); text-transform: uppercase; background: rgba(255,255,255,.95); color: var(--ink); padding: 5px 8px; border-radius: 6px; }
+.game-back { align-self: flex-start; border: 0; background: var(--tint); color: var(--ink); border-radius: 999px; padding: 9px 14px; font: 700 0.88rem/1 var(--font-body); cursor: pointer; }
+@media (max-width: 820px) { .hub { grid-template-columns: repeat(2, minmax(0, 1fr)); } .hub button { min-height: 130px; } }
+</style>
+<script>
+/* Kapitel, Ansichten im Kompetenzprofil und Spiele-Bereich */
+(() => {
+  const CH = {
+    s: { t: ["So läuft's", "Deine Stärken", "Mitmachen"], d: ["Ablauf und Aufgaben", "Was du kannst und was dir Spaß macht", "Spiele, Quiz und wie es weitergeht"],
+      c: [["ablauf", "aufgaben"], ["kompetenzen", "ergebnis"], ["spiele", "rundgang", "mythos", "suchsel", "quiz", "anschluesse", "ausblick"]] },
+    e: { t: ["So läuft's", "Stärken", "Begleiten"], d: ["Ablauf, Fahrplan und Aufgaben", "Kompetenzen, Ergebnis und Ihr Blick", "Unterstützen, Gespräche und Fragen"],
+      c: [["ablauf", "aufgaben"], ["kompetenzen", "ergebnis", "einschaetzen"], ["unterstuetzen", "gespraech", "mythos", "faq", "quiz", "anschluesse", "ausblick"]] },
+    l: { t: ["Was ist neu", "Stärken & Gespräch", "Umsetzung"], d: ["Dreischritt, Ablauf und Aufgaben", "Kompetenzen, Ergebnis und Gesprächsleitfaden", "Umsetzung, Fortbildung und Fragen"],
+      c: [["dreischritt", "menue", "ablauf", "aufgaben"], ["kompetenzen", "ergebnis", "leitfaden"], ["schule", "fortbildung", "faq", "quiz", "anschluesse", "ausblick"]] }
+  };
+  const GAMES = [["rundgang", "Rundgang", "Begleite eine Figur durch den Tag", "var(--magenta)"], ["mythos", "Mythos oder Fakt", "Wisch dich durch 7 Aussagen", "var(--cyan)"], ["suchsel", "Suchsel", "Finde 10 Wörter", "#7a5cf0"], ["quiz", "Quiz", "Checkst du Profil AC?", "#14162b"]];
+  const ALWAYS = ["chap-next", "kontakt"];
+  const tabs = document.getElementById("chap-tabs"), next = document.getElementById("chap-next"), hub = document.getElementById("hub");
+  const RM = matchMedia("(prefers-reduced-motion: reduce)");
+  let ch = 0, game = null;
+  // Weiter-Kasten springt beim Hereinscrollen ins Bild
+  const cnIO = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); cnIO.unobserve(e.target); } }), { threshold: 0.35 });
+  const played = new Set((() => { try { return JSON.parse(localStorage.getItem("pac-played") || "[]"); } catch (e) { return []; } })());
+  const role = () => document.body.dataset.role;
+  const cfg = () => CH[role()];
+  function chapterOf(id) { const c = cfg(); if (!c) return -1; return c.c.findIndex((list) => list.includes(id)); }
+  function apply(scroll) {
+    const c = cfg(), secs = document.querySelectorAll(".site main > section");
+    if (!c) {
+      const gate = role() === "x";
+      secs.forEach((x) => { if (gate && GAMES.some((g) => g[0] === x.id)) x.toggleAttribute("data-off", game !== x.id); else x.removeAttribute("data-off"); });
+      window.PAC_CH = null; tabs.innerHTML = ""; next.innerHTML = ""; if (hub) drawHub(); document.dispatchEvent(new Event("chapterchange")); return;
+    }
+    const on = new Set(c.c[ch]);
+    secs.forEach((x) => {
+      if (x.classList.contains("cine") || ALWAYS.includes(x.id)) { x.removeAttribute("data-off"); return; }
+      let show = on.has(x.id);
+      if (show && role() === "s" && GAMES.some((g) => g[0] === x.id)) show = game === x.id;
+      x.toggleAttribute("data-off", !show);
+    });
+    window.PAC_CH = { i: ch, n: c.c.length };
+    tabs.innerHTML = c.t.map((t, i) => `<button type="button" role="tab" aria-selected="${i === ch}" data-ch="${i}"><i>${i + 1}</i><span>${t}</span></button>`).join("");
+    const last = ch === c.c.length - 1;
+    next.innerHTML = last
+      ? `<span class="cn-chev" aria-hidden="true">»»»</span><small>Geschafft</small><h2>Alles gesehen</h2><p>${role() === "s" ? "Spiel noch eine Runde oder schau dir die Kapitel noch einmal an." : "Sie können jederzeit über die Reiter oben zurückspringen."}</p><button class="btn" type="button" data-go="0">Zurück zu Kapitel 1</button>`
+      : `<span class="cn-chev" aria-hidden="true">»»»</span><small>Weiter mit Kapitel ${ch + 2}</small><h2>${c.t[ch + 1]}</h2><p>${c.d[ch + 1]}</p><button class="btn" type="button" data-go="${ch + 1}">Weiter</button>`;
+    if (hub) drawHub();
+    next.classList.remove("in"); cnIO.unobserve(next); cnIO.observe(next);
+    document.dispatchEvent(new Event("chapterchange"));
+    if (scroll) {
+      const first = [...secs].filter((x) => !x.hasAttribute("data-off") && !x.classList.contains("cine") && x.getClientRects().length).sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)[0];
+      if (first) scrollTo({ top: first.getBoundingClientRect().top + scrollY - 110, behavior: RM.matches ? "auto" : "smooth" });
+    }
+  }
+  function drawHub() {
+    hub.innerHTML = GAMES.map((g, i) => `<button type="button" data-game="${g[0]}" data-n="${i + 1}" aria-pressed="${game === g[0]}" style="--hc:${g[3]}">${played.has(g[0]) ? '<span class="done">Gespielt ✓</span>' : ""}<b>${g[1]}</b><span>${g[2]}</span></button>`).join("");
+  }
+  function openGame(id, scroll) {
+    game = id; played.add(id); try { localStorage.setItem("pac-played", JSON.stringify([...played])); } catch (e) {}
+    apply(false);
+    const el = document.getElementById(id);
+    if (el && scroll !== false) setTimeout(() => el.scrollIntoView({ behavior: RM.matches ? "auto" : "smooth", block: "start" }), 60);
+  }
+  tabs.addEventListener("click", (e) => { const b = e.target.closest("button[data-ch]"); if (!b) return; ch = +b.dataset.ch; game = null; apply(true); });
+  next.addEventListener("click", (e) => { const b = e.target.closest("button[data-go]"); if (!b) return; ch = +b.dataset.go; game = null; apply(true); });
+  if (hub) hub.addEventListener("click", (e) => { const b = e.target.closest("button[data-game]"); if (b) openGame(b.dataset.game); });
+  // Sprunglinks auf Abschnitte in anderen Kapiteln: erst das Kapitel öffnen
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('.site a[href^="#"]'); if (!a) return;
+    if (!cfg()) { const id0 = a.getAttribute("href").slice(1); if (role() === "x" && GAMES.some((g) => g[0] === id0) && game !== id0) { game = id0; played.add(id0); apply(false); } return; }
+    const id = a.getAttribute("href").slice(1), k = chapterOf(id);
+    if (k < 0) return;
+    const isGame = role() === "s" && GAMES.some((g) => g[0] === id);
+    if (k !== ch || (isGame && game !== id)) { ch = k; if (isGame) { game = id; played.add(id); } apply(false); }
+  }, true);
+  // Zurück aus einem Spiel in die Übersicht
+  document.querySelectorAll("#rundgang, #mythos, #suchsel, #quiz").forEach((sec) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "game-back"; b.dataset.r = "s x"; b.textContent = "« Alle Spiele";
+    b.addEventListener("click", () => { game = null; apply(false); document.getElementById("spiele").scrollIntoView({ behavior: RM.matches ? "auto" : "smooth", block: "start" }); });
+    sec.prepend(b);
+  });
+  // Ansichten im Kompetenzprofil (Schüler*innen)
+  const seg = document.querySelector("#kompetenzen .seg");
+  if (seg) seg.addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-kp]"); if (!b) return;
+    seg.querySelectorAll("button").forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+    document.querySelectorAll("#kompetenzen .kpanel").forEach((p) => { p.hidden = p.dataset.kp !== b.dataset.kp; });
+    document.dispatchEvent(new Event("chapterchange"));
+  });
+  document.addEventListener("rolechange", () => { ch = 0; game = null; if (seg) seg.querySelector('[data-kp="0"]').click(); apply(false); });
+  apply(false);
+})();
+</script>
+<style>
+/* Weiter-Kasten: fällt auf durch Farbverlauf, Lichtstreif, laufende Pfeile und pulsierenden Knopf */
+.chap-next { position: relative; overflow: hidden; isolation: isolate; background: linear-gradient(120deg, #14162b 0%, #3a0f3a 35%, #0b3a55 70%, #14162b 100%); background-size: 260% 260%; animation: cnBg 9s ease-in-out infinite; box-shadow: 0 40px 70px -40px rgba(226,0,122,.55); }
+.chap-next > *:not(.cn-chev) { position: relative; z-index: 2; }
+.chap-next::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.16) 50%, transparent 65%); transform: translateX(-100%); animation: cnShine 3.6s ease-in-out infinite 1s; pointer-events: none; }
+.chap-next::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; padding: 3px; background: conic-gradient(from var(--cn-a, 0deg), var(--magenta), var(--cyan), var(--magenta)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: cnSpin 4s linear infinite; pointer-events: none; }
+@property --cn-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.cn-chev { position: absolute; right: clamp(16px, 5vw, 64px); top: 50%; z-index: 1; transform: translateY(-50%); font: 900 clamp(5rem, 13vw, 11rem)/1 var(--font-display); letter-spacing: -0.12em; color: transparent; -webkit-text-stroke: 3px var(--cyan); opacity: .55; animation: cnMove 1.8s ease-in-out infinite; pointer-events: none; }
+.chap-next .btn { animation: cnPulse 2s ease-out infinite; }
+.chap-next .btn::after { display: inline-block; animation: cnNudge 1.2s ease-in-out infinite; }
+.chap-next.in { animation: cnBg 9s ease-in-out infinite, cnPop .8s cubic-bezier(.2,.9,.25,1.2) both; }
+@keyframes cnBg { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes cnShine { 0% { transform: translateX(-100%); } 60%, 100% { transform: translateX(100%); } }
+@keyframes cnSpin { to { --cn-a: 360deg; } }
+@keyframes cnMove { 0%, 100% { transform: translate(0, -50%); opacity: .35; } 50% { transform: translate(18px, -50%); opacity: .75; } }
+@keyframes cnPulse { 0% { box-shadow: 0 0 0 0 rgba(226,0,122,.7); } 70% { box-shadow: 0 0 0 16px rgba(226,0,122,0); } 100% { box-shadow: 0 0 0 0 rgba(226,0,122,0); } }
+@keyframes cnNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+@keyframes cnPop { from { transform: translateY(40px) scale(.94); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (max-width: 640px) { .cn-chev { top: 22px; transform: none; font-size: 4rem; } @keyframes cnMove { 0%, 100% { translate: 0 0; opacity: .35; } 50% { translate: 12px 0; opacity: .75; } } }
+@media (prefers-reduced-motion: reduce) { .chap-next, .chap-next.in, .chap-next::before, .chap-next::after, .cn-chev, .chap-next .btn, .chap-next .btn::after { animation: none !important; } .chap-next::before { display: none; } }
+</style>
+<style>
+/* Lehrkräfte: Neuerungen als übersichtliche Liste statt Kachelwand */
+body[data-role="l"] .features { grid-template-columns: minmax(0, 1fr); gap: 0; background: var(--card); border-radius: 20px; padding: 4px clamp(16px, 2.4vw, 28px); }
+body[data-role="l"] .feature { display: grid; grid-template-columns: 150px minmax(0, 220px) minmax(0, 1fr); gap: 6px 20px; align-items: baseline; background: transparent; border-radius: 0; padding: 16px 0; border-top: 1.5px solid var(--line); }
+body[data-role="l"] .feature:first-child { border-top: 0; }
+body[data-role="l"] .feature h3 { font-size: 1.1rem; margin: 0; }
+body[data-role="l"] .feature p { margin: 0; font-size: 1rem; }
+body[data-role="l"] .feature .who { justify-self: start; }
+@media (max-width: 760px) { body[data-role="l"] .feature { grid-template-columns: minmax(0, 1fr); gap: 6px; } }
+</style>
+<style>
+/* Klassenraum als Hintergrund beim Weiterscrollen */
+.vstage .bgw { position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease; }
+.vstage .bgw.on { opacity: 1; }
+.vstage .bgw video { position: absolute; inset: -4%; width: 108%; height: 108%; object-fit: cover; will-change: transform; }
+.vstage .bgveil { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--bg-rgb) / .8), rgb(var(--bg-rgb) / .74) 50%, rgb(var(--bg-rgb) / .84)); }
+@media (prefers-reduced-motion: reduce) { .vstage .bgw { transition: none; } }
+</style>
+<style>
+/* Einfache Sprache: Spiele nach den Erklärungen, Quiz am Schluss */
+body[data-role="x"] #spiele, body[data-role="x"] #rundgang, body[data-role="x"] #mythos, body[data-role="x"] #suchsel { order: 2; }
+body[data-role="x"] #quiz { order: 3; }
+</style>

@@ -115,6 +115,9 @@ main { position: relative; z-index: 1; }
 .cta.s { background: var(--magenta); color: #fff; }
 .cta.e { background: var(--cyan); color: #fff; }
 .cta.l { background: #fff; color: #14162b; }
+.ctas-more { gap: 10px; margin-top: -6px; }
+.cta.x { padding: 12px 18px; font-size: 0.88rem; background: rgba(20,22,43,.55); color: #fff; box-shadow: inset 0 0 0 2px rgba(255,255,255,.85); text-shadow: none; }
+.cta.x:hover { background: rgba(20,22,43,.75); }
 .foot { position: relative; z-index: 1; background: var(--bg); padding-block: 28px; font-size: 0.85rem; color: var(--soft); }
 
 /* Mobil und reduzierte Bewegung */
@@ -149,7 +152,7 @@ main { position: relative; z-index: 1; }
     <source src="loop.mp4" type="video/mp4">
   </video>
   <canvas id="gl"></canvas>
-  <canvas id="seq" class="mseq" data-dir="seq" data-n="76"></canvas>
+  <canvas id="seq" class="mseq" data-dir="seq" data-hd="seq-hd" data-n="76"></canvas>
   <canvas id="seq6" class="mseq" data-dir="finale" data-hd="finale-hd" data-pre="e" data-n="96"></canvas>
   <div class="shade" id="shade"></div>
   <div class="whiteout" id="whiteout"></div>
@@ -191,11 +194,11 @@ main { position: relative; z-index: 1; }
       <div class="track" id="track">
         <div class="panel gutter">
           <div class="txt"><span class="num">01</span><span class="kicker">Diagnostik</span><h2>Zeig, was du kannst</h2><p>Einzel- und Gruppenaufgaben, zum Beispiel eine Murmelbahn bauen. Geschulte Lehrkräfte beobachten, Tests am PC ergänzen das Bild.</p></div>
-          <div class="media" data-video=""><canvas class="mseq" data-dir="murmel" data-pre="m" data-n="96" aria-label="Hände bauen eine Murmelbahn aus Pappe und legen eine Murmel auf"></canvas><span class="tag">Gruppenaufgabe</span></div>
+          <div class="media" data-video=""><canvas class="mseq" data-dir="murmel" data-hd="murmel-hd" data-pre="m" data-n="96" aria-label="Hände bauen eine Murmelbahn aus Pappe und legen eine Murmel auf"></canvas><span class="tag">Gruppenaufgabe</span></div>
         </div>
         <div class="panel gutter">
           <div class="txt"><span class="num">02</span><span class="kicker">Reflexion</span><h2>Versteh, was es bedeutet</h2><p>Im Rückmeldegespräch schaut ihr gemeinsam auf dein Profil. Wo siehst du dich anders als die Beobachter? Was passt zu dir?</p></div>
-          <div class="media" data-video=""><canvas class="mseq" data-dir="gespraech" data-pre="g" data-n="96" aria-label="Lehrerin und Schülerin lesen gemeinsam ein Blatt und lächeln sich an"></canvas><span class="tag">Rückmeldegespräch</span></div>
+          <div class="media" data-video=""><canvas class="mseq" data-dir="gespraech" data-hd="gespraech-hd" data-pre="g" data-n="96" aria-label="Lehrerin und Schülerin lesen gemeinsam ein Blatt und lächeln sich an"></canvas><span class="tag">Rückmeldegespräch</span></div>
         </div>
         <div class="panel gutter">
           <div class="txt"><span class="num">03</span><span class="kicker">Förderung</span><h2>Mach den nächsten Schritt</h2><p>Neue Fördermodule helfen dir, an deinen Entwicklungsfeldern zu arbeiten. Und dann: Praktikum, Ausbildung, Traumjob.</p></div>
@@ -216,6 +219,11 @@ main { position: relative; z-index: 1; }
           <a class="cta s" href="info/#schueler">Ich bin Schüler*in</a>
           <a class="cta e" href="info/#eltern">Ich bin Elternteil</a>
           <a class="cta l" href="info/#lehrkraefte">Ich bin Lehrkraft</a>
+        </div>
+        <div class="ctas ctas-more" role="group" aria-label="Weitere Sprachen">
+          <a class="cta x" href="info/#einfach">Einfache Sprache</a>
+          <a class="cta x" href="info/#english" lang="en">English</a>
+          <a class="cta x" href="info/#ukrainska" lang="uk">Українська</a>
         </div>
       </div>
     </div>
