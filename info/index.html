@@ -767,6 +767,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     <a href="#uk-faq" data-r="uk" lang="uk">Запитання</a>
     <button class="switch" id="switch" type="button">Rolle wechseln</button>
   </div>
+  <div class="readbar" id="readbar" hidden><div class="rb-segs" id="rb-segs"></div><span class="rb-count" id="rb-count"></span></div>
 </nav>
 
 <main class="gutter" id="top">
@@ -869,21 +870,61 @@ body[data-role="l"] main > section { order: var(--l, 50); }
     <div class="sec-head">
       <span class="kicker" data-r="s">So läuft's ab</span><span class="kicker" data-r="e l">Ablauf</span>
       <h2>Ablauf <span class="c">Profil AC</span></h2>
-      <p class="soft" data-r="s">Tippe dich durch die 6 Schritte.</p>
+      <p class="soft" data-r="s">Scroll dich durch die 5 Schritte.</p>
       <p class="soft" data-r="e">So begleitet die Schule Ihr Kind von der Vorbereitung bis zum Entwicklungsplan.</p>
       <p class="soft" data-r="l">Wie können die Ziele erreicht werden? Ablauf nach dem Schaubild der Präsentation.</p>
     </div>
-    <div>
-      <div class="stepper" id="stepper" data-r="s"></div>
-      <div class="flow" data-r="e l">
-        <div class="node"><h3>Vorbereitung</h3><ul><li data-r="l">Organisation und Auswahl der Module</li><li data-r="l">Vorbereitung der Schüler*innen: Schulung der Merkmale, Video</li><li data-r="s">Deine Schule plant alles</li><li data-r="s">Du erfährst, was dich erwartet</li><li data-r="e">Die Schule plant und informiert Sie und Ihr Kind</li></ul></div>
-        <div class="node"><h3>Durchführung</h3><ul><li>Beobachtungsaufgaben<span data-r="l"> mit Beurteilung und Beobachterkonferenz</span></li><li>Selbsteinschätzung</li><li>Simulationsspiele</li><li>Tests und Fragebogen</li></ul></div>
-        <div class="node"><h3>Ergebnisse</h3><ul><li>Individuelles Kompetenzprofil</li><li>Einzelergebnisse aus Tests und Fragebogen</li></ul></div>
-        <div class="node"><h3>Reflexion</h3><ul><li>Ergebnisse reflektieren</li><li>Rückmeldegespräch</li></ul></div>
-        <div class="node end"><h3 data-r="s">Mein Entwicklungs&shy;plan</h3><h3 data-r="e l">Entwicklungs&shy;plan</h3><ul><li>Förderplanung</li><li>Fördermodule</li></ul></div>
+    <div class="story no3d" id="story">
+      <div class="story-media" aria-hidden="true">
+        <div class="sm-frame">
+          <video muted loop playsinline preload="none" data-clip="start" poster="media/start.jpg"></video>
+          <video muted loop playsinline preload="none" data-clip="schueler" poster="media/schueler.jpg"></video>
+          <video muted loop playsinline preload="none" data-clip="lehrkraft" poster="media/lehrkraft.jpg"></video>
+          <video muted loop playsinline preload="none" data-clip="eltern" poster="media/eltern.jpg"></video>
+          <video muted loop playsinline preload="none" data-clip="praktikum" poster="media/praktikum.jpg"></video>
+          <span class="sm-num" id="sm-num">01</span>
+          <span class="sm-bar"><i id="sm-fill"></i></span>
+        </div>
       </div>
-      <p class="loop" data-r="e l"><b>Verzahnung:</b> <span data-r="s">Deine Ergebnisse helfen dir später auch beim Praxistag und bei Praktika.</span><span data-r="e l">Die Ergebnisse fließen weiter in DiBoP, BOP, Praxistag und andere Angebote der Beruflichen Orientierung.</span></p>
+      <ol class="story-steps">
+        <li class="st" data-clip="start">
+          <div class="st-in">
+          <span class="st-n" aria-hidden="true">01</span>
+          <h3><span data-r="s">Vorbereitung</span><span data-r="e l">Vorbereitung</span></h3>
+          <p data-r="s">Deine Schule plant alles. Vorher erfährst du, was dich erwartet.</p><p data-r="e">Die Schule plant die Kompetenzanalyse und informiert Sie und Ihr Kind.</p><p data-r="l">Organisation und Auswahl der Module. Vorbereitung der Schüler*innen: Schulung der Merkmale, Video.</p>
+          </div>
+        </li>
+        <li class="st" data-clip="schueler">
+          <div class="st-in">
+          <span class="st-n" aria-hidden="true">02</span>
+          <h3><span data-r="s">Durchführung</span><span data-r="e l">Durchführung</span></h3>
+          <p data-r="s">Bauen, planen, knobeln: allein oder im Team. Dazu Tests am PC und deine Selbsteinschätzung.</p><p data-r="e">Ihr Kind löst Beobachtungsaufgaben allein und im Team. Dazu kommen Tests am PC, Simulationsspiele und eine Selbsteinschätzung.</p><p data-r="l">Beobachtungsaufgaben mit Beurteilung und Beobachterkonferenz, Selbsteinschätzung, Simulationsspiele, Tests und Fragebogen.</p>
+          </div>
+        </li>
+        <li class="st" data-clip="lehrkraft">
+          <div class="st-in">
+          <span class="st-n" aria-hidden="true">03</span>
+          <h3><span data-r="s">Dein Profil</span><span data-r="e l">Ergebnisse</span></h3>
+          <p data-r="s">Dein Kompetenzprofil zeigt deinen eigenen Blick und den Blick der Beobachter.</p><p data-r="e">Es entsteht ein individuelles Kompetenzprofil, dazu Einzelergebnisse aus Tests und Fragebogen.</p><p data-r="l">Individuelles Kompetenzprofil sowie Einzelergebnisse aus Tests und Fragebogen.</p>
+          </div>
+        </li>
+        <li class="st" data-clip="eltern">
+          <div class="st-in">
+          <span class="st-n" aria-hidden="true">04</span>
+          <h3><span data-r="s">Gespräch</span><span data-r="e l">Reflexion</span></h3>
+          <p data-r="s">Im Rückmeldegespräch schaut ihr gemeinsam auf dein Profil: Was passt zu dir?</p><p data-r="e">Im Rückmeldegespräch werden die Ergebnisse gemeinsam besprochen und eingeordnet.</p><p data-r="l">Ergebnisse reflektieren, Rückmeldegespräch, digitale und analoge Module der Reflexion.</p>
+          </div>
+        </li>
+        <li class="st" data-clip="praktikum">
+          <div class="st-in">
+          <span class="st-n" aria-hidden="true">05</span>
+          <h3><span data-r="s">Mein Plan</span><span data-r="e l">Entwicklungs&shy;plan</span></h3>
+          <p data-r="s">Du planst deine nächsten Schritte und übst gezielt, zum Beispiel im Praktikum.</p><p data-r="e">Daraus entsteht ein Entwicklungsplan mit Förderplanung und passenden Fördermodulen.</p><p data-r="l">Förderplanung und Fördermodule für Einzelarbeit, Tandem oder Gruppe.</p>
+          </div>
+        </li>
+      </ol>
     </div>
+    <p class="loop"><b>Verzahnung:</b> <span data-r="s">Deine Ergebnisse helfen dir später auch beim Praxistag und bei Praktika.</span><span data-r="e l">Die Ergebnisse fließen weiter in DiBoP, BOP, Praxistag und andere Angebote der Beruflichen Orientierung.</span></p>
   </section>
 
   <!-- AUFGABEN / DIAGNOSTIK -->
@@ -938,27 +979,20 @@ body[data-role="l"] main > section { order: var(--l, 50); }
       <span class="kicker">Was erfasst wird</span>
       <h2 data-r="s">Kein Schulstoff, <span class="c">sondern Skills</span></h2>
       <h2 data-r="e l">Kompetenz<span class="c">felder</span></h2>
-      <p class="soft" data-r="s">Tippe auf eine Karte.</p>
-      <p class="soft" data-r="e l">Erfasst werden überfachliche Kompetenzen, also Fähigkeiten, die in Ausbildung und Studium unabhängig vom Fach zählen.</p>
+      <p class="soft" data-r="s">Dreh das Profil und tippe auf eine Fähigkeit.</p>
+      <p class="soft" data-r="e l">Erfasst werden überfachliche Kompetenzen, also Fähigkeiten, die in Ausbildung und Studium unabhängig vom Fach zählen. Klicken Sie auf eine Kompetenz, um mehr zu erfahren.</p>
     </div>
-    <div class="gloss flip" data-r="s">
-      <button type="button" id="fk-1" aria-pressed="false"><b>Sozial</b><span>Reden, Kritik und Konflikte, Teamwork</span></button>
-      <button type="button" id="fk-2" aria-pressed="false"><b>Methoden</b><span>Planen, Probleme lösen, Präsentieren</span></button>
-      <button type="button" id="fk-3" aria-pressed="false"><b>Persönlich</b><span>Dranbleiben, selbstständig, ordentlich, verantwortungsvoll</span></button>
-      <button type="button" id="fk-4" aria-pressed="false"><b>Kopf</b><span>Konzentration, Vorstellungsvermögen, Merken, Logik</span></button>
-      <button type="button" id="fk-5" aria-pressed="false"><b>Berufsfelder</b><span>Technik, Forschen, Kreativ, Helfen, Verkaufen, Verwalten</span></button>
-      <button type="button" id="fk-6" aria-pressed="false"><b>Interessen</b><span>Was dich interessiert: 16 Berufsgruppen</span></button>
+    <div class="k3d" id="k3d">
+      <div class="k3d-stage">
+        <div class="k3d-sheet" id="k3d-sheet">
+          <div class="k3d-head"><b>Kompetenz&shy;profil</b><span>Profil AC · <span data-r="s">zum Antippen</span><span data-r="e l">zum Anklicken</span></span></div>
+          <div class="k3d-groups" id="k3d-groups"></div>
+          <p class="k3d-hint" aria-hidden="true">Ziehen zum Drehen</p>
+        </div>
+      </div>
+      <div class="k3d-detail" id="k3d-detail" aria-live="polite"></div>
     </div>
-    <div class="komp" data-r="e l">
-      <div class="card"><h3><i></i>Sozialkompetenz</h3><ul><li>Kommunikationsfähigkeit</li><li>Kritik- und Konfliktfähigkeit</li><li>Teamfähigkeit</li></ul></div>
-      <div class="card"><h3><i></i>Methodenkompetenz</h3><ul><li>Planungsfähigkeit</li><li>Problemlösefähigkeit</li><li>Präsentationsfähigkeit</li></ul></div>
-      <div class="card"><h3><i></i>Personale Kompetenz</h3><ul><li>Durchhaltevermögen</li><li>Selbstständigkeit</li><li>Ordentlichkeit</li><li>Verantwortungsfähigkeit</li><li>Arbeitsgenauigkeit</li><li>Arbeitstempo</li></ul></div>
-      <div class="card"><h3><i></i>Kognitive Basiskompetenz</h3><ul><li>Konzentrationsfähigkeit</li><li>Räumliches Vorstellungsvermögen</li><li>Merkfähigkeit</li><li>Schlussfolgerndes Denken</li></ul></div>
-      <div class="card"><h3><i></i>Berufsfeldbezogen</h3><ul><li>Handwerklich-technisch</li><li>Untersuchend-forschend</li><li>Kreativ-sprachlich</li><li>Pädagogisch-helfend</li><li>Führend-verkaufend</li><li>Kaufmännisch-verwaltend</li></ul></div>
-      <div class="card hi"><h3><i></i>Interessen &amp; mehr</h3><ul><li>Berufsinteressen: 16 Berufsgruppen</li><li>IT-Fähigkeit</li><li>Zukunftswege (Sek I)</li><li>Emotionale Kompetenz (Sek II)</li><li>Passung Ausbildung / Studium (Sek II)</li></ul></div>
-    </div>
-    
-    <p class="note" data-r="e l">Welche Module eingesetzt werden, entscheidet die Schule.</p>
+    <p class="note">Welche Module eingesetzt werden, entscheidet die Schule. Die Übungsideen sind Anregungen, keine offiziellen Fördermodule.</p>
   </section>
 
   <!-- ERGEBNIS -->
@@ -1799,33 +1833,6 @@ window.addEventListener("hashchange", fromHash);
   document.getElementById("gs-next").addEventListener("click", () => { qi++; showQ(); });
   gsM.addEventListener("click", () => { mode = mode === "after" ? "before" : "after"; qi = 0; showQ(); });
 
-  /* Schüler: Schritt für Schritt */
-  const STEPS = [
-    ["Vorbereitung", "Deine Schule plant. Du erfährst, was kommt."],
-    ["Aufgaben", "Bauen, planen, knobeln. Allein oder im Team."],
-    ["Tests am PC", "Denken, IT und deine Interessen."],
-    ["Selbstcheck", "Du sagst, was du gut kannst."],
-    ["Dein Profil", "Dein Blick und der Blick der Beobachter."],
-    ["Gespräch und Plan", "Ihr plant deine nächsten Schritte."]
-  ];
-  let stp = 0;
-  const stepper = document.getElementById("stepper");
-  const drawStep = () => {
-    stepper.innerHTML = `<span class="big-n" aria-hidden="true">${stp + 1}</span><div><h3>${STEPS[stp][0]}</h3><p>${STEPS[stp][1]}</p></div>
-      <div class="ctrl"><div class="dots">${STEPS.map((st, i) => `<button type="button" id="st-d${i}" aria-label="Schritt ${i + 1}: ${st[0]}"${i === stp ? ' aria-current="step"' : ""} data-i="${i}"></button>`).join("")}</div>
-      <button type="button" class="nav-b" id="st-prev"${stp ? "" : " disabled"}>Zurück</button>
-      <button type="button" class="nav-b fwd" id="st-next">${stp === STEPS.length - 1 ? "Von vorn" : "Weiter"}</button></div>`;
-  };
-  stepper.addEventListener("click", (e) => {
-    const b = e.target.closest("button"); if (!b) return;
-    const id = b.id;
-    if (b.dataset.i) stp = Number(b.dataset.i);
-    else if (id === "st-prev") stp = Math.max(0, stp - 1);
-    else if (id === "st-next") stp = stp === STEPS.length - 1 ? 0 : stp + 1;
-    drawStep();
-    const f = document.getElementById(id === "st-prev" && !stp ? "st-next" : id); if (f) f.focus({ preventScroll: true });
-  });
-  drawStep();
 
   /* Mythos oder Fakt */
   const MF = {
@@ -2779,7 +2786,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
     document.querySelectorAll(".site main > section:not(.cine)").forEach((sec) => {
       if (!sec.getClientRects().length) return;
       [...sec.children].forEach((ch) => {
-        if (!ch.getClientRects().length) return;
+        if (!ch.getClientRects().length || ch.classList.contains("no3d")) return;
         const kids = [...ch.children].filter((c) => c.getClientRects().length && c.tagName !== "VIDEO");
         const grid = getComputedStyle(ch).display === "grid" && kids.length >= 2 && kids.length <= 12;
         (grid ? kids : [ch]).forEach((el, i) => { el.classList.add("r3d"); items.push({ el, d: grid ? i % 4 : 0, top: 0, h: 0, p: -1 }); });
@@ -2859,3 +2866,267 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
 })();
 </script>
 <style>/* GitHub-Fassung: Umfrage braucht claude.ai */ #feedback { display: none !important; }</style>
+<style>
+/* 1 Ablauf als Scroll-Geschichte: Video bleibt stehen, Schritte ziehen vorbei */
+.story { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 56px); align-items: start; }
+.story-media { position: sticky; top: 96px; height: min(72vh, 640px); perspective: 1200px; }
+.sm-frame { position: relative; height: 100%; border-radius: 26px; overflow: hidden; background: #14162b; box-shadow: 0 40px 80px -40px rgba(20,22,43,.6); transform-style: preserve-3d; }
+.sm-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: rotateY(-14deg) scale(1.08) translateZ(-60px); transform-origin: 0% 50%; transition: opacity .7s ease, transform .9s cubic-bezier(.2,.8,.2,1); }
+.sm-frame video.on { opacity: 1; transform: none; }
+.sm-frame video.past { transform: rotateY(14deg) scale(1.04) translateZ(-60px); transform-origin: 100% 50%; }
+.sm-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,22,43,0) 55%, rgba(20,22,43,.7) 100%); pointer-events: none; }
+.sm-num { position: absolute; left: 22px; bottom: 26px; z-index: 2; font: 900 clamp(4rem, 9vw, 7.5rem)/.8 var(--font-display); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 2.5px #ffffff; }
+.sm-bar { position: absolute; left: 22px; right: 22px; top: 20px; z-index: 2; height: 5px; border-radius: 3px; background: rgba(255,255,255,.3); overflow: hidden; }
+.sm-bar i { display: block; height: 100%; width: 20%; background: var(--magenta); border-radius: 3px; transition: width .5s ease; }
+.story-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.st { min-height: 64vh; display: flex; flex-direction: column; justify-content: center; padding: 20px 0; opacity: .28; transform: translateX(18px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
+.st:first-child { min-height: 46vh; justify-content: flex-start; padding-top: 6vh; }
+.st:last-child { min-height: 56vh; }
+.st.on { opacity: 1; transform: none; }
+.st-in { display: flex; flex-direction: column; gap: 12px; }
+.st-n { font: 700 0.85rem/1 var(--font-mono); color: var(--magenta); letter-spacing: .08em; }
+.st h3 { font: 900 clamp(2rem, 4.4vw, 3.6rem)/.95 var(--font-display); text-transform: uppercase; letter-spacing: -0.045em; color: var(--ink); hyphens: manual; }
+.st.on h3 { color: var(--magenta); }
+.st p { font-size: clamp(1.1rem, 1.5vw, 1.35rem); line-height: 1.5; color: var(--soft); max-width: 34ch; }
+#ablauf .loop { margin-top: 8px; }
+@media (max-width: 820px) {
+  .story { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .story-media { top: 76px; height: 36vh; z-index: 2; }
+  .sm-frame { border-radius: 18px; }
+  .sm-num { left: 14px; bottom: 14px; font-size: 3.4rem; }
+  .st, .st:first-child, .st:last-child { min-height: 58vh; justify-content: flex-start; padding: 18px 0 0; transform: none; }
+  .st-in { position: sticky; top: calc(76px + 36vh + 16px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sm-frame video, .st { transition: none; transform: none; }
+}
+
+/* 2 Kompetenzprofil zum Drehen */
+.k3d { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
+.k3d-stage { perspective: 1400px; touch-action: pan-y; }
+.k3d-sheet { background: var(--card); border-radius: 18px; padding: clamp(16px, 2.4vw, 28px); box-shadow: 0 50px 90px -50px rgba(20,22,43,.55), 0 2px 0 var(--line); transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.8,.2,1); cursor: grab; position: relative; }
+.k3d-sheet.drag { transition: none; cursor: grabbing; }
+.k3d-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-bottom: 3px solid var(--magenta); padding-bottom: 10px; margin-bottom: 14px; }
+.k3d-head b { font: 900 clamp(1.4rem, 2.6vw, 2.1rem)/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.04em; color: var(--magenta); }
+.k3d-head > span { font: 700 0.75rem/1 var(--font-mono); text-transform: uppercase; color: var(--soft); }
+.k3d-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 16px 18px; }
+.kg { display: flex; flex-direction: column; gap: 6px; min-width: 0; transform: translateZ(18px); }
+.kg h4 { margin: 0 0 2px; font: 800 0.95rem/1.15 var(--font-display); text-transform: uppercase; letter-spacing: 0.01em; display: flex; gap: 8px; align-items: center; }
+.kg h4 i { width: 12px; height: 12px; border-radius: 3px; background: var(--kc); flex: none; }
+.kg button { text-align: left; border: 0; background: var(--bg); color: var(--ink); border-radius: 8px; padding: 7px 10px; font: 500 0.92rem/1.25 var(--font-body); cursor: pointer; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; transition: transform .25s ease, background .25s ease, box-shadow .25s ease; overflow-wrap: break-word; hyphens: auto; }
+.kg button::after { content: ""; width: 34px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--kc) var(--w, 60%), var(--line) 0); }
+.kg button:hover { transform: translateZ(14px) translateY(-1px); box-shadow: 0 8px 18px -10px rgba(20,22,43,.5); }
+.kg button[aria-pressed="true"] { background: var(--kc); color: #ffffff; transform: translateZ(26px); box-shadow: 0 14px 26px -12px var(--kc); }
+.kg button[aria-pressed="true"]::after { background: rgba(255,255,255,.6); }
+.k3d-hint { margin: 14px 0 0; font: 700 0.72rem/1 var(--font-mono); text-transform: uppercase; color: var(--soft); text-align: right; }
+.k3d-detail { position: sticky; top: 110px; perspective: 1000px; }
+.kd { background: var(--ink); color: var(--bg); border-radius: 22px; padding: clamp(20px, 3vw, 32px); display: flex; flex-direction: column; gap: 14px; transform-origin: 0% 50%; animation: kdIn .6s cubic-bezier(.2,.8,.2,1); box-shadow: 0 40px 70px -40px rgba(20,22,43,.7); }
+@keyframes kdIn { from { opacity: 0; transform: rotateY(-35deg) translateX(-20px); } to { opacity: 1; transform: none; } }
+.kd small { font: 700 0.75rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--kc); }
+.kd h3 { font: 900 clamp(1.6rem, 3vw, 2.4rem)/.95 var(--font-display); text-transform: uppercase; letter-spacing: -0.04em; color: #ffffff; hyphens: auto; }
+.kd dl { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.kd dt { font: 700 0.75rem/1 var(--font-mono); text-transform: uppercase; color: var(--cyan); margin-bottom: 4px; }
+.kd dd { margin: 0; font-size: 1.02rem; line-height: 1.5; color: #e9e7f2; }
+.kd-empty { border: 2px dashed var(--line); border-radius: 22px; padding: 28px; color: var(--soft); display: flex; flex-direction: column; gap: 10px; }
+.kd-empty b { font: 900 1.4rem/1 var(--font-display); text-transform: uppercase; color: var(--ink); }
+@media (max-width: 820px) {
+  .k3d { grid-template-columns: minmax(0, 1fr); }
+  .k3d-detail { position: static; }
+  .k3d-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .kd { animation: none; } .k3d-sheet { transition: none; } }
+
+/* 3 Lesefortschritt unter der Navigation */
+.readbar { display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 0 10px; }
+.readbar[hidden] { display: none; }
+.rb-segs { flex: 1; display: flex; gap: 4px; min-width: 0; }
+.rb-segs button { flex: 1; min-width: 6px; height: 7px; border: 0; padding: 0; border-radius: 4px; background: rgb(var(--bg-rgb) / .85); box-shadow: inset 0 0 0 1px var(--line); cursor: pointer; position: relative; overflow: hidden; }
+.rb-segs button i { position: absolute; inset: 0; width: var(--f, 0%); background: var(--cyan); border-radius: 4px; transition: width .3s ease; }
+.rb-segs button.read i { width: 100%; background: var(--magenta); }
+.rb-segs button.cur { height: 11px; }
+.rb-segs button:hover::before, .rb-segs button:focus-visible::before { content: attr(data-t); }
+.rb-count { flex: none; font: 700 0.75rem/1 var(--font-mono); color: var(--ink); background: rgb(var(--bg-rgb) / .9); padding: 4px 8px; border-radius: 999px; }
+.rb-tip { position: fixed; z-index: 30; pointer-events: none; background: var(--ink); color: var(--bg); font: 600 0.82rem/1.2 var(--font-body); padding: 6px 10px; border-radius: 8px; transform: translate(-50%, 8px); white-space: nowrap; }
+.rb-toast { position: fixed; z-index: 25; left: 50%; width: max-content; bottom: calc(env(safe-area-inset-bottom, 0px) + 22px); transform: translateX(-50%) translateY(140%); background: var(--ink); color: var(--bg); border-radius: 18px; padding: 14px 16px 14px 20px; display: flex; align-items: center; gap: 14px; box-shadow: 0 24px 50px -20px rgba(20,22,43,.7); transition: transform .6s cubic-bezier(.2,.8,.2,1); max-width: calc(100vw - 32px); }
+.rb-toast.show { transform: translateX(-50%) translateY(0); }
+.rb-toast b { font: 900 1.05rem/1.1 var(--font-display); text-transform: uppercase; }
+.rb-toast .btn { padding: 11px 16px; font-size: 0.9rem; flex: none; }
+.rb-toast .x { border: 0; background: transparent; color: var(--bg); font-size: 1.3rem; cursor: pointer; padding: 4px 6px; }
+@media (max-width: 560px) { .rb-toast { flex-wrap: wrap; } .rb-count { display: none; } }
+@media print { .readbar, .rb-toast { display: none !important; } }
+</style>
+<script>
+/* 1 Scroll-Geschichte im Ablauf */
+(() => {
+  const story = document.getElementById("story"); if (!story) return;
+  const vids = [...story.querySelectorAll(".sm-frame video")], steps = [...story.querySelectorAll(".st")];
+  const num = document.getElementById("sm-num"), fill = document.getElementById("sm-fill");
+  const RM = matchMedia("(prefers-reduced-motion: reduce)");
+  let cur = -1, near = false;
+  const load = (v) => { if (v.dataset.on) return; v.dataset.on = 1; const k = v.dataset.clip; v.innerHTML = `<source src="media/${k}.webm" type="video/webm"><source src="media/${k}.mp4" type="video/mp4">`; v.load(); };
+  const play = (v) => { if (RM.matches || !near) { v.pause(); return; } const p = v.play(); if (p) p.catch(() => {}); };
+  function show(i) {
+    if (i === cur) return; cur = i;
+    steps.forEach((s, j) => s.classList.toggle("on", j === i));
+    vids.forEach((v, j) => { v.classList.toggle("on", j === i); v.classList.toggle("past", j < i); if (j === i) { load(v); play(v); } else v.pause(); });
+    if (vids[i + 1] && near) load(vids[i + 1]);
+    num.textContent = String(i + 1).padStart(2, "0");
+    fill.style.width = ((i + 1) / steps.length * 100) + "%";
+  }
+  // aktiver Schritt: der, dessen Mitte der Bildschirmmitte am nächsten ist
+  let raf = 0;
+  const pick = () => { raf = 0; if (!story.getClientRects().length) return;
+    const mid = innerWidth > 820 ? innerHeight * 0.5 : 76 + innerHeight * 0.36 + 60; let best = 0, bd = 1e9;
+    steps.forEach((s, j) => { const r = s.getBoundingClientRect(); const d = innerWidth > 820 ? Math.abs((r.top + Math.min(r.height, innerHeight * 0.5) / 2) - mid) : (r.top <= mid && r.bottom > mid ? 0 : Math.abs(r.top - mid)); if (d < bd) { bd = d; best = j; } });
+    show(best); };
+  addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(pick); }, { passive: true });
+  new IntersectionObserver((es) => { near = es[0].isIntersecting; if (near) { vids.slice(0, 2).forEach(load); if (cur >= 0) play(vids[cur]); else pick(); } else vids.forEach((v) => v.pause()); }, { rootMargin: "300px" }).observe(story);
+  document.addEventListener("rolechange", () => { cur = -1; requestAnimationFrame(pick); });
+  show(0);
+})();
+
+/* 2 Kompetenzprofil zum Drehen und Antippen */
+(() => {
+  const root = document.getElementById("k3d"); if (!root) return;
+  const G = [
+    ["Sozialkompetenz", "var(--cyan)", [
+      ["Kommunikationsfähigkeit", "Sich verständlich ausdrücken, zuhören und auf andere eingehen.", "Vor allem in Gruppenaufgaben, zum Beispiel beim gemeinsamen Planen.", "In Gesprächen nachfragen und eigene Ideen kurz zusammenfassen."],
+      ["Kritik- und Konfliktfähigkeit", "Rückmeldungen annehmen und fair geben, bei Streit nach Lösungen suchen.", "In Gruppenaufgaben, wenn Meinungen auseinandergehen.", "Rückmeldungen als Ich-Botschaften formulieren und Kompromisse aushandeln."],
+      ["Teamfähigkeit", "Mit anderen ein gemeinsames Ziel verfolgen, Aufgaben teilen und alle einbeziehen.", "In Gruppenaufgaben wie dem Bau einer Murmelbahn.", "In Projekten Rollen verteilen und am Ende gemeinsam auswerten, was gut lief."]]],
+    ["Methodenkompetenz", "var(--magenta)", [
+      ["Planungsfähigkeit", "Vorgehen und Zeit einteilen und Schritte in eine sinnvolle Reihenfolge bringen.", "In Einzel- und Gruppenaufgaben, besonders zu Beginn einer Aufgabe.", "Vor einer Aufgabe kurz einen Plan mit Zwischenzielen notieren."],
+      ["Problemlösefähigkeit", "Probleme erkennen, Lösungswege ausprobieren und bei Bedarf anpassen.", "In Beobachtungsaufgaben und Simulationsspielen.", "Knobelaufgaben lösen und bei Fehlern fragen: Was probiere ich als Nächstes?"],
+      ["Präsentationsfähigkeit", "Ergebnisse verständlich und überzeugend vorstellen.", "In Aufgaben, bei denen ein Ergebnis vorgestellt wird.", "Vor anderen kurz etwas erklären, zum Beispiel ein Hobby in zwei Minuten."]]],
+    ["Personale Kompetenz", "#7a5cf0", [
+      ["Durchhaltevermögen", "Bei einer Sache bleiben, auch wenn sie schwierig oder langwierig wird.", "In längeren Einzelaufgaben und Tests.", "Kleine Ziele setzen und bewusst zu Ende bringen."],
+      ["Selbstständigkeit", "Ohne Anleitung anfangen, Entscheidungen treffen und sich selbst organisieren.", "Vor allem in Einzelaufgaben.", "Kleine Aufgaben ganz in eigener Verantwortung übernehmen, zu Hause oder in der Schule."],
+      ["Ordentlichkeit", "Arbeitsplatz und Material geordnet halten und sauber arbeiten.", "In Einzel- und Gruppenaufgaben mit Material.", "Vor und nach dem Arbeiten den Platz bewusst ordnen."],
+      ["Verantwortungsfähigkeit", "Für die eigene Aufgabe und für die Gruppe einstehen und Absprachen einhalten.", "In Gruppenaufgaben.", "Feste Aufgaben übernehmen, zum Beispiel im Klassendienst oder im Verein."],
+      ["Arbeitsgenauigkeit", "Sorgfältig arbeiten und Vorgaben genau beachten.", "In Einzelaufgaben mit genauen Vorgaben.", "Eigene Ergebnisse vor der Abgabe noch einmal prüfen."],
+      ["Arbeitstempo", "Aufgaben in angemessener Zeit erledigen.", "In Einzelaufgaben und Tests.", "Mit Zeitvorgaben üben und danach vergleichen."]]],
+    ["Kognitive Basiskompetenz", "#0f9d8a", [
+      ["Konzentrationsfähigkeit", "Aufmerksam bei einer Sache bleiben, ohne sich ablenken zu lassen.", "In den Tests am PC.", "Beim Lernen das Handy weglegen und in festen Zeitblöcken arbeiten."],
+      ["Räumliches Vorstellungsvermögen", "Sich Formen und Lagen im Raum vorstellen und gedanklich drehen.", "In den Tests am PC und beim Bauen.", "Bauen, Modelle, Puzzles und Karten lesen."],
+      ["Merkfähigkeit", "Informationen aufnehmen und später wieder abrufen.", "In den Tests am PC.", "Mit Eselsbrücken lernen und in Abständen wiederholen."],
+      ["Schlussfolgerndes Denken", "Regeln erkennen und logische Schlüsse ziehen.", "In den Tests am PC.", "Rätsel, Logikspiele und Zahlenreihen."]]],
+    ["Berufsfeldbezogen", "#f08a00", [
+      ["Handwerklich-technisch", "Geschick und Verständnis für Technik, Werkzeug und Material.", "Im Test zu berufsfeldbezogenen Kompetenzen.", "Basteln, reparieren, Technik-AG oder ein Praktikum im Handwerk."],
+      ["Untersuchend-forschend", "Neugierig sein, Dingen auf den Grund gehen, beobachten und experimentieren.", "Im Test zu berufsfeldbezogenen Kompetenzen.", "Experimente, Naturwissenschaften, Forschungs-AG."],
+      ["Kreativ-sprachlich", "Ideen entwickeln und mit Sprache, Bild oder Gestaltung ausdrücken.", "Im Test zu berufsfeldbezogenen Kompetenzen.", "Schreiben, gestalten, Schülerzeitung oder Theater."],
+      ["Pädagogisch-helfend", "Anderen helfen, etwas erklären und sich um Menschen kümmern.", "Im Test zu berufsfeldbezogenen Kompetenzen.", "Nachhilfe geben, Jugendarbeit, Patenschaften für Jüngere."],
+      ["Führend-verkaufend", "Andere überzeugen, Verantwortung übernehmen und verhandeln.", "Im Test zu berufsfeldbezogenen Kompetenzen.", "Schülervertretung, Schulkiosk oder ein Projekt leiten."],
+      ["Kaufmännisch-verwaltend", "Ordnen, rechnen, Abläufe organisieren und Daten verwalten.", "Im Test zu berufsfeldbezogenen Kompetenzen.", "Die Kasse in einem Projekt führen oder Tabellen anlegen."]]],
+    ["Interessen & mehr", "#55586e", [
+      ["Berufsinteressen", "Welche der 16 Berufsgruppen besonders interessieren.", "Im Fragebogen zu Berufs- und Studieninteressen.", "Interessen in Praktika, am Praxistag oder bei BO-Tagen ausprobieren."],
+      ["IT-Fähigkeit", "Sicherer Umgang mit Computer und digitalen Werkzeugen.", "Im IT-Test am PC.", "Digitale Projekte umsetzen, Tabellen und Präsentationen erstellen."],
+      ["Zukunftswege (Sek I)", "Vorstellungen zu Abschluss und Weg nach der Schule.", "Im Fragebogen.", "Mit Eltern und Lehrkräften über mögliche Wege sprechen."],
+      ["Emotionale Kompetenz (Sek II)", "Eigene Gefühle und die anderer wahrnehmen und damit umgehen.", "In Tests und Fragebogen der Sekundarstufe II.", "Nach schwierigen Situationen in Ruhe überlegen, was in einem vorging."],
+      ["Passung Ausbildung / Studium (Sek II)", "Ob eher eine Ausbildung oder ein Studium zu den Interessen passt.", "Im Fragebogen der Sekundarstufe II.", "Infotage von Hochschulen und Betrieben besuchen, Praktika machen."]]]
+  ];
+  const sheet = document.getElementById("k3d-sheet"), groups = document.getElementById("k3d-groups"), detail = document.getElementById("k3d-detail");
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  groups.innerHTML = G.map(([g, c, items], gi) => `<div class="kg" style="--kc:${c}"><h4><i></i>${esc(g)}</h4>${items.map((it, ii) => `<button type="button" aria-pressed="false" data-g="${gi}" data-i="${ii}" style="--w:${40 + ((gi * 7 + ii * 13) % 5) * 12}%">${esc(it[0])}</button>`).join("")}</div>`).join("");
+  const role = () => document.body.dataset.role || "s";
+  function empty() {
+    const s = role() === "s";
+    detail.innerHTML = `<div class="kd-empty"><b>${s ? "Tipp auf eine Fähigkeit" : "Kompetenz auswählen"}</b><span>${s ? "Dann siehst du, was sie bedeutet, wo sie beobachtet wird und wie du sie üben kannst." : "Dann sehen Sie, was sie bedeutet, wo sie beobachtet wird und wie sie sich fördern lässt."}</span></div>`;
+  }
+  function open(gi, ii) {
+    const [g, c, items] = G[gi], [name, what, where, tip] = items[ii], s = role() === "s";
+    groups.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.g === gi && +b.dataset.i === ii)));
+    detail.innerHTML = `<div class="kd" style="--kc:${c}"><small>${esc(g)}</small><h3>${esc(name)}</h3><dl>
+      <div><dt>Was heißt das?</dt><dd>${esc(what)}</dd></div>
+      <div><dt>Wo zeigt es sich bei Profil AC?</dt><dd>${esc(where)}</dd></div>
+      <div><dt>${s ? "So kannst du es üben" : "Ideen zum Fördern"}</dt><dd>${esc(tip)}</dd></div></dl></div>`;
+    // das Blatt dreht sich leicht zur Erklärung hin
+    if (!RM.matches) { tilt.x = innerWidth > 820 ? -10 : 0; tilt.y = 4; applyTilt(); }
+    if (innerWidth <= 820) detail.scrollIntoView({ behavior: RM.matches ? "auto" : "smooth", block: "nearest" });
+  }
+  groups.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b || moved) return; open(+b.dataset.g, +b.dataset.i); });
+  // Drehen: Maus folgt leicht, Ziehen dreht stärker, Loslassen federt zurück
+  const RM = matchMedia("(prefers-reduced-motion: reduce)");
+  const tilt = { x: 0, y: 0 };
+  const applyTilt = () => { sheet.style.transform = `rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`; };
+  let drag = null, moved = false;
+  sheet.addEventListener("pointermove", (e) => {
+    if (RM.matches) return;
+    if (drag) {
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (Math.abs(dx) + Math.abs(dy) > 6) moved = true;
+      tilt.x = Math.max(-35, Math.min(35, drag.tx + dx * 0.25)); tilt.y = Math.max(-25, Math.min(25, drag.ty - dy * 0.2)); applyTilt();
+    } else if (e.pointerType === "mouse") {
+      const r = sheet.getBoundingClientRect();
+      tilt.x = ((e.clientX - r.left) / r.width - 0.5) * 10; tilt.y = -((e.clientY - r.top) / r.height - 0.5) * 8; applyTilt();
+    }
+  });
+  sheet.addEventListener("pointerdown", (e) => { if (RM.matches || e.pointerType !== "mouse") return; drag = { x: e.clientX, y: e.clientY, tx: tilt.x, ty: tilt.y }; moved = false; sheet.classList.add("drag"); });
+  const end = () => { if (!drag) return; drag = null; sheet.classList.remove("drag"); setTimeout(() => { moved = false; }, 0); tilt.x *= 0.3; tilt.y *= 0.3; applyTilt(); };
+  addEventListener("pointerup", end); addEventListener("pointercancel", end);
+  sheet.addEventListener("pointerleave", () => { if (!drag) { tilt.x = 0; tilt.y = 0; applyTilt(); } });
+  document.addEventListener("rolechange", () => { groups.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", "false")); empty(); });
+  empty();
+})();
+
+/* 3 Lesefortschritt: welche Abschnitte schon gelesen sind */
+(() => {
+  const bar = document.getElementById("readbar"), segs = document.getElementById("rb-segs"), count = document.getElementById("rb-count");
+  const T = {
+    de: ["Abschnitt", "gelesen", "Alles gesehen!", "Jetzt das Quiz", "Zum Quiz", "Schließen", "von"],
+    en: ["Section", "read", "You have seen it all!", "Now try the quiz", "To the quiz", "Close", "of"],
+    uk: ["Розділ", "прочитано", "Ви все переглянули!", "Тепер вікторина", "До вікторини", "Закрити", "з"]
+  };
+  let list = [], read = new Set(), curIdx = -1, dwell = 0, toastShown = false, key = "";
+  const lang = () => { const r = document.body.dataset.role; return r === "en" || r === "uk" ? r : "de"; };
+  const store = { get(k) { try { return JSON.parse(localStorage.getItem(k) || "[]"); } catch (e) { return []; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+  const title = (sec) => { const h = [...sec.querySelectorAll("h2, h1")].find((x) => x.getClientRects().length); return h ? h.textContent.replace(/\s+/g, " ").trim() : sec.id; };
+  function build() {
+    const r = document.body.dataset.role;
+    if (!r || r === "m") { bar.hidden = true; return; }
+    key = "pac-read-" + r; read = new Set(store.get(key));
+    list = [...document.querySelectorAll(".site main > section[id]")].filter((s) => s.getClientRects().length && !/^(feedback|quellen)$/.test(s.id) && !s.classList.contains("cine"))
+      .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+    segs.innerHTML = list.map((s, i) => `<button type="button" data-i="${i}" data-t="${title(s).replace(/"/g, "&quot;")}"><i></i></button>`).join("");
+    bar.hidden = false; curIdx = -1; paint();
+  }
+  function paint() {
+    const L = T[lang()];
+    [...segs.children].forEach((b, i) => { const s = list[i], done = read.has(s.id); b.classList.toggle("read", done); b.classList.toggle("cur", i === curIdx); b.setAttribute("aria-label", `${L[0]} ${i + 1}: ${b.dataset.t}${done ? ", " + L[1] : ""}`); });
+    count.textContent = `${read.size ? list.filter((s) => read.has(s.id)).length : 0} ${L[6]} ${list.length}`;
+  }
+  function tick() {
+    if (bar.hidden || !list.length) return;
+    const vh = innerHeight; let idx = -1;
+    list.forEach((s, i) => { const r = s.getBoundingClientRect(); if (r.top < vh * 0.55 && r.bottom > vh * 0.3) idx = i; });
+    if (idx !== curIdx) { curIdx = idx; dwell = performance.now(); }
+    list.forEach((s, i) => {
+      const r = s.getBoundingClientRect(), f = Math.max(0, Math.min(1, (vh * 0.7 - r.top) / Math.max(1, r.height)));
+      segs.children[i].querySelector("i").style.setProperty("--f", (f * 100).toFixed(1) + "%");
+      segs.children[i].style.setProperty("--f", (f * 100).toFixed(1) + "%");
+      // gelesen: bis zum Ende gescrollt, oder lange genug dort geblieben
+      if (!read.has(s.id) && (r.bottom < vh * 0.75 && r.top < 0 || (i === curIdx && performance.now() - dwell > 6000))) { read.add(s.id); store.set(key, [...read]); maybeToast(); }
+    });
+    paint();
+  }
+  function maybeToast() {
+    if (toastShown) return;
+    const quiz = list.find((s) => s.id === "quiz"), rest = list.filter((s) => s.id !== "quiz");
+    if (!rest.length || !rest.every((s) => read.has(s.id))) return;
+    toastShown = true; const L = T[lang()];
+    const t = document.createElement("div"); t.className = "rb-toast"; t.setAttribute("role", "status");
+    t.innerHTML = quiz && !read.has("quiz") ? `<b>${L[2]} ${L[3]}</b><a class="btn" href="#quiz">${L[4]}</a><button type="button" class="x" aria-label="${L[5]}">×</button>` : `<b>${L[2]}</b><button type="button" class="x" aria-label="${L[5]}">×</button>`;
+    document.body.appendChild(t); requestAnimationFrame(() => t.classList.add("show"));
+    const close = () => { t.classList.remove("show"); setTimeout(() => t.remove(), 700); };
+    t.addEventListener("click", (e) => { if (e.target.closest(".x, a")) close(); });
+    setTimeout(close, 12000);
+  }
+  // Tippen auf einen Abschnitt springt dorthin, Hover zeigt den Titel
+  const tip = document.createElement("div"); tip.className = "rb-tip"; tip.hidden = true; document.body.appendChild(tip);
+  segs.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; list[+b.dataset.i].scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); });
+  segs.addEventListener("pointerover", (e) => { const b = e.target.closest("button"); if (!b) return; const r = b.getBoundingClientRect(); tip.textContent = b.dataset.t; tip.style.left = Math.max(80, Math.min(innerWidth - 80, r.left + r.width / 2)) + "px"; tip.style.top = r.bottom + "px"; tip.hidden = false; });
+  segs.addEventListener("pointerout", () => { tip.hidden = true; });
+  let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); }, { passive: true });
+  setInterval(tick, 1500);
+  document.addEventListener("rolechange", () => { toastShown = false; requestAnimationFrame(() => { build(); tick(); }); });
+  build(); tick();
+})();
+</script>
