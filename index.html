@@ -35,7 +35,7 @@ p { margin: 0; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--magenta); outline-offset: 3px; }
 .gutter { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
-.kicker { font: 700 0.78rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--magenta); display: inline-flex; gap: 10px; align-items: center; }
+.kicker { font: 700 0.9rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--magenta); display: inline-flex; gap: 10px; align-items: center; }
 .kicker::before { content: "»"; font: 900 1.3rem/0.6 var(--font-display); }
 
 /* Bühne: festes 3D-Foto */
@@ -55,7 +55,7 @@ main { position: relative; z-index: 1; }
 .hero-title h1 { font-size: clamp(2.6rem, 8vw, 6.4rem); }
 .hero-title h1 span { color: var(--cyan); display: block; }
 .hero-title h1 b { color: #ff4fa8; font-weight: 900; }
-.claim { font: 800 clamp(0.8rem, 2.2vw, 1.05rem)/1.3 var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; }
+.claim { font: 800 clamp(0.95rem, 2.2vw, 1.3rem)/1.3 var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; }
 .claim span { white-space: nowrap; }
 .scrollhint { margin-top: 22px; font: 700 0.75rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: .1em; display: inline-flex; align-items: center; gap: 10px; }
 .scrollhint i { width: 2px; height: 34px; background: currentColor; display: inline-block; transform-origin: top; animation: hint 1.8s ease-in-out infinite; }
@@ -71,17 +71,17 @@ main { position: relative; z-index: 1; }
 .sheet h2 { font-size: clamp(1.4rem, 4vw, 2.2rem); color: var(--magenta); }
 .badge { font: 700 0.7rem/1 var(--font-mono); text-transform: uppercase; padding: 6px 9px; border-radius: 6px; background: var(--bg); color: var(--soft); }
 .prow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 6px 14px; align-items: center; padding-block: 6px; border-top: 1px solid var(--line); }
-.prow b { font-weight: 500; font-size: 0.95rem; }
+.prow b { font-weight: 500; font-size: 1.05rem; }
 .bars { display: grid; gap: 3px; }
 .bar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; height: 14px; }
 .bar i { background: var(--bg); border-radius: 2px; }
 .bar.b i.on { background: var(--cyan); }
 .bar.s i.on { background: var(--magenta); }
-.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--soft); }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.98rem; color: var(--soft); }
 .legend span::before { content: ""; display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
 .legend .b::before { background: var(--cyan); }
 .legend .s::before { background: var(--magenta); }
-.sheet-note { font-size: 0.9rem; color: var(--soft); }
+.sheet-note { font-size: 1.02rem; color: var(--soft); }
 
 /* 3 Dreischritt */
 .steps { height: 480vh; position: relative; background: var(--bg); }
@@ -93,7 +93,7 @@ main { position: relative; z-index: 1; }
 .panel h2 { font-size: clamp(2.6rem, 8vw, 6rem); }
 .panel:nth-child(2) h2 { color: var(--magenta); }
 .panel:nth-child(3) h2 { color: var(--cyan-deep); }
-.panel p { max-width: 42ch; font-size: 1.1rem; color: var(--soft); }
+.panel p { max-width: 36ch; font-size: clamp(1.2rem, 1.7vw, 1.65rem); line-height: 1.45; color: var(--soft); }
 .media { position: relative; height: min(68vh, 640px); border-radius: 22px; overflow: hidden; background: #e9e7e2; }
 .media .pic { position: absolute; inset: -12%; background-image: url("hero.jpg"); background-repeat: no-repeat; will-change: transform; }
 .media video, .media canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -122,7 +122,7 @@ main { position: relative; z-index: 1; }
   .media { height: 38vh; order: -1; }
   .panel .num { font-size: 4.5rem; }
   .panel h2 { font-size: clamp(1.9rem, 9vw, 2.6rem); overflow-wrap: break-word; }
-  .panel p { font-size: 1rem; }
+  .panel p { font-size: 1.12rem; }
   .prow { grid-template-columns: minmax(0, 1fr); gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
