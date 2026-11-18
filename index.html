@@ -64,7 +64,8 @@ main { position: relative; z-index: 1; }
 .caption p { font: 900 clamp(1.6rem, 5vw, 3.4rem)/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.04em; }
 
 /* 2 Kompetenzprofil */
-.profile { height: 260vh; position: relative; background: transparent; }
+.profile { height: 230vh; margin-top: -110vh; position: relative; background: transparent; }
+.sheet { opacity: 0; }
 .profile-inner { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; perspective: 1400px; }
 .sheet { width: min(760px, 100%); background: var(--paper); color: var(--ink); border-radius: 14px; padding: clamp(18px, 4vw, 36px); box-shadow: 0 30px 80px -30px rgba(20,22,43,.45); transform-origin: 50% 70%; display: flex; flex-direction: column; gap: 14px; will-change: transform; }
 .sheet-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
@@ -127,6 +128,8 @@ main { position: relative; z-index: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero, .profile, .steps, .finale { height: auto; }
+  .profile { margin-top: 0; }
+  .sheet { opacity: 1; }
   .hero-inner, .finale-inner { position: relative; height: 100vh; }
   .profile-inner { position: relative; height: auto; padding-block: 12vh; }
   .steps-inner { position: relative; height: auto; overflow: visible; }
@@ -361,16 +364,16 @@ function story() {
     cap2.style.opacity = clamp01((p - 0.62) / 0.08) * (1 - clamp01((p - 0.82) / 0.06));
     cap2.style.transform = `translateY(${(0.72 - p) * 90}px)`;
     // c) das Blatt wird zur weißen Fläche des Profils
-    white.style.opacity = clamp01((p - 0.88) / 0.1);
+    white.style.opacity = clamp01((p - 0.86) / 0.1);
   } });
   // 2 Das Blatt hebt sich vom Tisch und die Balken wachsen
   const sheet = $("sheet");
-  ScrollTrigger.create({ trigger: "#profile", start: "top bottom", end: "bottom bottom", scrub: true, onUpdate: (st) => {
+  ScrollTrigger.create({ trigger: "#profile", start: "top top", end: "bottom bottom", scrub: true, onUpdate: (st) => {
     const p = st.progress;
-    const lift = ease(clamp01((p - 0.18) / 0.32));
+    const lift = ease(clamp01(p / 0.35));
     sheet.style.transform = `translateY(${mix(40, 0, lift)}vh) rotateX(${mix(68, 0, lift)}deg) scale(${mix(0.78, 1, lift)})`;
-    sheet.style.opacity = clamp01((p - 0.12) / 0.12);
-    setBars(clamp01((p - 0.5) / 0.42));
+    sheet.style.opacity = clamp01(p / 0.1);
+    setBars(clamp01((p - 0.35) / 0.5));
   } });
   // 3 Dreischritt: waagerechte Fahrt durch drei Kapitel
   const track = $("track"), pics = [...document.querySelectorAll(".media .pic")], dots = [...$("prog").children];
