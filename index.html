@@ -448,6 +448,29 @@ function mseqDraw(m, i, force) {
 }
 function mseqShow(key, t) { const m = MSEQ.find(q => q.dir === key); if (!m) return; mseqLoad(m); m.want = Math.round(t * (m.n - 1)); mseqDraw(m, m.want); }
 addEventListener("resize", () => MSEQ.forEach(m => mseqDraw(m, m.want, true)));
+// Ruhepause: sichtbare Clips laufen in Endlosschleife (vor und zurück), sobald nicht gescrollt wird
+let lastScroll = performance.now(), idleOn = false, idleT = 0;
+addEventListener("scroll", () => {
+  lastScroll = performance.now();
+  if (idleOn) { idleOn = false; MSEQ.forEach(m => { if (m.idle != null) { m.idle = null; mseqDraw(m, m.want, true); } }); }
+}, { passive: true });
+function idleTick(t) {
+  if (!calm && t - lastScroll > 650 && t - idleT > 1000 / 24) {
+    idleT = t;
+    for (const m of MSEQ) {
+      if (!m.loaded) continue;
+      const r = m.cv.getBoundingClientRect();
+      if (r.width < 2 || r.bottom < 0 || r.top > innerHeight || r.right < 0 || r.left > innerWidth) continue;
+      if (parseFloat(getComputedStyle(m.cv).opacity) < 0.05) continue;
+      if (m.idle == null) { m.idle = m.want; m.step = m.want >= m.n - 1 ? -1 : 1; }
+      m.idle += m.step;
+      if (m.idle >= m.n - 1) { m.idle = m.n - 1; m.step = -1; } else if (m.idle <= 0) { m.idle = 0; m.step = 1; }
+      idleOn = true; mseqDraw(m, m.idle);
+    }
+  }
+  requestAnimationFrame(idleTick);
+}
+requestAnimationFrame(idleTick);
 // ohne Scroll-Animation (reduzierte Bewegung): ein ruhiges Standbild aus der Mitte des Clips zeigen
 if (calm) MSEQ.forEach(m => { m.want = Math.round(m.n * 0.6); mseqLoad(m); });
 // früh vorladen, damit das Kapitel sofort bereit ist
