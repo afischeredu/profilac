@@ -1094,7 +1094,7 @@ body[data-role="l"] main > section { order: var(--l, 50); }
       <div class="pills"><span>Stärkenorientierung</span><span>Wertschätzung</span><span>Augenhöhe</span><span>Selbstverantwortung der Schüler*innen</span></div>
     </div>
     <div class="tool-teaser card">
-      <div><span class="kicker">Werkzeug</span><h3>Eigenen Gesprächsleitfaden zusammenstellen</h3><p class="soft">Formulierungen je Gesprächsphase auswählen, eigene ergänzen und am Ende kopieren. Öffnet sich in einem eigenen Fenster.</p></div>
+      <div><span class="kicker">Werkzeug</span><h3>Eigenen Gesprächsleitfaden zusammenstellen</h3><p class="soft">Acht Gesprächsphasen mit über 45 stärkenorientierten Formulierungen. Auswählen, eigene ergänzen und als PDF ausdrucken. Öffnet sich in einem eigenen Fenster.</p></div>
       <button class="btn" type="button" id="lf-open" aria-haspopup="dialog">Werkzeug öffnen</button>
     </div>
     <div class="tool-overlay" id="lf-tool" role="dialog" aria-modal="true" aria-labelledby="lf-tool-h" hidden>
@@ -1113,7 +1113,8 @@ body[data-role="l"] main > section { order: var(--l, 50); }
             <h3>Mein Leitfaden</h3>
             <ol class="lf-guide" id="lf-guide"></ol>
             <div class="row">
-              <button class="btn" id="lf-copy" type="button">Leitfaden kopieren</button>
+              <button class="btn" id="lf-pdf" type="button">Als PDF zum Ausdrucken</button>
+          <button class="btn alt" id="lf-copy" type="button">Kopieren</button>
               <button class="btn alt" id="lf-reset" type="button">Leeren</button>
             </div>
             <p class="note" id="lf-msg">Wird nur in Ihrem Browser gespeichert.</p>
@@ -1880,30 +1881,83 @@ window.addEventListener("hashchange", fromHash);
 
   /* Lehrkräfte: Gesprächsleitfaden fürs Rückmeldegespräch */
   const LF = [
-    ["Begrüßung", ["Schön, dass du da bist. Wie geht es dir heute?", "Wie hast du die Tage mit Profil AC erlebt?", "Was ist dir von den Aufgaben besonders in Erinnerung geblieben?"]],
-    ["Anlass und Rahmen", ["Heute schauen wir uns gemeinsam dein Kompetenzprofil an.", "Es geht um deine Stärken, nicht um Noten.", "Am Ende überlegen wir zusammen, wie es für dich weitergeht."]],
-    ["Ergebnisse", ["Was glaubst du, worin du besonders stark warst?", "Hier stehen deine Selbsteinschätzung und unsere Beobachtung nebeneinander. Was fällt dir auf?", "Hier hast du dich strenger eingeschätzt als wir. Woran könnte das liegen?", "Welche Aufgabe hat dir am meisten Spaß gemacht, und warum?", "Was hat dich an deinem Ergebnis überrascht?"]],
-    ["Nächste Schritte", ["Welche Stärke möchtest du als Nächstes nutzen, zum Beispiel in einem Praktikum?", "An welchem Entwicklungsfeld möchtest du arbeiten?", "Was brauchst du dafür, und wer kann dich unterstützen?", "Wir halten das in deinem Entwicklungsplan fest.", "Wann sprechen wir wieder darüber?"]],
-    ["Verabschiedung", ["Was nimmst du aus unserem Gespräch mit?", "Danke für das offene Gespräch.", "Du kannst jederzeit auf mich zukommen."]]
+    ["Ankommen", "Eine entspannte Atmosphäre schaffen. Die Schülerin oder der Schüler soll sich wohlfühlen.", [
+      "Schön, dass du da bist. Wie geht es dir heute?",
+      "Wie hast du die Tage mit Profil AC erlebt?",
+      "Was ist dir von den Aufgaben besonders in Erinnerung geblieben?",
+      "Worauf bist du gespannt, wenn du an dein Ergebnis denkst?",
+      "Gab es einen Moment, in dem du stolz auf dich warst?"]],
+    ["Rahmen klären", "Ablauf, Dauer und Ziel transparent machen. Rollen klären: Es geht um Begleitung, nicht um Bewertung.", [
+      "Heute schauen wir uns gemeinsam dein Kompetenzprofil an.",
+      "Es geht um deine Stärken, nicht um Noten.",
+      "Wir haben etwa eine halbe Stunde Zeit. Du kannst jederzeit Fragen stellen.",
+      "Deine Meinung ist genauso wichtig wie unsere Beobachtung.",
+      "Am Ende überlegen wir zusammen, wie es für dich weitergeht."]],
+    ["Stärken entdecken", "Mit dem Positiven beginnen und konkrete Situationen benennen. Stärken bewusst machen und würdigen.", [
+      "Was glaubst du, worin du besonders stark warst?",
+      "Hier liegst du über der Erwartung deiner Klassenstufe. Herzlichen Glückwunsch!",
+      "Bei der Gruppenaufgabe haben wir beobachtet, wie du … Das ist eine echte Stärke.",
+      "Woran merkst du im Alltag, dass du das gut kannst?",
+      "Wo hast du diese Stärke schon einmal gebraucht, zum Beispiel in der Freizeit oder im Verein?",
+      "Welche Stärke würden deine Freunde oder deine Familie bei dir zuerst nennen?",
+      "Welche Aufgabe hat dir am meisten Spaß gemacht, und warum?",
+      "Was davon möchtest du später in einem Beruf gern öfter machen?"]],
+    ["Ergebnisse besprechen", "Selbst- und Fremdeinschätzung nebeneinanderlegen. Unterschiede neugierig erkunden, nicht bewerten.", [
+      "Hier stehen deine Selbsteinschätzung und unsere Beobachtung nebeneinander. Was fällt dir auf?",
+      "Hier hast du dich strenger eingeschätzt als wir. Woran könnte das liegen?",
+      "Hier hast du dich höher eingeschätzt. Erzähl mal, wie du die Aufgabe erlebt hast.",
+      "Was hat dich an deinem Ergebnis überrascht?",
+      "Welches Ergebnis passt besonders gut zu dir?",
+      "Gibt es etwas, das du anders siehst? Das ist völlig in Ordnung."]],
+    ["Entwicklungsfelder", "Entwicklungsfelder als Chancen formulieren, an vorhandene Stärken anknüpfen und auf ein bis zwei Felder beschränken.", [
+      "Hier ist noch Luft nach oben. Was meinst du, woran das liegt?",
+      "Welche deiner Stärken kann dir helfen, hier besser zu werden?",
+      "In welcher Situation ist dir das schon einmal gut gelungen?",
+      "Was wäre ein kleiner erster Schritt?",
+      "An welchem Feld möchtest du am liebsten arbeiten?",
+      "Das ist kein Fehler, sondern ein Feld, in dem du noch wachsen kannst."]],
+    ["Ziele und nächste Schritte", "Gemeinsam ein konkretes, erreichbares Ziel vereinbaren und im Entwicklungsplan festhalten.", [
+      "Welche Stärke möchtest du als Nächstes nutzen, zum Beispiel in einem Praktikum?",
+      "Welches Ziel nimmst du dir bis zum nächsten Gespräch vor?",
+      "Woran merkst du, dass du dein Ziel erreicht hast?",
+      "Welches Fördermodul könnte dir dabei helfen?",
+      "Welche Berufsfelder passen zu deinen Stärken und Interessen?",
+      "Was brauchst du dafür, und wer kann dich unterstützen?",
+      "Wir halten das in deinem Entwicklungsplan fest.",
+      "Wann sprechen wir wieder darüber?"]],
+    ["Eltern einbeziehen", "Optional, wenn Eltern dabei sind: ihre Sicht einholen und sie als Unterstützer gewinnen.", [
+      "Was erleben Sie zu Hause als Stärke Ihres Kindes?",
+      "Erkennen Sie Ihr Kind in diesem Profil wieder?",
+      "Wie können Sie Ihr Kind bei den nächsten Schritten unterstützen?",
+      "Gibt es Kontakte, zum Beispiel für ein Praktikum, die hilfreich sein könnten?"]],
+    ["Abschluss", "Positiv abschließen, Wertschätzung zeigen und das Wichtigste zusammenfassen lassen.", [
+      "Was nimmst du aus unserem Gespräch mit?",
+      "Was war dir heute besonders wichtig?",
+      "Ich fand es toll zu sehen, wie gut du … kannst.",
+      "Danke für das offene Gespräch.",
+      "Du kannst jederzeit auf mich zukommen."]]
   ];
-  const lfState = store.get("pac-leitfaden", { phase: 0, picked: [], own: [[], [], [], [], []] });
+  const lfState = store.get("pac-leitfaden2", { phase: 0, picked: [], own: LF.map(() => []) });
   if (!Array.isArray(lfState.own) || lfState.own.length !== LF.length) lfState.own = LF.map(() => []);
-  const lfSave = () => store.set("pac-leitfaden", lfState);
+  const lfSave = () => store.set("pac-leitfaden2", lfState);
   const keyOf = (p, t) => p + "|" + t;
+  // ausgewählte Sätze je Phase, in der Reihenfolge der Vorschläge
+  const lfByPhase = () => LF.map(([n, , list], i) => { const all = list.concat(lfState.own[i]); return [n, all.filter(t => lfState.picked.includes(keyOf(i, t)))]; }).filter(x => x[1].length);
   const lfPhases = document.getElementById("lf-phases"), lfList = document.getElementById("lf-list"), lfGuide = document.getElementById("lf-guide");
   const drawLf = () => {
-    lfPhases.innerHTML = LF.map(([n], i) => `<button type="button" role="tab" id="lf-p${i}" aria-selected="${i === lfState.phase}"><small>${i + 1}</small>${n}</button>`).join("");
-    const p = lfState.phase, items = LF[p][1].concat(lfState.own[p]);
-    lfList.innerHTML = items.map((t, j) => {
+    lfPhases.innerHTML = LF.map(([n], i) => { const c = lfState.picked.filter(k => k.startsWith(i + "|")).length; return `<button type="button" role="tab" id="lf-p${i}" aria-selected="${i === lfState.phase}"><small>${i + 1}</small>${n}${c ? `<em>${c}</em>` : ""}</button>`; }).join("");
+    const p = lfState.phase, items = LF[p][2].concat(lfState.own[p]);
+    lfList.innerHTML = `<p class="lf-tip"><b>Worauf es ankommt:</b> ${esc2(LF[p][1])}</p><button type="button" class="lf-all" data-all="1">Alle Vorschläge dieser Phase übernehmen</button>` + items.map((t, j) => {
       const on = lfState.picked.includes(keyOf(p, t));
       return `<button type="button" class="lf-item" id="lf-i${p}-${j}" aria-pressed="${on}" data-t="${esc2(t)}"><span>${esc2(t)}</span><i>${on ? "Übernommen" : "+ Übernehmen"}</i></button>`;
     }).join("");
-    const byPhase = LF.map(([n], i) => [n, lfState.picked.filter(k => k.startsWith(i + "|")).map(k => k.slice(k.indexOf("|") + 1))]).filter(x => x[1].length);
+    const byPhase = lfByPhase();
     lfGuide.innerHTML = byPhase.length ? byPhase.map(([n, ts]) => `<li><b>${esc2(n)}</b><ul>${ts.map(t => `<li>${esc2(t)}</li>`).join("")}</ul></li>`).join("") : `<li class="empty">Noch leer. Übernehmen Sie links Formulierungen.</li>`;
   };
   lfPhases.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; lfState.phase = Number(b.id.slice(4)); lfSave(); drawLf(); document.getElementById(b.id)?.focus({ preventScroll: true }); });
   lfList.addEventListener("click", (e) => {
     const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.all) { LF[lfState.phase][2].concat(lfState.own[lfState.phase]).forEach(t => { const k = keyOf(lfState.phase, t); if (!lfState.picked.includes(k)) lfState.picked.push(k); }); lfSave(); drawLf(); return; }
     const k = keyOf(lfState.phase, b.dataset.t), at = lfState.picked.indexOf(k);
     if (at >= 0) lfState.picked.splice(at, 1); else lfState.picked.push(k);
     lfSave(); const id = b.id; drawLf(); document.getElementById(id)?.focus({ preventScroll: true });
@@ -1913,19 +1967,72 @@ window.addEventListener("hashchange", fromHash);
     const inp = document.getElementById("lf-input"), t = inp.value.trim();
     if (!t) return;
     const p = lfState.phase;
-    if (!LF[p][1].includes(t) && !lfState.own[p].includes(t)) lfState.own[p].push(t);
+    if (!LF[p][2].includes(t) && !lfState.own[p].includes(t)) lfState.own[p].push(t);
     if (!lfState.picked.includes(keyOf(p, t))) lfState.picked.push(keyOf(p, t));
     inp.value = ""; lfSave(); drawLf();
   });
   const lfMsg = document.getElementById("lf-msg");
   document.getElementById("lf-copy").addEventListener("click", () => {
-    const text = "Rückmeldegespräch Profil AC – Leitfaden\n\n" + LF.map(([n], i) => {
-      const ts = lfState.picked.filter(k => k.startsWith(i + "|")).map(k => "  – " + k.slice(k.indexOf("|") + 1));
-      return ts.length ? `${i + 1}. ${n}\n${ts.join("\n")}` : "";
-    }).filter(Boolean).join("\n\n");
+    const text = "Rückmeldegespräch Profil AC – Leitfaden\n\n" + lfByPhase().map(([n, ts], i) => `${i + 1}. ${n}\n${ts.map(t => "  – " + t).join("\n")}`).join("\n\n");
     const fallback = () => { const r = document.createRange(); r.selectNodeContents(lfGuide); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); lfMsg.textContent = "Kopieren ging nicht automatisch. Der Leitfaden ist markiert: Strg+C bzw. Cmd+C drücken."; };
     try { navigator.clipboard.writeText(text).then(() => { lfMsg.textContent = "Kopiert. Sie können den Leitfaden jetzt einfügen."; }, fallback); } catch (err) { fallback(); }
   });
+  // Leitfaden als PDF zum Ausdrucken
+  const loadPdfLib = () => window.jspdf ? Promise.resolve(window.jspdf) : new Promise((ok, no) => { const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"; sc.onload = () => ok(window.jspdf); sc.onerror = no; document.head.appendChild(sc); });
+  const pdfText = (t) => String(t).replace(/[„“”]/g, '"').replace(/[‚‘’]/g, "'").replace(/…/g, "...").replace(/\u00ad/g, "");
+  async function lfPdf() {
+    const groups = lfByPhase();
+    if (!groups.length) { lfMsg.textContent = "Bitte zuerst Formulierungen übernehmen."; return; }
+    lfMsg.textContent = "PDF wird erstellt …";
+    let lib; try { lib = await loadPdfLib(); } catch (e) { lfMsg.textContent = "Das PDF-Werkzeug konnte nicht geladen werden. Bitte später erneut versuchen."; return; }
+    const doc = new lib.jsPDF({ unit: "mm", format: "a4" }), W = 210, L = 18, R = 192, maxW = R - L - 8;
+    let y = 0;
+    const page = () => { doc.addPage(); y = 20; };
+    const need = (h) => { if (y + h > 280) page(); };
+    // Kopf
+    doc.setFillColor(226, 0, 122); doc.rect(0, 0, W, 30, "F");
+    doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.text("Rückmeldegespräch Profil AC", L, 14);
+    doc.setFont("helvetica", "normal"); doc.setFontSize(11); doc.text("Gesprächsleitfaden, stärkenorientiert", L, 22);
+    y = 42; doc.setTextColor(20, 22, 43); doc.setFontSize(10);
+    [["Schüler*in", L], ["Datum", 120]].forEach(([t, x]) => { doc.text(t + ":", x, y); doc.setDrawColor(180, 176, 168); doc.line(x + (t === "Datum" ? 14 : 22), y + 1, x === L ? 112 : R, y + 1); });
+    y += 9; [["Lehrkraft", L], ["Eltern dabei", 120]].forEach(([t, x]) => { doc.text(t + ":", x, y); doc.line(x + (t === "Lehrkraft" ? 20 : 25), y + 1, x === L ? 112 : R, y + 1); });
+    y += 10;
+    doc.setFillColor(239, 231, 218); doc.roundedRect(L, y, R - L, 14, 2, 2, "F");
+    doc.setFont("helvetica", "bold"); doc.setFontSize(9.5); doc.text("Grundhaltung:", L + 4, y + 6);
+    doc.setFont("helvetica", "normal"); doc.text("Stärkenorientierung · Wertschätzung · Augenhöhe · Selbstverantwortung der Schüler*innen", L + 4, y + 11);
+    y += 22;
+    groups.forEach(([n, ts], gi) => {
+      const ph = LF.find(x => x[0] === n), tip = ph ? pdfText(ph[1]) : "";
+      need(20);
+      doc.setFillColor(0, 177, 230); doc.circle(L + 3.5, y - 1.3, 3.5, "F");
+      doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.text(String(gi + 1), L + 3.5, y, { align: "center" });
+      doc.setTextColor(20, 22, 43); doc.setFontSize(13); doc.text(pdfText(n), L + 10, y);
+      y += 5.5;
+      if (tip) { doc.setFont("helvetica", "italic"); doc.setFontSize(9); doc.setTextColor(85, 88, 110); const tl = doc.splitTextToSize(tip, maxW); need(tl.length * 4.2); doc.text(tl, L + 10, y); y += tl.length * 4.2 + 1.5; }
+      doc.setFont("helvetica", "normal"); doc.setFontSize(10.5); doc.setTextColor(20, 22, 43);
+      ts.forEach((t) => {
+        const ls = doc.splitTextToSize(pdfText(t), maxW - 8); need(ls.length * 5 + 2);
+        doc.setDrawColor(226, 0, 122); doc.rect(L + 10, y - 3.2, 3.2, 3.2);
+        doc.text(ls, L + 16, y); y += ls.length * 5 + 1.6;
+      });
+      need(12); doc.setFontSize(8.5); doc.setTextColor(150, 146, 140); doc.text("Notizen:", L + 10, y + 3);
+      doc.setDrawColor(215, 210, 200); doc.line(L + 25, y + 4, R, y + 4); doc.line(L + 10, y + 10, R, y + 10);
+      y += 17;
+    });
+    need(30);
+    doc.setTextColor(20, 22, 43); doc.setFont("helvetica", "bold"); doc.setFontSize(12); doc.text("Vereinbarungen für den Entwicklungsplan", L, y); y += 7;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+    ["Ziel:", "Erster Schritt:", "Unterstützung durch:", "Nächstes Gespräch am:"].forEach(t => { need(9); doc.text(t, L, y); doc.setDrawColor(180, 176, 168); doc.line(L + 40, y + 1, R, y + 1); y += 9; });
+    const pages = doc.getNumberOfPages();
+    for (let i = 1; i <= pages; i++) { doc.setPage(i); doc.setFontSize(8); doc.setTextColor(150, 146, 140); doc.text(`Profil AC · Gesprächsleitfaden · Seite ${i} von ${pages}`, L, 290); }
+    const name = "Gespraechsleitfaden-Profil-AC.pdf", blob = doc.output("blob");
+    const dl = window.claude && window.claude.use ? await window.claude.use("downloads").catch(() => null) : null;
+    if (dl) {
+      try { await dl.save({ filename: name, data: blob }); lfMsg.textContent = "PDF gespeichert. Sie können es jetzt öffnen und ausdrucken."; }
+      catch (e) { lfMsg.textContent = e && e.code === "declined" ? "Speichern abgebrochen." : "Das PDF konnte hier nicht gespeichert werden."; }
+    } else { doc.save(name); lfMsg.textContent = "PDF heruntergeladen. Sie können es jetzt öffnen und ausdrucken."; }
+  }
+  document.getElementById("lf-pdf").addEventListener("click", lfPdf);
   document.getElementById("lf-reset").addEventListener("click", () => { lfState.picked = []; lfSave(); drawLf(); lfMsg.textContent = "Leitfaden geleert."; });
   drawLf();
 
@@ -3591,3 +3698,37 @@ body.tool-open { overflow: hidden; }
   });
 })();
 </script>
+<style>
+/* Leitfaden: Hinweise je Phase, Zähler, Alle-übernehmen */
+.lf-phases button em { font-style: normal; font: 800 0.7rem/1 var(--font-body); background: var(--magenta); color: #ffffff; border-radius: 999px; padding: 3px 6px; margin-left: 6px; }
+.lf-phases button[aria-selected="true"] em { background: #ffffff; color: var(--magenta); }
+.lf-tip { background: var(--tint); border-radius: 12px; padding: 10px 12px; font-size: 0.92rem; color: var(--ink); max-width: none; }
+.lf-all { align-self: flex-start; border: 0; background: transparent; color: var(--magenta); font: 700 0.9rem/1.2 var(--font-body); cursor: pointer; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+<style>
+/* Größere, immer sichtbare Leiste oben */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; padding-block: 10px; }
+.nav::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgb(var(--bg-rgb) / .96); box-shadow: 0 0 0 100vmax rgb(var(--bg-rgb) / .96); clip-path: inset(0 -100vmax); pointer-events: none; }
+body:not([data-role]) .nav::before { display: none; }
+.nav-in { padding: 8px; gap: 6px; box-shadow: 0 12px 30px -14px rgba(20,22,43,.45); }
+.nav a, .nav-in > a { padding: 13px 18px; font-size: 1rem; }
+.nav a.logo { font-size: 1.08rem; padding: 13px 20px; }
+.chap-tabs { gap: 6px; }
+.chap-tabs button { padding: 13px 20px; font-size: 1.02rem; gap: 10px; }
+.chap-tabs button i { width: 28px; height: 28px; font-size: 0.92rem; }
+.chap-tabs button.done i::before { font-size: 0.95rem; }
+.switch { padding: 13px 18px; font-size: 0.98rem; }
+.readbar { margin-top: 10px; }
+.rb-segs button { height: 9px; }
+.rb-segs button.cur { height: 13px; }
+.rb-count { font-size: 0.82rem; padding: 5px 10px; }
+@media (max-width: 640px) {
+  .nav { padding-block: 8px; }
+  .nav-in { padding: 6px; gap: 4px; }
+  .nav a, .nav-in > a { padding: 12px 14px; font-size: 0.95rem; }
+  .chap-tabs button { padding: 12px 10px; font-size: 0.9rem; gap: 7px; }
+  .chap-tabs button i { width: 26px; height: 26px; }
+  .switch { padding: 12px 10px; }
+  body[data-role="s"] .switch::after, body[data-role="e"] .switch::after, body[data-role="l"] .switch::after { font-size: 0.92rem; }
+}
+</style>
