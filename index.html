@@ -2,6 +2,19 @@
 <html lang="de">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Die Kompetenzanalyse Profil AC in Rheinland-Pfalz erleben: Stärken erkennen, Interessen erkunden, Perspektiven schaffen.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="Profil AC Next Level">
+<meta property="og:title" content="Profil AC Next Level: Stärken erkennen">
+<meta property="og:description" content="Die Kompetenzanalyse Profil AC in Rheinland-Pfalz erleben: Stärken erkennen, Interessen erkunden, Perspektiven schaffen.">
+<meta property="og:url" content="https://afischeredu.github.io/profilac/">
+<meta property="og:image" content="https://afischeredu.github.io/profilac/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vier lachende Jugendliche am Tisch mit Papier-Murmelbahnen, dazu der Schriftzug Profil AC Next Level">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#e2007a">
 <title>Profil AC erleben</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,7 +158,7 @@ main { position: relative; z-index: 1; }
 </style>
 
 <div class="stage" id="stage" aria-hidden="true">
-  <video id="fallback" muted loop playsinline preload="auto" poster="poster.jpg">
+  <video id="fallback" muted loop playsinline preload="none" poster="poster.jpg">
     <source src="loop-hd.webm" type="video/webm" media="(min-width: 900px)">
     <source src="loop-hd.mp4" type="video/mp4" media="(min-width: 900px)">
     <source src="loop.webm" type="video/webm">
@@ -235,6 +248,8 @@ main { position: relative; z-index: 1; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Datensparmodus: keine Videos, nur Standbilder (automatisch bei langsamer Verbindung oder per Schalter)
+const LITE = window.PAC_LITE = (() => { try { const v = localStorage.getItem("pac-lite"); if (v === "1") return true; if (v === "0") return false; } catch (e) {} const c = navigator.connection; return !!(c && (c.saveData || /2g|3g/.test(c.effectiveType || ""))); })();
 const $ = (id) => document.getElementById(id);
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
 const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -261,7 +276,7 @@ function setStage(on) {
   if (on === stageOn) return; stageOn = on;
   if (on) playVideo(); else video.pause();
 }
-function playVideo() { if (calm) return; const pr = video.play(); if (pr && pr.catch) pr.catch(() => {}); }
+function playVideo() { if (calm || LITE) return; const pr = video.play(); if (pr && pr.catch) pr.catch(() => {}); }
 playVideo();
 ["pointerdown", "touchstart", "scroll", "keydown"].forEach(ev => addEventListener(ev, () => { if (video.paused) playVideo(); }, { once: true, passive: true }));
 function loadImg(src) { return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; }); }
@@ -437,8 +452,8 @@ const MSEQ = [...document.querySelectorAll("canvas.mseq")].map(cv => ({ cv, ctx:
 function mseqLoad(m) {
   if (m.loaded) return; m.loaded = true;
   // je 8 Bilder untereinander in einem Streifen; große Bildschirme laden die HD-Streifen
-  m.per = 8; const big = m.hd && innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100;
-  const files = Math.ceil(m.n / m.per);
+  m.per = 8; const big = !LITE && m.hd && innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100;
+  const files = LITE ? 1 : Math.ceil(m.n / m.per);
   for (let i = 0; i < files; i++) { const im = new Image(); im.decoding = "async"; im.src = `${big ? m.hd : m.dir}/s${String(i).padStart(2, "0")}.jpg`; im.onload = () => { const go = () => { if (i === 0 || i === Math.floor(m.want / m.per)) mseqDraw(m, m.want, true); }; im.decode ? im.decode().then(go, go) : go(); }; m.imgs.push(im); }
 }
 function mseqDraw(m, i, force) {
@@ -461,7 +476,7 @@ addEventListener("resize", () => MSEQ.forEach(m => mseqDraw(m, pp(m.want + (m.of
 // Sichtbare Clips laufen ständig flüssig weiter (24 Bilder pro Sekunde); Scrollen spult zusätzlich vor oder zurück
 let idleT = 0;
 function idleTick(t) {
-  if (!calm && t - idleT > 1000 / 24) {
+  if (!calm && !LITE && t - idleT > 1000 / 24) {
     idleT = t;
     for (const m of MSEQ) {
       if (!m.loaded) continue;
@@ -486,4 +501,24 @@ function seqShow(t) { mseqShow("seq", t); }
 setTimeout(() => mseqLoad(MSEQ.find(q => q.dir === "seq")), 600);
 
 initGL(); resize(); requestAnimationFrame(draw); story();
+</script>
+<style>
+/* Datensparmodus: Schalter unten links */
+.lite-pill { position: fixed; z-index: 14; left: calc(env(safe-area-inset-left, 0px) + 14px); bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer; border-radius: 999px; padding: 10px 14px; font: 700 0.82rem/1 "Rubik", system-ui, sans-serif; background: rgba(20,22,43,.82); color: #ffffff; box-shadow: 0 10px 24px -12px rgba(0,0,0,.6); }
+.lite-pill i { width: 9px; height: 9px; border-radius: 50%; background: #3fd98f; flex: none; }
+.lite-pill[aria-pressed="true"] { background: #ffffff; color: #14162b; box-shadow: inset 0 0 0 2px #e2007a, 0 10px 24px -12px rgba(0,0,0,.6); }
+.lite-pill[aria-pressed="true"] i { background: #e2007a; }
+@media print { .lite-pill { display: none; } }
+</style>
+<script>
+/* Datensparmodus umschalten (gilt für dieses Gerät) */
+(() => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "lite-pill";
+  const on = !!window.PAC_LITE;
+  b.setAttribute("aria-pressed", String(on));
+  b.innerHTML = on ? '<i></i>Datensparmodus an · Videos laden' : '<i></i>Daten sparen';
+  b.title = on ? "Videos sind aus, damit weniger Daten geladen werden. Tippen, um sie zu laden." : "Videos ausschalten, um mobile Daten zu sparen";
+  b.addEventListener("click", () => { try { localStorage.setItem("pac-lite", on ? "0" : "1"); } catch (e) {} location.reload(); });
+  document.body.appendChild(b);
+})();
 </script>

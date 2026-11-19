@@ -2,6 +2,19 @@
 <html lang="de">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Alles zur Kompetenzanalyse Profil AC in Rheinland-Pfalz, für Schüler*innen, Eltern und Lehrkräfte. Mit Ablauf, Kompetenzprofil, Spielen und Quiz.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="Profil AC Next Level">
+<meta property="og:title" content="Profil AC Rheinland-Pfalz: Infos, Spiele und Quiz">
+<meta property="og:description" content="Alles zur Kompetenzanalyse Profil AC in Rheinland-Pfalz, für Schüler*innen, Eltern und Lehrkräfte. Mit Ablauf, Kompetenzprofil, Spielen und Quiz.">
+<meta property="og:url" content="https://afischeredu.github.io/profilac/info/">
+<meta property="og:image" content="https://afischeredu.github.io/profilac/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vier lachende Jugendliche am Tisch mit Papier-Murmelbahnen, dazu der Schriftzug Profil AC Next Level">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#e2007a">
 <title>Profil AC Rheinland-Pfalz</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -692,7 +705,8 @@ body[data-role="l"] main > section { order: var(--l, 50); }
 </style>
 
 <div class="bgimg" aria-hidden="true"></div>
-<div class="vstage" id="vstage" aria-hidden="true"><div class="cam"><video muted loop playsinline autoplay preload="auto" poster="media/start.jpg"><source src="media/start.webm" type="video/webm"><source src="media/start.mp4" type="video/mp4"></video></div><div class="shade"></div><div class="veil"></div><div class="bgw" id="bgw"><video muted loop playsinline preload="none" poster="media/raum.jpg"></video><div class="bgveil"></div></div></div>
+<script>window.PAC_LITE = (() => { try { const v = localStorage.getItem("pac-lite"); if (v === "1") return true; if (v === "0") return false; } catch (e) {} const c = navigator.connection; return !!(c && (c.saveData || /2g|3g/.test(c.effectiveType || ""))); })();</script>
+<div class="vstage" id="vstage" aria-hidden="true"><div class="cam"><video muted loop playsinline preload="none" poster="media/start.jpg"></video></div><div class="shade"></div><div class="veil"></div><div class="bgw" id="bgw"><video muted loop playsinline preload="none" poster="media/raum.jpg"></video><div class="bgveil"></div></div></div>
 <div class="lupe" id="lupe">
   <div class="lupe-panel" id="lupe-panel" role="group" aria-label="Schriftgröße" hidden>
     <button type="button" id="lupe-minus" aria-label="Schrift kleiner">A−</button>
@@ -2725,7 +2739,8 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   // große Bildschirme: hochskalierte Fassungen der Hintergrundvideos
   const HD = innerWidth * Math.min(devicePixelRatio || 1, 2) > 1100;
   const HD_CLIPS = ["start", "schueler", "eltern", "lehrkraft"];
-  let cur = HD ? "" : "start", items = [], mx = 0, my = 0, tmx = 0, tmy = 0, dirty = true, sy = scrollY, heroes = [], bubbles = [], vidOn = true;
+  const LITE = !!window.PAC_LITE;
+  let cur = "", items = [], mx = 0, my = 0, tmx = 0, tmy = 0, dirty = true, sy = scrollY, heroes = [], bubbles = [], vidOn = true;
   const clamp01 = (t) => Math.max(0, Math.min(1, t));
   const ease = (t) => t * t * (3 - 2 * t);
   const role = () => document.body.dataset.role || "";
@@ -2736,11 +2751,12 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
     cur = k;
     const f = HD && HD_CLIPS.includes(k) ? `${k}-hd` : k;
     vid.poster = `media/${k}.jpg`;
+    if (LITE) { vid.innerHTML = ""; return; }
     vid.innerHTML = `<source src="media/${f}.webm" type="video/webm"><source src="media/${f}.mp4" type="video/mp4">`;
     vid.load();
     play(vid);
   }
-  function play(v) { if (RM.matches) { v.pause(); return; } const p = v.play(); if (p) p.catch(() => {}); }
+  function play(v) { if (RM.matches || LITE) { v.pause(); return; } const p = v.play(); if (p) p.catch(() => {}); }
 
   // Klassenraum im Hintergrund: erst nach dem Einstieg, nie während des Ablaufs
   const bgw = document.getElementById("bgw"), bgv = bgw.querySelector("video");
@@ -2749,7 +2765,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   function bgTick(y, vh, r) {
     let on = !!r && r !== "m" && y > vh * 0.9;
     if (on) for (const a of ABL) { if (!a.getClientRects().length) continue; const b = a.getBoundingClientRect(); if (b.top < vh * 0.75 && b.bottom > vh * 0.25) { on = false; break; } }
-    if (on && !bgLoaded) { bgLoaded = true; const f = HD ? "raum-hd" : "raum"; bgv.innerHTML = `<source src="media/${f}.webm" type="video/webm"><source src="media/${f}.mp4" type="video/mp4">`; bgv.load(); }
+    if (on && !bgLoaded && !LITE) { bgLoaded = true; const f = HD ? "raum-hd" : "raum"; bgv.innerHTML = `<source src="media/${f}.webm" type="video/webm"><source src="media/${f}.mp4" type="video/mp4">`; bgv.load(); }
     if (on !== bgOn) { bgOn = on; bgw.classList.toggle("on", on); if (on) play(bgv); else setTimeout(() => { if (!bgOn) bgv.pause(); }, 700); }
     // leichte Tiefe: der Raum gleitet beim Scrollen langsam mit
     if (on && !RM.matches) bgv.style.transform = `scale(1.08) translate3d(${-mx * 8}px, ${((y / vh) % 6) * -4 + my * -5}px, 0)`;
@@ -2770,12 +2786,12 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     const v = e.target;
     if (e.isIntersecting) {
-      if (!v.dataset.on) { v.dataset.on = 1; v.innerHTML = `<source src="media/${v.dataset.k}.webm" type="video/webm"><source src="media/${v.dataset.k}.mp4" type="video/mp4">`; v.load(); }
+      if (!v.dataset.on && !LITE) { v.dataset.on = 1; v.innerHTML = `<source src="media/${v.dataset.k}.webm" type="video/webm"><source src="media/${v.dataset.k}.mp4" type="video/mp4">`; v.load(); }
       play(v);
     } else v.pause();
   }), { rootMargin: "100px" });
   // früh vorladen, damit die Clips beim Erscheinen sofort laufen statt kurz zu stocken
-  const pre = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; const v = e.target; pre.unobserve(v); if (!v.dataset.on) { v.dataset.on = 1; v.preload = "auto"; v.innerHTML = `<source src="media/${v.dataset.k}.webm" type="video/webm"><source src="media/${v.dataset.k}.mp4" type="video/mp4">`; v.load(); } }), { rootMargin: "1200px 0px" });
+  const pre = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; const v = e.target; pre.unobserve(v); if (!v.dataset.on && !LITE) { v.dataset.on = 1; v.preload = "auto"; v.innerHTML = `<source src="media/${v.dataset.k}.webm" type="video/webm"><source src="media/${v.dataset.k}.mp4" type="video/mp4">`; v.load(); } }), { rootMargin: "1200px 0px" });
   triVids.forEach((v) => { io.observe(v); pre.observe(v); });
 
   // Elemente, die sich beim Hereinscrollen in 3D aufrichten
@@ -2967,7 +2983,7 @@ main > section.cine { min-height: calc(100svh - 96px); justify-content: flex-end
   const num = document.getElementById("sm-num"), fill = document.getElementById("sm-fill");
   const RM = matchMedia("(prefers-reduced-motion: reduce)");
   let cur = -1, near = false;
-  const load = (v) => { if (v.dataset.on) return; v.dataset.on = 1; v.preload = "auto"; const k = v.dataset.clip; v.innerHTML = `<source src="media/${k}.webm" type="video/webm"><source src="media/${k}.mp4" type="video/mp4">`; v.load(); };
+  const load = (v) => { if (v.dataset.on || window.PAC_LITE) return; v.dataset.on = 1; v.preload = "auto"; const k = v.dataset.clip; v.innerHTML = `<source src="media/${k}.webm" type="video/webm"><source src="media/${k}.mp4" type="video/mp4">`; v.load(); };
   const play = (v) => { if (RM.matches || !near) { v.pause(); return; } const p = v.play(); if (p) p.catch(() => {}); };
   function show(i) {
     if (i === cur) return; cur = i;
@@ -3732,3 +3748,23 @@ body:not([data-role]) .nav::before { display: none; }
   body[data-role="s"] .switch::after, body[data-role="e"] .switch::after, body[data-role="l"] .switch::after { font-size: 0.92rem; }
 }
 </style>
+<style>
+/* Datensparmodus: Schalter unten links */
+.lite-pill { position: fixed; z-index: 14; left: calc(env(safe-area-inset-left, 0px) + 14px); bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer; border-radius: 999px; padding: 10px 14px; font: 700 0.82rem/1 "Rubik", system-ui, sans-serif; background: rgba(20,22,43,.82); color: #ffffff; box-shadow: 0 10px 24px -12px rgba(0,0,0,.6); }
+.lite-pill i { width: 9px; height: 9px; border-radius: 50%; background: #3fd98f; flex: none; }
+.lite-pill[aria-pressed="true"] { background: #ffffff; color: #14162b; box-shadow: inset 0 0 0 2px #e2007a, 0 10px 24px -12px rgba(0,0,0,.6); }
+.lite-pill[aria-pressed="true"] i { background: #e2007a; }
+@media print { .lite-pill { display: none; } }
+</style>
+<script>
+/* Datensparmodus umschalten (gilt für dieses Gerät) */
+(() => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "lite-pill";
+  const on = !!window.PAC_LITE;
+  b.setAttribute("aria-pressed", String(on));
+  b.innerHTML = on ? '<i></i>Datensparmodus an · Videos laden' : '<i></i>Daten sparen';
+  b.title = on ? "Videos sind aus, damit weniger Daten geladen werden. Tippen, um sie zu laden." : "Videos ausschalten, um mobile Daten zu sparen";
+  b.addEventListener("click", () => { try { localStorage.setItem("pac-lite", on ? "0" : "1"); } catch (e) {} location.reload(); });
+  document.body.appendChild(b);
+})();
+</script>
